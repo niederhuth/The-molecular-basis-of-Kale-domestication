@@ -1,34 +1,35 @@
 #!/bin/bash
 
 echo "Starting"
+sample=$(pwd | sed s/.*data\\/// | sed s/\\/.*//)
 mkdir raw_QC trimmed_QC
 
 #Unpack fastqs
 cd fastq
-bunzip2 *.fastq.bz2
+bunzip2 "$sample".fastq.bz2
 cd ..
 
 #QC analysis raw data
 echo "First QC analysis"
 export PATH=${PATH}:/usr/local/fastqc/latest/
-time /usr/local/fastqc/latest/fastqc --noextract -t 4 -a ../../misc/evrogen_mint.tsv -o raw_QC fastq/*fastq 
+time /usr/local/fastqc/latest/fastqc --noextract -t 10 -a ../../misc/evrogen_mint.tsv -o raw_QC fastq/"$sample".fastq
 
 #Trim data
 echo "Trimming data"
-time python2.7 /usr/local/cutadapt/1.9.dev1/bin/cutadapt --quality-base=64 --trim-n --max-n 0.1 -m 30 -q 20,20 -e 0.1 -O 3 -a file:../../misc/evrogen_mint.fa  -o fastq/tmp.fastq fastq/*fastq
-time /usr/local/fastx_toolkit/0.0.14/bin/fastx_trimmer -i fastq/tmp.fastq -o fastq/tmp2.fastq -m 30 -f 2
-perl /usr/local/prinseq/0.20.3/prinseq-lite.pl -verbose -fastq tmp2.fastq -min_len 30 -out_format 3 -out_good trimmed.fastq -out_bad tmp3.fastq
+time python2.7 /usr/local/cutadapt/1.9.dev1/bin/cutadapt --quality-base=64 --trim-n --max-n 0.1 -m 30 -q 20,20 -e 0.1 -O 3 -a file:../../misc/evrogen_mint.fa  -o fastq/tmp.fastq fastq/"$sample".fastq
+time /usr/local/fastx_toolkit/0.0.14/bin/fastx_trimmer -i fastq/tmp.fastq -o fastq/tmp2.fastq -f 2
+perl /usr/local/prinseq/0.20.3/prinseq-lite.pl -verbose -fastq fastq/tmp2.fastq -min_len 30 -out_format 3 -out_good fastq/trimmed -out_bad fastq/tmp3
 rm fastq/tmp.fastq fastq/tmp2.fastq fastq/tmp3.fastq
 
 #QC analysis trimmed data
 echo "Second QC analysis"
-time /usr/local/fastqc/latest/fastqc --noextract -t 4 -a ../../misc/evrogen_mint.tsv -o trimmed_QC fastq/trimmed.fastq 
+time /usr/local/fastqc/latest/fastqc --noextract -t 10 -a ../../misc/evrogen_mint.tsv -o trimmed_QC fastq/trimmed.fastq
 
 #Align data
 echo "Aligning data"
 export PATH=/usr/local/samtools/0.1.18/:${PATH}
 export LD_LIBRARY_PATH=/usr/local/boost/1.54.0/gcc447/lib:/usr/local/gcc/4.7.1/lib:/usr/local/gcc/4.7.1/lib64:${LD_LIBRARY_PATH}
-time /usr/local/tophat/2.0.14/bin/tophat -F 0.1 --phred64-quals --transcriptome-index ../ref/transcriptome/Boleracea_v2.1.31 --no-coverage-search --b2-sensitive --no-mixed --read-realign-edit-dist 0 -i 30 -M -I 10000 -p 4 --library-type fr-unstranded -o tophat ../ref/bowtie2/Boleracea_v2.1.31 fastq/trimmed.fastq
+time /usr/local/tophat/2.0.14/bin/tophat -F 0.1 --phred64-quals --transcriptome-index ../ref/transcriptome/Boleracea_v2.1.31 --no-coverage-search --b2-sensitive --no-mixed --read-realign-edit-dist 0 -i 30 -M -I 10000 -p 10 --library-type fr-unstranded -o tophat ../ref/bowtie2/Boleracea_v2.1.31 fastq/trimmed.fastq
 
 #Count reads per feature
 echo "Running htseq-count"
