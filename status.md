@@ -1,6 +1,9 @@
 ---
 Daily status of the analysis.
 ---
+### Jan 12, 2017
+1. Added deg.R (for calling de genes, etc)
+2. Major edits.
 
 #### Dec. 12, 2016
 1. Data is phred64 
