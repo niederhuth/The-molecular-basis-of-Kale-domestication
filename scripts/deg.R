@@ -1,28 +1,19 @@
 setwd("deg")
 
 #Define functions
-readCounts <- function() {
-     l <- list.files()
-     d <- read.table(l[1], header=F, sep="\t", row.names=1)
-     for(i in l[2:length(l)]){
-          d <- cbind(d, read.table(i, header=F, sep="\t", row.names=1))
-     }
-     colnames(d) <- gsub(pattern = "_counts.tsv", replacement = "", l)
-     row.names(d) <- gsub(pattern = "gene:", replacement = "", row.names(d))
-     return(d[1:(nrow(d)-5),])
+makeResultsTable <- function(x,conditionA,conditionB,filter=FALSE){
+    require(DESeq2)
+    bml <- sapply(levels(dds$condition),function(lvl) rowMeans(counts(dds,normalized=TRUE)[,dds$condition == lvl]))
+    y <- results(x,contrast=c("condition",conditionA,conditionB),independentFiltering=filter)
+    y <- data.frame(id=gsub(pattern = "gene:", replacement = "", row.names(y)),
+                    sampleA=c(conditionA),sampleB=c(conditionB),
+                    baseMeanA=paste("bml$",conditionA,sep=""),baseMeanB=paste("bml$",conditionB,sep=""),
+                    log2FC=y$log2FoldChange,pval=y$pvalue,padj=y$padj)
+    row.names(y) <- c(1:nrow(y))
+    return(y)
 }
 
-sampleHeatMap <- function(x,y){
-     require(gplots)
-     require(RColorBrewer)
-     dists = dist(t(exprs(x)))
-     mat = as.matrix(dists)
-     rownames(mat) = colnames(mat) = row.names(pData(y))
-     hmcol = colorRampPalette(brewer.pal(9, "GnBu"))(100)
-     heatmap.2(mat,trace="none",col = rev(hmcol),margin=c(13, 13),keysize=0.9,density.info="none",key.title="none",key.xlab="Sample distance")
-}
-
-sampleHeatMap2 <- function(x){
+sampleHeatMap <- function(x){
     require(pheatmap)
     require("RColorBrewer")
     sampleDists <- dist(t(assay(x)))
@@ -80,61 +71,9 @@ topGO <- function(genelist,goTerms,nodeSize,filename,writeData=FALSE){
     }
 }
 
-
-##
-sampleTable <- read.csv("../../misc/sample_metadata.csv",header=T)
-countTable <- readCounts()
-condition <- factor(sampleTable$condition)
-
-##
-library(DESeq)
-cds <- newCountDataSet(countTable,condition)
-cds <- estimateSizeFactors(cds)
-
-##Explore samples
-cdsBlind <- estimateDispersions(cds,method="blind")
-vsd <- varianceStabilizingTransformation(cdsBlind)
-pdf("../../figures_tables/sampleHeatMap.pdf",width=6,height=6,paper='special')
-sampleHeatMap(vsd,cdsBlind)
-dev.off()
-
-##Differential expression
-cds <- estimateDispersions(cds,method="pooled",sharingMode="maximum",fitType="parametric")
-TvC <- nbinomTest(cds,"TO1000", "cabbage")
-TvC <- data.frame(TvC,sampleA=c("TO1000"),sampleB=c("cabbage"))
-TvK <- nbinomTest(cds,"TO1000", "kale")
-TvK <- data.frame(TvK,sampleA=c("TO1000"),sampleB=c("kale"))
-KvC <- nbinomTest(cds,"kale", "cabbage")
-KvC <- data.frame(KvC,sampleA=c("kale"),sampleB=c("cabbage"))
-full <- as.data.frame(rbind(TvC,TvK,KvC))
-full$padj <- p.adjust(full$pval,method="BH")
-
-sig <- na.omit(full[full$padj <= 0.05 & full$log2FoldChange >= 2 | full$padj <= 0.05 & full$log2FoldChange <= -2,])
-TCsig <- sig[sig$sampleA == "TO1000" & sig$sampleB == "cabbage",]
-TKsig <- sig[sig$sampleA == "TO1000" & sig$sampleB == "kale",]
-KCsig <- sig[sig$sampleA == "kale" & sig$sampleB == "cabbage",]
-d <- data.frame(id=unique(sig$id))
-d <- data.frame(id=d$id,TvC=ifelse(d$id %in% sig[sig$sampleA == "TO1000" & sig$sampleB == "cabbage",]$id, 1, 0),
-  TvK=ifelse(d$id %in% sig[sig$sampleA == "TO1000" & sig$sampleB == "kale",]$id, 1, 0),
-  KvC=ifelse(d$id %in% sig[sig$sampleA == "kale" & sig$sampleB == "cabbage",]$id, 1, 0)
-)
-library(VennDiagram)
-pdf("../../figures_tables/comparisonVennDiagram.pdf",width=6,height=6,paper='special')
-draw.triple.venn(area1=nrow(subset(d,TvC==1)),
-  area2=nrow(subset(d,TvK==1)),
-  area3=nrow(subset(d,KvC==1)),
-  n12=nrow(subset(d,TvC==1 & TvK==1)),
-  n23=nrow(subset(d,TvK==1 & KvC==1)),
-  n13=nrow(subset(d,TvC==1 & KvC==1)),
-  n123=nrow(subset(d,TvC==1 & TvK==1 & KvC==1)),
-  category = c("TO1000 v Cabbage", "TO1000 v Kale", "Kale v Cabbage"),
-  lty = "blank",
-  fill = c("skyblue", "pink1", "mediumorchid")
-)
-dev.off()
-
 ##DESeq2
 library(DESeq2)
+sampleTable <- read.csv("../../misc/sample_metadata.csv",header=T)
 dds <- DESeqDataSetFromHTSeqCount(sampleTable, design= ~ condition)
 dds <- dds[ rowSums(counts(dds)) > 1, ]
 
@@ -145,8 +84,8 @@ dds <- nbinomWaldTest(dds)
 ##
 rld <- rlog(dds, blind=FALSE)
 rld <- rlog(dds, blind=TRUE)
-pdf("../../figures_tables/sampleHeatMap2.pdf",width=6,height=6,paper='special')
-sampleHeatMap2(rld)
+pdf("../../figures_tables/sampleHeatMap.pdf",width=6,height=6,paper='special')
+sampleHeatMap(rld)
 dev.off()
 
 pdf("../../figures_tables/samplePCA.pdf",width=6,height=6,paper='special')
@@ -160,19 +99,19 @@ resKvC <- makeResultsTable(dds,"kale","cabbage",filter=FALSE)
 resfull <- as.data.frame(rbind(resTvC,resTvK,resKvC))
 resfull$padj <- p.adjust(resfull$pval,method="BH")
 
-sig2 <- na.omit(resfull[resfull$padj <= 0.05 & resfull$log2FoldChange >= 2 | resfull$padj <= 0.05 & resfull$log2FoldChange <= -2,])
-table(sig2$sampleA,sig2$sampleB)
-TCsig2 <- sig2[sig2$sampleA == "TO1000" & sig2$sampleB == "cabbage",]
-TKsig2 <- sig2[sig2$sampleA == "TO1000" & sig2$sampleB == "kale",]
-KCsig2 <- sig2[sig2$sampleA == "kale" & sig2$sampleB == "cabbage",]
-d2 <- data.frame(id=unique(sig2$id))
-d2 <- data.frame(id=d2$id,TvC=ifelse(d2$id %in% sig2[sig2$sampleA == "TO1000" & sig2$sampleB == "cabbage",]$id, 1, 0),
-  TvK=ifelse(d2$id %in% sig2[sig2$sampleA == "TO1000" & sig2$sampleB == "kale",]$id, 1, 0),
-  KvC=ifelse(d2$id %in% sig2[sig2$sampleA == "kale" & sig2$sampleB == "cabbage",]$id, 1, 0)
+sig <- na.omit(resfull[resfull$padj <= 0.05 & resfull$log2FC >= 1 | resfull$padj <= 0.05 & resfull$log2FC <= -1,])
+table(sig$sampleA,sig$sampleB)
+TvCsig <- sig[sig$sampleA == "TO1000" & sig$sampleB == "cabbage",]
+TvKsig <- sig[sig$sampleA == "TO1000" & sig$sampleB == "kale",]
+KvCsig <- sig[sig$sampleA == "kale" & sig$sampleB == "cabbage",]
+d2 <- data.frame(id=unique(sig$id))
+d2 <- data.frame(id=d2$id,TvC=ifelse(d2$id %in% sig[sig$sampleA == "TO1000" & sig$sampleB == "cabbage",]$id, 1, 0),
+  TvK=ifelse(d2$id %in% sig[sig$sampleA == "TO1000" & sig$sampleB == "kale",]$id, 1, 0),
+  KvC=ifelse(d2$id %in% sig[sig$sampleA == "kale" & sig$sampleB == "cabbage",]$id, 1, 0)
 )
 
 library(VennDiagram)
-pdf("../../figures_tables/comparisonVennDiagram2.pdf",width=6,height=6,paper='special')
+pdf("../../figures_tables/comparisonVennDiagram.pdf",width=6,height=6,paper='special')
 draw.triple.venn(area1=nrow(subset(d2,TvC==1)),
   area2=nrow(subset(d2,TvK==1)),
   area3=nrow(subset(d2,KvC==1)),
@@ -191,15 +130,29 @@ library(topGO)
 library(GO.db)
 goTerms <- readMappings(file="../../misc/topGO.txt")
 
-TvCgoterm <- factor(as.integer(resTvC$id %in% TCsig2$id))
-names(TvCgoterm) <- resTvC$id
-TvCgoterm <- topGO(TvCgoterm,goTerms,nodeSize=5,"TvC",writeData=TRUE)
-TvKgoterm <- factor(as.integer(resTvK$id %in% TKsig2$id))
-names(TvKgoterm) <- resTvK$id
-TvKgoterm <- topGO(TvKgoterm,goTerms,nodeSize=5,"TvK",writeData=TRUE)
-KvCgoterm <- factor(as.integer(resKvC$id %in% KCsig2$id))
-names(KvCgoterm) <- resKvC$id
-KvCgoterm <- topGO(KvCgoterm,goTerms,nodeSize=5,"KvC",writeData=TRUE)
+TvCgotermUP <- factor(as.integer(resTvC$id %in% TvCsig[TvCsig$log2FC > 1,]$id))
+names(TvCgotermUP) <- resTvC$id
+TvCgotermUP <- topGO(TvCgotermUP,goTerms,nodeSize=5,"TvC_up",writeData=TRUE)
+TvCgotermDOWN <- factor(as.integer(resTvC$id %in% TvCsig[TvCsig$log2FC < -1,]$id))
+names(TvCgotermDOWN) <- resTvC$id
+TvCgotermDOWN <- topGO(TvCgotermDOWN,goTerms,nodeSize=5,"TvC_down",writeData=TRUE)
+
+TvKgotermUP <- factor(as.integer(resTvK$id %in% TvKsig[TvKsig$log2FC > 1,]$id))
+names(TvKgotermUP) <- resTvK$id
+TvKgotermUP <- topGO(TvKgotermUP,goTerms,nodeSize=5,"TvK_up",writeData=TRUE)
+TvKgotermDOWN <- factor(as.integer(resTvK$id %in% TvKsig[TvKsig$log2FC < -1,]$id))
+names(TvKgotermDOWN) <- resTvK$id
+TvKgotermDOWN <- topGO(TvKgotermDOWN,goTerms,nodeSize=5,"TvK_down",writeData=TRUE)
+
+KvCgotermUP <- factor(as.integer(resKvC$id %in% KvCsig[KvCsig$log2FC > 1,]$id))
+names(KvCgotermUP) <- resKvC$id
+KvCgotermUP <- topGO(KvCgotermUP,goTerms,nodeSize=5,"KvC_up",writeData=TRUE)
+KvCgotermDOWN <- factor(as.integer(resKvC$id %in% KvCsig[KvCsig$log2FC < -1,]$id))
+names(KvCgotermDOWN) <- resKvC$id
+KvCgotermDOWN <- topGO(KvCgotermDOWN,goTerms,nodeSize=5,"KvC_down",writeData=TRUE)
+
+
+
 
 
 ggplot(test,aes(x=c("TvC"),y=GO.ID)) + geom_point(aes(size=factor(Significant),color=factor(fdr)))
