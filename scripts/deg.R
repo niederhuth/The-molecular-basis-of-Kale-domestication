@@ -71,10 +71,26 @@ topGO <- function(genelist,goTerms,nodeSize,filename,writeData=FALSE){
     }
 }
 
+geneHeatMap <- function(dds,geneList){
+    require(pheatmap)
+    select <- select <- row.names(counts(dds,normalized=TRUE)) %in% genelist
+    nt <- normTransform(dds) # defaults to log2(x+1)
+    log2.norm.counts <- assay(nt)[select,]
+    COL <- as.data.frame(colData(dds)[,c("condition")])
+    pheatmap(log2.norm.counts, cluster_rows=TRUE, show_rownames=TRUE,
+             cluster_cols=FALSE, annotation_col=df)
+}
+
+mergeTopGO <- function(){
+
+}
+
+
 ##DESeq2
 library(DESeq2)
 sampleTable <- read.csv("../../misc/sample_metadata.csv",header=T)
 dds <- DESeqDataSetFromHTSeqCount(sampleTable, design= ~ condition)
+row.names(dds) <- gsub("gene:","",row.names(dds))
 dds <- dds[ rowSums(counts(dds)) > 1, ]
 
 dds <- estimateSizeFactors(dds)
@@ -151,8 +167,41 @@ KvCgotermDOWN <- factor(as.integer(resKvC$id %in% KvCsig[KvCsig$log2FC < -1,]$id
 names(KvCgotermDOWN) <- resKvC$id
 KvCgotermDOWN <- topGO(KvCgotermDOWN,goTerms,nodeSize=5,"KvC_down",writeData=TRUE)
 
+upGoterm <- merge(TvCgotermUP$BP,TvKgotermUP$BP,by.x=GO.ID,by.y=GO.ID)
+upGoterm <- merge(TvCgotermUP$BP,TvKgotermUP$BP,by.x="GO.ID",by.y="GO.ID")
+upSig <- upGoterm[upGoterm$fdr.x <= 0.05 | upGoterm$fdr.y <= 0.05 | upGoterm$fdr <= 0.05, ]
+upSig <- data.frame(GO.ID = upSig$GO.ID, TvC_FDR = upSig$fdr.x, TvC_sig = upSig$Significant.x, TvK_FDR = upSig$fdr.y, TvK_sig = upSig$Significant.y, KvC_FDR = upSig$fdr, KvC_sig = upSig$Significant)
 
+ggplot() + geom_point(data = upSig,aes(x=c("TvC"),y=GO.ID,size=TvC_sig,color=TvC_FDR)) +
+           geom_point(data = upSig,aes(x=c("TvK"),y=GO.ID,size=TvK_sig,color=TvK_FDR)) +
+           geom_point(data = upSig,aes(x=c("KvC"),y=GO.ID,size=KvC_sig,color=KvC_FDR))
 
+tmp <- upSig
+tmp$KvC_FDR <- ifelse(tmp$KvC_FDR > 0.05, 0.6, tmp$KvC_FDR)
+tmp$TvC_FDR <- ifelse(tmp$TvC_FDR > 0.05, 0.6, tmp$TvC_FDR)
+tmp$TvK_FDR <- ifelse(tmp$TvK_FDR > 0.05, 0.6, tmp$TvK_FDR)
 
+ggplot() + geom_point(data = tmp,aes(x=c("TvC"),y=GO.ID,size=TvC_sig,color=TvC_FDR)) +
+           geom_point(data = tmp,aes(x=c("TvK"),y=GO.ID,size=TvK_sig,color=TvK_FDR)) +
+           geom_point(data = tmp,aes(x=c("KvC"),y=GO.ID,size=KvC_sig,color=KvC_FDR)) +
+           scale_color_gradient("q-value", low = "blue", high = "white") +
+           theme(panel.background=element_blank())
 
-ggplot(test,aes(x=c("TvC"),y=GO.ID)) + geom_point(aes(size=factor(Significant),color=factor(fdr)))
+#KEGG analysis
+
+#Genes of interest
+path <- c("../../figures_tables/genes_of_interest/")
+ifelse(!dir.exists(path),
+dir.create(path), FALSE)
+gof <- read.csv("../../misc/gof.csv")
+for(gene in gof$gene){
+    x <- plotCounts(dds, gene, intgroup = "condition", normalized = TRUE,
+                    transform = FALSE, returnData = TRUE)
+    p <- ggplot(x, aes(x = condition, y = count)) + geom_jitter(aes(color=condition)) +
+         theme(panel.background=element_blank(),
+               axis.line=element_line(color="black"),
+               axis.text=element_text(color="black"),
+               axis.title=element_text(color="black",face="bold"),
+               legend.position="none")
+    ggsave(paste(path,gene,"_counts.pdf",sep=""), p, width=5, height=4)
+}
