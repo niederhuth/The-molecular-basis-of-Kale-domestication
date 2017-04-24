@@ -37,13 +37,13 @@ else
   echo "Second round of trimming"
   time perl /usr/local/prinseq/0.20.3/prinseq-lite.pl -verbose \
   -fastq trimmed1.fastq -trim_left 1 -trim_ns_right 1 -min_len 30 -out_format 3 \
-  -out_good trimmed2 -out_bad tmp3
+  -out_good trimmed2 -out_bad bad
   rm trimmed1.fastq bad.fastq
 
   #QC analysis trimmed data
   echo "Third QC analysis"
   time /usr/local/fastqc/0.11.4/fastqc --noextract -t 10 \
-  -a ../../../misc/evrogen_mint.tsv ../fastq_QC trimmed2.fastq
+  -a ../../../misc/evrogen_mint.tsv -o ../fastq_QC trimmed2.fastq
   cd ../
 fi
 

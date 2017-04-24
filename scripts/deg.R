@@ -4,10 +4,11 @@ setwd("deg")
 makeResultsTable <- function(x,conditionA,conditionB,filter=FALSE){
     require(DESeq2)
     bml <- sapply(levels(dds$condition),function(lvl) rowMeans(counts(dds,normalized=TRUE)[,dds$condition == lvl]))
+    bml <- as.data.frame(bml)
     y <- results(x,contrast=c("condition",conditionA,conditionB),independentFiltering=filter)
     y <- data.frame(id=gsub(pattern = "gene:", replacement = "", row.names(y)),
                     sampleA=c(conditionA),sampleB=c(conditionB),
-                    baseMeanA=paste("bml$",conditionA,sep=""),baseMeanB=paste("bml$",conditionB,sep=""),
+                    baseMeanA=bml[,conditionA],baseMeanB=bml[,conditionB],
                     log2FC=y$log2FoldChange,pval=y$pvalue,padj=y$padj)
     row.names(y) <- c(1:nrow(y))
     return(y)
@@ -97,6 +98,9 @@ dds <- estimateSizeFactors(dds)
 dds <- estimateDispersions(dds,fitType="parametric")
 dds <- nbinomWaldTest(dds)
 
+normalized_counts <- counts(dds, normalized=TRUE)
+raw_counts <- counts(dds, normalized=FALSE)
+
 ##
 rld <- rlog(dds, blind=FALSE)
 rld <- rlog(dds, blind=TRUE)
@@ -114,6 +118,19 @@ resTvK <- makeResultsTable(dds,"TO1000","kale",filter=FALSE)
 resKvC <- makeResultsTable(dds,"kale","cabbage",filter=FALSE)
 resfull <- as.data.frame(rbind(resTvC,resTvK,resKvC))
 resfull$padj <- p.adjust(resfull$pval,method="BH")
+
+all_genes <- data.frame(gene=row.names(normalized_counts), normalized_counts,
+             as.data.frame(sapply(levels(dds$condition),
+             function(lvl) rowMeans(counts(dds,normalized=TRUE)[,dds$condition == lvl]))),
+             resfull[resfull$sampleA=="TO1000" & resfull$sampleB=="cabbage",c(6,8)],
+             resfull[resfull$sampleA=="TO1000" & resfull$sampleB=="kale",c(6,8)],
+             resfull[resfull$sampleA=="kale" & resfull$sampleB=="cabbage",c(6,8)])
+colnames(all_genes) <- c("gene","cabbage1", "cabbage2", "kale1", "kale2", "kale3",
+                         "TO10001", "TO10002", "TO10003", "cabbage_mean",
+                         "kale_mean", "TO1000_mean", "TvC_log2FC", "TvC_padj",
+                         "TvK_log2FC", "TvK_padj", "KvC_log2FC", "KvC_padj" )
+write.table(all_genes, "../../figures_tables/Gene_expression_table.tsv",sep="\t",
+            quote=FALSE, row.names=FALSE)
 
 sig <- na.omit(resfull[resfull$padj <= 0.05 & resfull$log2FC >= 1 | resfull$padj <= 0.05 & resfull$log2FC <= -1,])
 table(sig$sampleA,sig$sampleB)
