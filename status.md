@@ -8,6 +8,9 @@ Daily status of the analysis.
 4. How does gene expression PCA compare to genetic PCA?
 5. Other QC & global analyses?
 
+### April 24, 2017
+1. Update trim_align.sh
+
 ### Mar 17, 2017
 1. Edits to deg.R adding new analyses
 2. Added plotting of genes of interest
@@ -24,4 +27,3 @@ Daily status of the analysis.
  * High occurance (>90%) of "A" at first base indicated some sort of contamination in read even after trimming. Removing first base from all reads greatly improved mapping further.
  * Keeping reads <30bp (min length 25bp) gives a weird GC content skew. Filter out reads <30bp.
 3. Run trim_align.sh on all data.
-4.
