@@ -6,7 +6,7 @@ mkdir fastq_QC
 
 #Unpack fastqs
 cd fastq
-if [ -s trimmed2.fastq.gz ]
+if [ -f trimmed2.fastq.gz ]
 then
   gunzip trimmed2.fastq.gz
   cd ../
@@ -18,7 +18,7 @@ else
 
   #QC analysis raw data
   echo "First QC analysis"
-  export PATH=${PATH}:/usr/local/fastqc/latest/
+  export PATH=${PATH}:/usr/local/fastqc/0.11.4/
   time /usr/local/fastqc/0.11.4/fastqc --noextract -t 10 \
   -a ../../../misc/evrogen_mint.tsv -o ../raw_QC "$sample".fastq
 
@@ -36,7 +36,7 @@ else
   #Second round of trimming
   echo "Second round of trimming"
   time perl /usr/local/prinseq/0.20.3/prinseq-lite.pl -verbose \
-  -fastq tmp.fastq -trim_left 1 -trim_ns_right 1 -min_len 30 -out_format 3 \
+  -fastq trimmed1.fastq -trim_left 1 -trim_ns_right 1 -min_len 30 -out_format 3 \
   -out_good trimmed2 -out_bad tmp3
   rm trimmed1.fastq bad.fastq
 
