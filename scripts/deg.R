@@ -1,4 +1,4 @@
-setwd("deg")
+#setwd("deg")
 
 #Define functions
 makeResultsTable <- function(x,conditionA,conditionB,filter=FALSE){
@@ -82,11 +82,6 @@ geneHeatMap <- function(dds,geneList){
              cluster_cols=FALSE, annotation_col=df)
 }
 
-mergeTopGO <- function(){
-
-}
-
-
 ##DESeq2
 library(DESeq2)
 sampleTable <- read.csv("../../misc/sample_metadata.csv",header=T)
@@ -99,10 +94,11 @@ dds <- estimateDispersions(dds,fitType="parametric")
 dds <- nbinomWaldTest(dds)
 
 normalized_counts <- counts(dds, normalized=TRUE)
-raw_counts <- counts(dds, normalized=FALSE)
+rawcounts <- data.frame(gene = row.names(counts(dds, normalized=FALSE)),counts(dds, normalized=FALSE))
+write.table(rawcounts, "../../figures_tables/raw_counts.tsv",sep="\t",
+            quote=FALSE, row.names=TRUE)
 
 ##
-rld <- rlog(dds, blind=FALSE)
 rld <- rlog(dds, blind=TRUE)
 pdf("../../figures_tables/sampleHeatMap.pdf",width=6,height=6,paper='special')
 sampleHeatMap(rld)
@@ -210,15 +206,17 @@ ggplot() + geom_point(data = tmp,aes(x=c("TvC"),y=GO.ID,size=TvC_sig,color=TvC_F
 path <- c("../../figures_tables/genes_of_interest/")
 ifelse(!dir.exists(path),
 dir.create(path), FALSE)
-gof <- read.csv("../../misc/gof.csv")
-for(gene in gof$gene){
-    x <- plotCounts(dds, gene, intgroup = "condition", normalized = TRUE,
-                    transform = FALSE, returnData = TRUE)
-    p <- ggplot(x, aes(x = condition, y = count)) + geom_jitter(aes(color=condition)) +
-         theme(panel.background=element_blank(),
-               axis.line=element_line(color="black"),
-               axis.text=element_text(color="black"),
-               axis.title=element_text(color="black",face="bold"),
-               legend.position="none")
-    ggsave(paste(path,gene,"_counts.pdf",sep=""), p, width=5, height=4)
+goi <- read.csv("../../misc/goi.csv")
+for(gene in goi$gene){
+    tryCatch({
+        x <- plotCounts(dds, gene, intgroup = "condition",
+                        normalized = TRUE,transform = FALSE, returnData = TRUE)
+        p <- ggplot(x, aes(x = condition, y = count)) +
+             geom_point(aes(color=condition)) +
+             theme(panel.background=element_blank(),
+                   axis.line=element_line(color="black"),
+                   axis.text=element_text(color="black"),
+                   axis.title=element_text(color="black",face="bold"),
+                   legend.position="none") + xlab("Genotype")
+    ggsave(paste(path,gene,"_counts.pdf",sep=""), p, width=5, height=4)}, error=function(e){})
 }

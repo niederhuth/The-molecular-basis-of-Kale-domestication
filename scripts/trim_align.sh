@@ -20,7 +20,7 @@ else
   echo "First QC analysis"
   export PATH=${PATH}:/usr/local/fastqc/0.11.4/
   time /usr/local/fastqc/0.11.4/fastqc --noextract -t 10 \
-  -a ../../../misc/evrogen_mint.tsv -o ../raw_QC "$sample".fastq
+  -a ../../../misc/evrogen_mint.tsv -o ../fastq_QC "$sample".fastq
 
   #Trim data
   echo "Trimming adapters"
