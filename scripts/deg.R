@@ -1,19 +1,18 @@
-#setwd("deg")
-
 #Define functions
+#Function for making a table of results for two conditions from dds
 makeResultsTable <- function(x,conditionA,conditionB,filter=FALSE){
     require(DESeq2)
     bml <- sapply(levels(dds$condition),function(lvl) rowMeans(counts(dds,normalized=TRUE)[,dds$condition == lvl]))
     bml <- as.data.frame(bml)
     y <- results(x,contrast=c("condition",conditionA,conditionB),independentFiltering=filter)
-    y <- data.frame(id=gsub(pattern = "gene:", replacement = "", row.names(y)),
+    y <- data.frame(id=gsub(pattern = "gene:",replacement = "",row.names(y)),
                     sampleA=c(conditionA),sampleB=c(conditionB),
                     baseMeanA=bml[,conditionA],baseMeanB=bml[,conditionB],
                     log2FC=y$log2FoldChange,pval=y$pvalue,padj=y$padj)
     row.names(y) <- c(1:nrow(y))
     return(y)
 }
-
+#Function for making a heat map of samples
 sampleHeatMap <- function(x){
     require(pheatmap)
     require("RColorBrewer")
@@ -27,7 +26,7 @@ sampleHeatMap <- function(x){
          clustering_distance_cols=sampleDists,
          col=colors)
 }
-
+#Function for making a PCA plot of samples
 pcaPlot <- function(x){
     require(ggplot2)
      d <- plotPCA(x, intgroup=c("condition"), returnData=TRUE)
@@ -42,7 +41,7 @@ pcaPlot <- function(x){
            axis.text=element_text(color="black"),
            axis.title=element_text(color="black",face="bold"))
 }
-
+#Function for running topGO on a list of genes
 topGO <- function(genelist,goTerms,nodeSize,filename,writeData=FALSE){
     require(topGO)
     require(GO.db)
@@ -71,7 +70,7 @@ topGO <- function(genelist,goTerms,nodeSize,filename,writeData=FALSE){
       return(list(BP=BPgenTable,MF=MFgenTable,CC=CCgenTable))
     }
 }
-
+#Function for making a heat map of genes
 geneHeatMap <- function(dds,geneList){
     require(pheatmap)
     select <- select <- row.names(counts(dds,normalized=TRUE)) %in% genelist
@@ -82,40 +81,54 @@ geneHeatMap <- function(dds,geneList){
              cluster_cols=FALSE, annotation_col=df)
 }
 
-##DESeq2
+#DESeq2
+#Run initial DESeq2 analysis
+#Load Deseq2
 library(DESeq2)
+#Read in sample metadata
 sampleTable <- read.csv("../../misc/sample_metadata.csv",header=T)
-dds <- DESeqDataSetFromHTSeqCount(sampleTable, design= ~ condition)
-row.names(dds) <- gsub("gene:","",row.names(dds))
-dds <- dds[ rowSums(counts(dds)) > 1, ]
-
+#Read in Counts Table
+dds <- DESeqDataSetFromHTSeqCount(sampleTable,design= ~ condition)
+#Prefilter
+dds <- dds[rowSums(counts(dds)) > 1,]
+#Set reference level
+dds$condition <- relevel(dds$condition, ref="TO1000")
+#Estimate Size Factors
 dds <- estimateSizeFactors(dds)
+#Estimate Dispersions
 dds <- estimateDispersions(dds,fitType="parametric")
+#Run Wald Test
 dds <- nbinomWaldTest(dds)
 
-normalized_counts <- counts(dds, normalized=TRUE)
-rawcounts <- data.frame(gene = row.names(counts(dds, normalized=FALSE)),counts(dds, normalized=FALSE))
-write.table(rawcounts, "../../figures_tables/raw_counts.tsv",sep="\t",
-            quote=FALSE, row.names=TRUE)
-
-##
+#Make diagnostic figures of samples
+#Make a heat map of samples
 rld <- rlog(dds, blind=TRUE)
 pdf("../../figures_tables/sampleHeatMap.pdf",width=6,height=6,paper='special')
 sampleHeatMap(rld)
 dev.off()
-
+#Make a PCA plot of samples
 pdf("../../figures_tables/samplePCA.pdf",width=6,height=6,paper='special')
 pcaPlot(rld)
 dev.off()
 
-##Differential expression
+#Make results tables for each pairwise comparison
 resTvC <- makeResultsTable(dds,"TO1000","cabbage",filter=FALSE)
 resTvK <- makeResultsTable(dds,"TO1000","kale",filter=FALSE)
 resKvC <- makeResultsTable(dds,"kale","cabbage",filter=FALSE)
+#Combine results tables
 resfull <- as.data.frame(rbind(resTvC,resTvK,resKvC))
+#Adjust p-values for all results
 resfull$padj <- p.adjust(resfull$pval,method="BH")
 
-all_genes <- data.frame(gene=row.names(normalized_counts), normalized_counts,
+#Extract raw counts and output a table
+rawCounts <- data.frame(gene = row.names(counts(dds,normalized=FALSE)),
+                        counts(dds,normalized=FALSE))
+write.table(rawCounts, "../../figures_tables/raw_counts.tsv",sep="\t",
+            quote=FALSE, row.names=TRUE)
+
+#Extract and output a table of normalized counts
+normalizedCounts <- counts(dds, normalized=TRUE)
+all_genes <- data.frame(gene=row.names(normalizedCounts), normalizedCounts,
              as.data.frame(sapply(levels(dds$condition),
              function(lvl) rowMeans(counts(dds,normalized=TRUE)[,dds$condition == lvl]))),
              resfull[resfull$sampleA=="TO1000" & resfull$sampleB=="cabbage",c(6,8)],
@@ -128,17 +141,23 @@ colnames(all_genes) <- c("gene","cabbage1", "cabbage2", "kale1", "kale2", "kale3
 write.table(all_genes, "../../figures_tables/Gene_expression_table.tsv",sep="\t",
             quote=FALSE, row.names=FALSE)
 
+#Extract significant DEGs
 sig <- na.omit(resfull[resfull$padj <= 0.05 & resfull$log2FC >= 1 | resfull$padj <= 0.05 & resfull$log2FC <= -1,])
+#Count number of DEGs for each comparison
 table(sig$sampleA,sig$sampleB)
+#For each pairwise comparison, extract the DEGs
 TvCsig <- sig[sig$sampleA == "TO1000" & sig$sampleB == "cabbage",]
 TvKsig <- sig[sig$sampleA == "TO1000" & sig$sampleB == "kale",]
 KvCsig <- sig[sig$sampleA == "kale" & sig$sampleB == "cabbage",]
+
+#Venn Diagram of DEGs
+#Make a table of overlap between pairwise comparisons
 d2 <- data.frame(id=unique(sig$id))
 d2 <- data.frame(id=d2$id,TvC=ifelse(d2$id %in% sig[sig$sampleA == "TO1000" & sig$sampleB == "cabbage",]$id, 1, 0),
   TvK=ifelse(d2$id %in% sig[sig$sampleA == "TO1000" & sig$sampleB == "kale",]$id, 1, 0),
   KvC=ifelse(d2$id %in% sig[sig$sampleA == "kale" & sig$sampleB == "cabbage",]$id, 1, 0)
 )
-
+#Make Venn Diagram
 library(VennDiagram)
 pdf("../../figures_tables/comparisonVennDiagram.pdf",width=6,height=6,paper='special')
 draw.triple.venn(area1=nrow(subset(d2,TvC==1)),

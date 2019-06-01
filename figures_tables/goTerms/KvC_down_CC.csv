@@ -1,595 +1,597 @@
 GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
-GO:0070469,respiratory chain,151,26,10.06,5.5e-07,0.0003295
-GO:0032991,macromolecular complex,4035,342,268.95,1.0e-06,0.0003295
-GO:0000786,nucleosome,99,22,6.6,2.4e-06,0.00042835
-GO:0005623,cell,26652,1850,1776.47,2.9e-06,0.00042835
-GO:0005840,ribosome,870,103,57.99,3.4e-06,0.00042835
-GO:0044464,cell part,26602,1846,1773.13,3.9e-06,0.00042835
-GO:0005737,cytoplasm,16064,1227,1070.73,7.2e-06,0.000677828571428571
-GO:0030529,intracellular ribonucleoprotein complex,1314,135,87.58,1.0e-05,0.0007908
-GO:0044815,DNA packaging complex,108,22,7.2,1.2e-05,0.0007908
-GO:0044455,mitochondrial membrane part,287,36,19.13,1.2e-05,0.0007908
-GO:0005622,intracellular,24198,1727,1612.9,1.6e-05,0.000958545454545454
-GO:1990204,oxidoreductase complex,187,29,12.46,3.9e-05,0.00212907692307692
-GO:0043226,organelle,21361,1506,1423.8,4.2e-05,0.00212907692307692
-GO:0044424,intracellular part,23936,1708,1595.43,5.4e-05,0.00254185714285714
-GO:0044444,cytoplasmic part,13303,1021,886.7,0.00015,0.00659
-GO:0098796,membrane protein complex,913,82,60.86,0.00023,0.009473125
-GO:0045281,succinate dehydrogenase complex,10,5,0.67,0.00034,0.01318
-GO:0031966,mitochondrial membrane,515,59,34.33,0.00037,0.0135461111111111
-GO:0019866,organelle inner membrane,530,59,35.33,0.00046,0.0159547368421053
-GO:0005740,mitochondrial envelope,546,64,36.39,0.00053,0.0169457142857143
-GO:0044429,mitochondrial part,703,77,46.86,0.00054,0.0169457142857143
-GO:0045273,respiratory chain complex II,11,5,0.73,0.00059,0.0176731818181818
-GO:0032993,protein-DNA complex,134,23,8.93,0.00072,0.0206295652173913
-GO:0043228,non-membrane-bounded organelle,2416,208,161.04,0.00110,0.0292596
-GO:0043232,intracellular non-membrane-bounded organ...,2416,208,161.04,0.00111,0.0292596
-GO:0005747,mitochondrial respiratory chain complex ...,87,16,5.8,0.00128,0.0324430769230769
-GO:0098805,whole membrane,1420,111,94.65,0.00163,0.0397840740740741
-GO:0098798,mitochondrial protein complex,237,31,15.8,0.00182,0.042835
-GO:0045283,fumarate reductase complex,9,4,0.6,0.00243,0.0551363333333333
-GO:0098803,respiratory chain complex,124,21,8.27,0.00251,0.0551363333333333
-GO:1990904,ribonucleoprotein complex,1314,135,87.58,0.00293,0.0622861290322581
-GO:0005749,mitochondrial respiratory chain complex ...,9,4,0.6,0.00376,0.0774325
-GO:0030964,NADH dehydrogenase complex,88,16,5.87,0.00451,0.0900633333333333
-GO:0005853,eukaryotic translation elongation factor...,10,4,0.67,0.00471,0.0912908823529412
-GO:0044422,organelle part,6972,513,464.71,0.00507,0.0954608571428571
-GO:0044391,ribosomal subunit,452,49,30.13,0.00663,0.121365833333333
-GO:0005774,vacuolar membrane,1095,90,72.99,0.00737,0.131265675675676
-GO:0098800,inner mitochondrial membrane protein com...,220,29,14.66,0.01181,0.204810263157895
-GO:0031975,envelope,1586,133,105.71,0.01264,0.21358358974359
-GO:0009536,plastid,5071,400,338,0.01453,0.23938175
-GO:0042579,microbody,380,39,25.33,0.01556,0.250098536585366
-GO:0005739,mitochondrion,3423,276,228.16,0.01693,0.265639761904762
-GO:0033177,proton-transporting two-sector ATPase co...,63,11,4.2,0.01958,0.290389782608696
-GO:0031090,organelle membrane,2531,191,168.7,0.01972,0.290389782608696
-GO:0071011,precatalytic spliceosome,30,5,2,0.02015,0.290389782608696
-GO:0031967,organelle envelope,1584,132,105.58,0.02027,0.290389782608696
-GO:0000785,chromatin,198,25,13.2,0.02503,0.350952553191489
-GO:0033176,proton-transporting V-type ATPase comple...,66,11,4.4,0.02564,0.352015833333333
-GO:0098533,ATPase dependent transmembrane transport...,5,2,0.33,0.02767,0.372133265306122
-GO:0043190,ATP-binding cassette (ABC) transporter c...,5,2,0.33,0.02856,0.3764208
-GO:0044445,cytosolic part,521,52,34.73,0.02999,0.387517843137255
-GO:0016272,prefoldin complex,17,4,1.13,0.03539,0.444389811320755
-GO:0031970,organelle envelope lumen,34,6,2.27,0.03574,0.444389811320755
-GO:0005746,mitochondrial respiratory chain,130,21,8.67,0.03782,0.461544074074074
-GO:0000788,nuclear nucleosome,5,2,0.33,0.04109,0.492332909090909
-GO:1904949,ATPase complex,5,2,0.33,0.04251,0.500251607142857
-GO:0070847,core mediator complex,7,2,0.47,0.04454,0.514944912280702
-GO:0031974,membrane-enclosed lumen,1535,119,102.31,0.04707,0.534812586206897
-GO:0012507,ER to Golgi transport vesicle membrane,37,5,2.47,0.04904,0.54775186440678
-GO:0044427,chromosomal part,352,34,23.46,0.06063,0.6659195
-GO:0033179,proton-transporting V-type ATPase, V0 do...,41,9,2.73,0.07036,0.76011868852459
-GO:0005771,multivesicular body,20,3,1.33,0.07459,0.79090296875
-GO:0019867,outer membrane,154,14,10.26,0.07572,0.79090296875
-GO:0000815,ESCRT III complex,12,3,0.8,0.07681,0.79090296875
-GO:0098827,endoplasmic reticulum subcompartment,7,2,0.47,0.08035,0.810470151515152
-GO:0005665,DNA-directed RNA polymerase II, core com...,48,5,3.2,0.08117,0.810470151515152
-GO:0031225,anchored component of membrane,343,26,22.86,0.08310,0.81735671641791
-GO:0032585,multivesicular body membrane,7,2,0.47,0.08543,0.827917205882353
-GO:0061695,transferase complex, transferring phosph...,215,16,14.33,0.09461,0.887979295774648
-GO:0005960,glycine cleavage complex,7,2,0.47,0.09564,0.887979295774648
-GO:0071782,endoplasmic reticulum tubular network,7,2,0.47,0.09567,0.887979295774648
-GO:0016591,DNA-directed RNA polymerase II, holoenzy...,116,9,7.73,0.09849,0.89163602739726
-GO:0045298,tubulin complex,24,4,1.6,0.09877,0.89163602739726
-GO:0005689,U12-type spliceosomal complex,20,3,1.33,0.10982,0.977991621621622
-GO:0005876,spindle microtubule,19,3,1.27,0.11487,1
-GO:0005761,mitochondrial ribosome,24,4,1.6,0.12164,1
-GO:0005945,6-phosphofructokinase complex,7,2,0.47,0.12600,1
-GO:0022626,cytosolic ribosome,471,48,31.39,0.13155,1
-GO:0005829,cytosol,3425,277,228.29,0.14026,1
-GO:0036452,ESCRT complex,27,4,1.8,0.14236,1
-GO:0043233,organelle lumen,1535,119,102.31,0.14401,1
-GO:0071013,catalytic step 2 spliceosome,35,4,2.33,0.14411,1
-GO:0009331,glycerol-3-phosphate dehydrogenase compl...,9,2,0.6,0.14821,1
-GO:0005852,eukaryotic translation initiation factor...,48,6,3.2,0.15186,1
-GO:0031461,cullin-RING ubiquitin ligase complex,251,13,16.73,0.15338,1
-GO:0030127,COPII vesicle coat,20,3,1.33,0.15916,1
-GO:0044423,virion part,44,5,2.93,0.16724,1
-GO:0019012,virion,44,5,2.93,0.16724,1
-GO:0035618,root hair,8,1,0.53,0.17225,1
-GO:0005666,DNA-directed RNA polymerase III complex,29,3,1.93,0.17247,1
-GO:0000418,DNA-directed RNA polymerase IV complex,29,3,1.93,0.17247,1
-GO:0000922,spindle pole,26,3,1.73,0.17514,1
-GO:0016607,nuclear speck,83,6,5.53,0.17829,1
-GO:0031012,extracellular matrix,52,5,3.47,0.17845,1
-GO:0070013,intracellular organelle lumen,1535,119,102.31,0.17847,1
-GO:0000138,Golgi trans cisterna,6,1,0.4,0.18280,1
-GO:0000790,nuclear chromatin,80,8,5.33,0.18315,1
-GO:0071010,prespliceosome,25,3,1.67,0.18585,1
-GO:0030134,ER to Golgi transport vesicle,40,5,2.67,0.18725,1
-GO:0032040,small-subunit processome,45,5,3,0.18868,1
-GO:0044446,intracellular organelle part,6959,513,463.85,0.18905,1
-GO:0031304,intrinsic component of mitochondrial inn...,21,4,1.4,0.19160,1
-GO:0005798,Golgi-associated vesicle,79,6,5.27,0.19884,1
-GO:0031968,organelle outer membrane,153,14,10.2,0.20333,1
-GO:0000164,protein phosphatase type 1 complex,11,2,0.73,0.20413,1
-GO:0000307,cyclin-dependent protein kinase holoenzy...,22,3,1.47,0.20451,1
-GO:0031901,early endosome membrane,21,3,1.4,0.20656,1
-GO:0005730,nucleolus,719,64,47.92,0.21219,1
-GO:0005743,mitochondrial inner membrane,425,50,28.33,0.21362,1
-GO:0044437,vacuolar part,1100,90,73.32,0.21650,1
-GO:0005684,U2-type spliceosomal complex,41,4,2.73,0.22584,1
-GO:0005783,endoplasmic reticulum,1376,106,91.72,0.22777,1
+GO:0070469,respiratory chain,153,28,10.19,5.5e-08,3.6465e-05
+GO:0000786,nucleosome,100,24,6.66,4.3e-07,0.000142545
+GO:0044455,mitochondrial membrane part,285,39,18.98,7.1e-07,0.00015691
+GO:0005622,intracellular,24649,1746,1641.86,1.7e-06,0.000281775
+GO:0044429,mitochondrial part,709,84,47.23,3.3e-06,0.0003757
+GO:0005740,mitochondrial envelope,546,68,36.37,3.4e-06,0.0003757
+GO:0032991,protein-containing complex,3952,330,263.24,6.0e-06,0.000478833333333333
+GO:1990204,oxidoreductase complex,190,31,12.66,6.0e-06,0.000478833333333333
+GO:0044815,DNA packaging complex,109,24,7.26,6.5e-06,0.000478833333333333
+GO:0044424,intracellular part,24386,1724,1624.34,2.3e-05,0.0015249
+GO:0031966,mitochondrial membrane,515,63,34.3,4.9e-05,0.00295336363636364
+GO:0005840,ribosome,881,94,58.68,9.0e-05,0.0049725
+GO:0032993,protein-DNA complex,133,24,8.86,0.00020,0.0102
+GO:0098796,membrane protein complex,917,84,61.08,0.00024,0.0113657142857143
+GO:0005623,cell,27171,1868,1809.85,0.00027,0.011934
+GO:0019866,organelle inner membrane,532,59,35.44,0.00040,0.0164005263157895
+GO:0098805,whole membrane,1392,113,92.72,0.00045,0.0164005263157895
+GO:0043232,intracellular non-membrane-bounded organ...,2462,212,163.99,0.00045,0.0164005263157895
+GO:0043228,non-membrane-bounded organelle,2462,212,163.99,0.00047,0.0164005263157895
+GO:0044464,cell part,27119,1862,1806.39,0.00050,0.0164308695652174
+GO:0044440,endosomal part,224,19,14.92,0.00055,0.0164308695652174
+GO:0098803,respiratory chain complex,125,23,8.33,0.00055,0.0164308695652174
+GO:0045281,succinate dehydrogenase complex,11,5,0.73,0.00057,0.0164308695652174
+GO:0045273,respiratory chain complex II,12,5,0.8,0.00091,0.02513875
+GO:0043226,organelle,21771,1513,1450.16,0.00163,0.0432276
+GO:0030964,NADH dehydrogenase complex,87,15,5.8,0.00178,0.04539
+GO:0033176,proton-transporting V-type ATPase comple...,66,14,4.4,0.00195,0.0478833333333333
+GO:0045283,fumarate reductase complex,9,4,0.6,0.00235,0.0556446428571429
+GO:0098798,mitochondrial protein complex,263,36,17.52,0.00283,0.0646996551724138
+GO:0000785,chromatin,210,29,13.99,0.00492,0.108732
+GO:0098800,inner mitochondrial membrane protein com...,219,31,14.59,0.00547,0.116987419354839
+GO:0005773,vacuole,1583,136,105.44,0.00811,0.1680290625
+GO:0033179,proton-transporting V-type ATPase, V0 do...,41,11,2.73,0.00943,0.189457272727273
+GO:0031090,organelle membrane,2539,193,169.12,0.01197,0.233415
+GO:0044427,chromosomal part,364,37,24.25,0.01472,0.278838857142857
+GO:0042579,microbody,391,39,26.04,0.01763,0.324685833333333
+GO:0005737,cytoplasm,16333,1194,1087.94,0.01918,0.343684864864865
+GO:0043190,ATP-binding cassette (ABC) transporter c...,5,2,0.33,0.02038,0.35139
+GO:1990904,ribonucleoprotein complex,1267,123,84.39,0.02067,0.35139
+GO:0098533,ATPase dependent transmembrane transport...,5,2,0.33,0.02172,0.360009
+GO:0033177,proton-transporting two-sector ATPase co...,63,11,4.2,0.02254,0.364488292682927
+GO:0005746,mitochondrial respiratory chain,130,23,8.66,0.02316,0.365597142857143
+GO:0005749,mitochondrial respiratory chain complex ...,9,4,0.6,0.02481,0.376036304347826
+GO:0044437,vacuolar part,935,83,62.28,0.02504,0.376036304347826
+GO:0044445,cytosolic part,524,50,34.9,0.02580,0.376036304347826
+GO:0005743,mitochondrial inner membrane,426,54,28.38,0.02609,0.376036304347826
+GO:0005774,vacuolar membrane,912,79,60.75,0.02855,0.402737234042553
+GO:0031970,organelle envelope lumen,35,6,2.33,0.03414,0.47155875
+GO:0019867,outer membrane,154,15,10.26,0.04266,0.577215918367347
+GO:0044391,ribosomal subunit,454,42,30.24,0.05557,0.7368582
+GO:0016272,prefoldin complex,18,4,1.2,0.05727,0.74451
+GO:0016591,RNA polymerase II, holoenzyme,107,9,7.13,0.05985,0.758275555555556
+GO:0005798,Golgi-associated vesicle,121,10,8.06,0.06169,0.758275555555556
+GO:0046930,pore complex,16,3,1.07,0.06176,0.758275555555556
+GO:0071782,endoplasmic reticulum tubular network,7,2,0.47,0.06608,0.792640178571428
+GO:0044422,organelle part,7050,498,469.6,0.06695,0.792640178571428
+GO:0031975,envelope,1600,125,106.58,0.06974,0.811186315789474
+GO:0055044,symplast,1485,113,98.92,0.07595,0.868187068965517
+GO:0005665,RNA polymerase II, core complex,48,5,3.2,0.07873,0.884711694915254
+GO:0030054,cell junction,1490,113,99.25,0.08127,0.887115737704918
+GO:0031974,membrane-enclosed lumen,1561,118,103.98,0.08162,0.887115737704918
+GO:0010318,pyrophosphate-dependent phosphofructokin...,6,2,0.4,0.08326,0.890344838709677
+GO:0031967,organelle envelope,1598,124,106.44,0.08556,0.89121703125
+GO:0005960,glycine cleavage complex,7,2,0.47,0.08603,0.89121703125
+GO:0030134,COPII-coated ER to Golgi transport vesic...,41,5,2.73,0.10256,1
+GO:0016469,proton-transporting two-sector ATPase co...,127,16,8.46,0.10293,1
+GO:0031461,cullin-RING ubiquitin ligase complex,259,15,17.25,0.10417,1
+GO:0005739,mitochondrion,3483,263,232,0.10437,1
+GO:0005682,U5 snRNP,12,3,0.8,0.10662,1
+GO:0031012,extracellular matrix,26,3,1.73,0.10687,1
+GO:0031225,anchored component of membrane,356,26,23.71,0.11138,1
+GO:0000788,nuclear nucleosome,5,2,0.33,0.11201,1
+GO:0005672,transcription factor TFIIA complex,12,2,0.8,0.11425,1
+GO:0005945,6-phosphofructokinase complex,7,2,0.47,0.11690,1
+GO:0000815,ESCRT III complex,14,3,0.93,0.11963,1
+GO:0031968,organelle outer membrane,153,15,10.19,0.12413,1
+GO:0048046,apoplast,691,46,46.03,0.12469,1
+GO:0045298,tubulin complex,24,4,1.6,0.13198,1
+GO:0098799,outer mitochondrial membrane protein com...,14,3,0.93,0.13359,1
+GO:0009331,glycerol-3-phosphate dehydrogenase compl...,9,2,0.6,0.13410,1
+GO:0000220,vacuolar proton-transporting V-type ATPa...,22,4,1.47,0.13506,1
+GO:0005655,nucleolar ribonuclease P complex,11,1,0.73,0.14667,1
+GO:0009536,plastid,5127,378,341.51,0.14753,1
+GO:0010168,ER body,10,2,0.67,0.14821,1
+GO:0000421,autophagosome membrane,16,3,1.07,0.15092,1
+GO:0000314,organellar small ribosomal subunit,10,2,0.67,0.15204,1
+GO:0012507,ER to Golgi transport vesicle membrane,38,4,2.53,0.15526,1
+GO:0044444,cytoplasmic part,13499,975,899.16,0.15536,1
+GO:0005759,mitochondrial matrix,173,19,11.52,0.15648,1
+GO:0005853,eukaryotic translation elongation factor...,10,2,0.67,0.15791,1
+GO:0005758,mitochondrial intermembrane space,32,6,2.13,0.16440,1
+GO:0010316,pyrophosphate-dependent phosphofructokin...,9,2,0.6,0.16953,1
+GO:0005876,spindle microtubule,19,3,1.27,0.17471,1
+GO:0005747,mitochondrial respiratory chain complex ...,87,15,5.8,0.17791,1
+GO:0032040,small-subunit processome,45,3,3,0.17944,1
+GO:0009707,chloroplast outer membrane,75,6,5,0.18332,1
+GO:0005763,mitochondrial small ribosomal subunit,6,2,0.4,0.18706,1
+GO:0061695,transferase complex, transferring phosph...,210,15,13.99,0.19257,1
+GO:0098827,endoplasmic reticulum subcompartment,637,40,42.43,0.20318,1
+GO:0005839,proteasome core complex,56,6,3.73,0.20347,1
+GO:0043233,organelle lumen,1561,118,103.98,0.20814,1
+GO:1905348,endonuclease complex,12,2,0.8,0.20833,1
+GO:0005801,cis-Golgi network,23,3,1.53,0.20925,1
+GO:0031414,N-terminal protein acetyltransferase com...,12,2,0.8,0.21263,1
+GO:0036452,ESCRT complex,29,4,1.93,0.21559,1
+GO:0000922,spindle pole,25,3,1.67,0.22385,1
+GO:0035618,root hair,8,1,0.53,0.22515,1
 GO:0035619,root hair tip,8,1,0.53,0.22857,1
-GO:0000313,organellar ribosome,35,4,2.33,0.23109,1
-GO:0015630,microtubule cytoskeleton,397,25,26.46,0.23368,1
-GO:0009706,chloroplast inner membrane,97,8,6.47,0.23404,1
-GO:0009523,photosystem II,78,6,5.2,0.23516,1
-GO:0031300,intrinsic component of organelle membran...,109,9,7.27,0.23736,1
-GO:0005773,vacuole,2043,155,136.17,0.23857,1
-GO:0009570,chloroplast stroma,1029,79,68.59,0.24022,1
-GO:0030658,transport vesicle membrane,61,6,4.07,0.24344,1
-GO:0009504,cell plate,55,6,3.67,0.24474,1
-GO:0005762,mitochondrial large ribosomal subunit,16,3,1.07,0.24641,1
-GO:0030532,small nuclear ribonucleoprotein complex,68,8,4.53,0.24750,1
-GO:0010330,cellulose synthase complex,5,1,0.33,0.24790,1
-GO:0000243,commitment complex,19,3,1.27,0.24878,1
-GO:0005758,mitochondrial intermembrane space,31,5,2.07,0.25070,1
-GO:0009522,photosystem I,62,5,4.13,0.25570,1
-GO:0009531,secondary cell wall,15,2,1,0.26199,1
-GO:0016469,proton-transporting two-sector ATPase co...,130,14,8.67,0.26611,1
-GO:0008076,voltage-gated potassium channel complex,5,1,0.33,0.27431,1
-GO:0034357,photosynthetic membrane,524,35,34.93,0.27621,1
-GO:0031201,SNARE complex,69,7,4.6,0.27848,1
-GO:0070993,translation preinitiation complex,35,4,2.33,0.27938,1
-GO:0031301,integral component of organelle membrane,106,8,7.07,0.28537,1
-GO:0033116,endoplasmic reticulum-Golgi intermediate...,14,2,0.93,0.29255,1
-GO:0034703,cation channel complex,5,1,0.33,0.29412,1
-GO:0009532,plastid stroma,1052,80,70.12,0.29653,1
-GO:0038201,TOR complex,5,1,0.33,0.30939,1
-GO:0005846,nuclear cap binding complex,5,1,0.33,0.30939,1
-GO:0005789,endoplasmic reticulum membrane,632,41,42.13,0.30986,1
-GO:0044454,nuclear chromosome part,159,14,10.6,0.31085,1
-GO:0000109,nucleotide-excision repair complex,5,1,0.33,0.31205,1
-GO:0044440,endosomal part,220,18,14.66,0.31645,1
-GO:0031305,integral component of mitochondrial inne...,18,3,1.2,0.31846,1
-GO:0071012,catalytic step 1 spliceosome,6,1,0.4,0.32195,1
-GO:0030312,external encapsulating structure,1135,83,75.65,0.32319,1
-GO:0017119,Golgi transport complex,25,2,1.67,0.32535,1
-GO:0031931,TORC1 complex,5,1,0.33,0.32722,1
-GO:0034518,RNA cap binding complex,5,1,0.33,0.32722,1
-GO:0008180,COP9 signalosome,15,2,1,0.32788,1
-GO:0070652,HAUS complex,8,1,0.53,0.32828,1
-GO:0000228,nuclear chromosome,178,14,11.86,0.34016,1
-GO:0090576,RNA polymerase III transcription factor ...,7,1,0.47,0.34264,1
-GO:0048500,signal recognition particle,27,3,1.8,0.34311,1
-GO:0042807,central vacuole,12,1,0.8,0.34726,1
-GO:0000419,DNA-directed RNA polymerase V complex,31,3,2.07,0.34960,1
-GO:0031226,intrinsic component of plasma membrane,474,30,31.59,0.35626,1
-GO:0000323,lytic vacuole,64,6,4.27,0.35695,1
-GO:0022625,cytosolic large ribosomal subunit,226,25,15.06,0.35798,1
-GO:0033588,Elongator holoenzyme complex,6,1,0.4,0.35904,1
-GO:0005815,microtubule organizing center,38,3,2.53,0.36131,1
-GO:0000814,ESCRT II complex,5,1,0.33,0.36302,1
-GO:0044428,nuclear part,1652,119,110.11,0.36435,1
-GO:0000811,GINS complex,5,1,0.33,0.36549,1
-GO:0005664,nuclear origin of replication recognitio...,5,1,0.33,0.36737,1
-GO:0000779,condensed chromosome, centromeric region,10,1,0.67,0.37062,1
-GO:0005839,proteasome core complex,56,5,3.73,0.37123,1
-GO:0042651,thylakoid membrane,510,35,33.99,0.37514,1
-GO:0031298,replication fork protection complex,6,1,0.4,0.37584,1
-GO:0033557,Slx1-Slx4 complex,6,1,0.4,0.37584,1
-GO:0010318,pyrophosphate-dependent phosphofructokin...,6,1,0.4,0.37855,1
-GO:0000421,autophagosome membrane,16,2,1.07,0.37938,1
-GO:0000427,plastid-encoded plastid RNA polymerase c...,6,1,0.4,0.38761,1
-GO:0015934,large ribosomal subunit,282,32,18.8,0.38957,1
-GO:0005887,integral component of plasma membrane,333,21,22.2,0.39056,1
-GO:0045271,respiratory chain complex I,87,16,5.8,0.39663,1
-GO:0009295,nucleoid,62,5,4.13,0.39789,1
-GO:0010369,chromocenter,9,1,0.6,0.39821,1
-GO:0030133,transport vesicle,77,6,5.13,0.39899,1
-GO:0005793,endoplasmic reticulum-Golgi intermediate...,19,2,1.27,0.40038,1
-GO:0098799,outer mitochondrial membrane protein com...,15,2,1,0.40228,1
-GO:0000276,mitochondrial proton-transporting ATP sy...,17,2,1.13,0.40336,1
-GO:0031428,box C/D snoRNP complex,9,1,0.6,0.40530,1
-GO:0030118,clathrin coat,50,4,3.33,0.40774,1
-GO:0071006,U2-type catalytic step 1 spliceosome,5,1,0.33,0.40994,1
-GO:0048046,apoplast,682,41,45.46,0.41147,1
-GO:0005769,early endosome,42,3,2.8,0.41465,1
-GO:0005686,U2 snRNP,19,3,1.27,0.41752,1
-GO:0099513,polymeric cytoskeletal fiber,315,19,21,0.41960,1
-GO:0009346,citrate lyase complex,7,1,0.47,0.42329,1
-GO:0036464,cytoplasmic ribonucleoprotein granule,56,5,3.73,0.42734,1
-GO:0008287,protein serine/threonine phosphatase com...,62,5,4.13,0.43214,1
-GO:0046658,anchored component of plasma membrane,145,9,9.66,0.43931,1
-GO:0030688,preribosome, small subunit precursor,7,1,0.47,0.44241,1
-GO:0031082,BLOC complex,7,1,0.47,0.44365,1
-GO:1903293,phosphatase complex,62,5,4.13,0.44523,1
-GO:0045263,proton-transporting ATP synthase complex...,21,2,1.4,0.44840,1
-GO:0009508,plastid chromosome,19,2,1.27,0.44876,1
-GO:0005682,U5 snRNP,12,2,0.8,0.44883,1
-GO:0005687,U4 snRNP,12,2,0.8,0.44883,1
-GO:0005759,mitochondrial matrix,166,15,11.06,0.45085,1
-GO:0070062,extracellular exosome,10,1,0.67,0.45094,1
-GO:1903561,extracellular vesicle,10,1,0.67,0.45197,1
-GO:0000229,cytoplasmic chromosome,20,2,1.33,0.45917,1
-GO:0009707,chloroplast outer membrane,74,5,4.93,0.46139,1
-GO:0000808,origin recognition complex,8,1,0.53,0.46438,1
-GO:0000974,Prp19 complex,8,1,0.53,0.46980,1
-GO:0009579,thylakoid,759,55,50.59,0.47294,1
-GO:0031902,late endosome membrane,88,7,5.87,0.47380,1
-GO:0048475,coated membrane,109,7,7.27,0.47533,1
-GO:0005874,microtubule,301,19,20.06,0.47750,1
-GO:1902911,protein kinase complex,34,3,2.27,0.47950,1
-GO:0010168,ER body,9,1,0.6,0.48021,1
-GO:0005742,mitochondrial outer membrane translocase...,15,2,1,0.48087,1
-GO:0005694,chromosome,434,38,28.93,0.48309,1
-GO:0009330,DNA topoisomerase complex (ATP-hydrolyzi...,9,1,0.6,0.48687,1
-GO:1905369,endopeptidase complex,129,6,8.6,0.48933,1
-GO:0000315,organellar large ribosomal subunit,23,3,1.53,0.49080,1
-GO:0005635,nuclear envelope,151,11,10.06,0.49631,1
-GO:0005788,endoplasmic reticulum lumen,47,4,3.13,0.49709,1
-GO:1902495,transmembrane transporter complex,46,3,3.07,0.50042,1
-GO:0005763,mitochondrial small ribosomal subunit,6,1,0.4,0.50066,1
-GO:0030176,integral component of endoplasmic reticu...,65,4,4.33,0.50236,1
-GO:0034715,pICln-Sm protein complex,9,1,0.6,0.50723,1
-GO:0034719,SMN-Sm protein complex,9,1,0.6,0.50723,1
-GO:0005801,cis-Golgi network,24,2,1.6,0.50922,1
-GO:0030120,vesicle coat,78,5,5.2,0.50938,1
-GO:0043230,extracellular organelle,10,1,0.67,0.50944,1
-GO:0010316,pyrophosphate-dependent phosphofructokin...,9,1,0.6,0.51029,1
-GO:0031227,intrinsic component of endoplasmic retic...,65,4,4.33,0.51240,1
-GO:0098797,plasma membrane protein complex,159,10,10.6,0.51364,1
-GO:0030130,clathrin coat of trans-Golgi network ves...,14,1,0.93,0.51818,1
-GO:0030076,light-harvesting complex,24,2,1.6,0.51957,1
-GO:0019773,proteasome core complex, alpha-subunit c...,24,2,1.6,0.51957,1
-GO:0030139,endocytic vesicle,11,1,0.73,0.51989,1
-GO:0010008,endosome membrane,217,18,14.46,0.52225,1
-GO:0080008,Cul4-RING E3 ubiquitin ligase complex,165,9,11,0.52255,1
-GO:0042646,plastid nucleoid,35,3,2.33,0.53196,1
-GO:0031332,RNAi effector complex,7,1,0.47,0.53266,1
-GO:0019898,extrinsic component of membrane,188,11,12.53,0.53838,1
-GO:0035770,ribonucleoprotein granule,56,5,3.73,0.54003,1
-GO:0055044,symplast,1464,97,97.58,0.54066,1
-GO:0005663,DNA replication factor C complex,10,1,0.67,0.54191,1
-GO:0030662,coated vesicle membrane,114,8,7.6,0.54334,1
-GO:0005971,ribonucleoside-diphosphate reductase com...,9,1,0.6,0.54726,1
-GO:0005669,transcription factor TFIID complex,15,1,1,0.54840,1
-GO:0005819,spindle,116,10,7.73,0.54893,1
-GO:0030054,cell junction,1468,97,97.85,0.55197,1
-GO:0000326,protein storage vacuole,22,1,1.47,0.55204,1
-GO:0098554,cytoplasmic side of endoplasmic reticulu...,12,1,0.8,0.55603,1
-GO:0030014,CCR4-NOT complex,11,1,0.73,0.55760,1
-GO:0005736,DNA-directed RNA polymerase I complex,31,2,2.07,0.55976,1
-GO:0042175,nuclear outer membrane-endoplasmic retic...,636,42,42.39,0.56720,1
+GO:0015934,large ribosomal subunit,284,29,18.92,0.22981,1
+GO:0031305,integral component of mitochondrial inne...,18,3,1.2,0.23005,1
+GO:0070013,intracellular organelle lumen,1561,118,103.98,0.23115,1
+GO:0031304,intrinsic component of mitochondrial inn...,21,4,1.4,0.23125,1
+GO:0000243,commitment complex,19,3,1.27,0.23374,1
+GO:0089701,U2AF,11,2,0.73,0.23439,1
+GO:0045275,respiratory chain complex III,24,3,1.6,0.23873,1
+GO:0005680,anaphase-promoting complex,17,2,1.13,0.24434,1
+GO:0010008,endosome membrane,221,19,14.72,0.24953,1
+GO:0005829,cytosol,3458,259,230.34,0.25193,1
+GO:0010330,cellulose synthase complex,5,1,0.33,0.25704,1
+GO:0030118,clathrin coat,50,4,3.33,0.25709,1
+GO:0005730,nucleolus,727,63,48.43,0.25881,1
+GO:0000138,Golgi trans cisterna,6,1,0.4,0.26705,1
+GO:0000938,GARP complex,6,1,0.4,0.27298,1
+GO:0030286,dynein complex,15,2,1,0.28276,1
+GO:0005887,integral component of plasma membrane,342,22,22.78,0.29400,1
+GO:0000326,protein storage vacuole,26,2,1.73,0.29408,1
+GO:0032586,protein storage vacuole membrane,8,1,0.53,0.29852,1
+GO:0099513,polymeric cytoskeletal fiber,322,23,21.45,0.30050,1
+GO:0090568,nuclear transcriptional repressor comple...,22,2,1.47,0.30617,1
+GO:0033281,TAT protein transport complex,7,1,0.47,0.30661,1
+GO:0038201,TOR complex,5,1,0.33,0.30693,1
+GO:0005846,nuclear cap binding complex,5,1,0.33,0.30693,1
+GO:0030312,external encapsulating structure,1156,84,77,0.30763,1
+GO:0070062,extracellular exosome,10,1,0.67,0.30778,1
+GO:0009570,chloroplast stroma,1044,68,69.54,0.30987,1
+GO:0030135,coated vesicle,169,10,11.26,0.31587,1
+GO:0009531,secondary cell wall,16,2,1.07,0.31704,1
+GO:0071010,prespliceosome,25,3,1.67,0.31879,1
+GO:0000427,plastid-encoded plastid RNA polymerase c...,6,1,0.4,0.32354,1
+GO:0017119,Golgi transport complex,25,2,1.67,0.32489,1
+GO:0009523,photosystem II,81,5,5.4,0.32961,1
+GO:0015630,microtubule cytoskeleton,406,30,27.04,0.33234,1
+GO:0031226,intrinsic component of plasma membrane,487,30,32.44,0.33775,1
+GO:0030532,small nuclear ribonucleoprotein complex,69,7,4.6,0.34119,1
+GO:0005694,chromosome,447,41,29.77,0.34885,1
+GO:0044423,virion part,45,4,3,0.35207,1
+GO:0019012,virion,45,4,3,0.35207,1
+GO:0031931,TORC1 complex,5,1,0.33,0.35352,1
+GO:0034518,RNA cap binding complex,5,1,0.33,0.35352,1
+GO:0032592,integral component of mitochondrial memb...,48,4,3.2,0.35923,1
+GO:0070847,core mediator complex,7,1,0.47,0.36001,1
+GO:0030127,COPII vesicle coat,20,2,1.33,0.36018,1
+GO:0009532,plastid stroma,1067,69,71.07,0.36281,1
+GO:1902495,transmembrane transporter complex,22,2,1.47,0.36733,1
+GO:0031312,extrinsic component of organelle membran...,18,2,1.2,0.36843,1
+GO:0031201,SNARE complex,68,6,4.53,0.36858,1
+GO:0000814,ESCRT II complex,5,1,0.33,0.37143,1
+GO:0090576,RNA polymerase III transcription factor ...,7,1,0.47,0.37316,1
+GO:0005687,U4 snRNP,12,2,0.8,0.37464,1
+GO:0009522,photosystem I,64,4,4.26,0.37934,1
+GO:0031976,plastid thylakoid,636,39,42.36,0.38113,1
+GO:0120114,Sm-like protein family complex,71,7,4.73,0.38138,1
+GO:0042651,thylakoid membrane,510,32,33.97,0.38421,1
+GO:0005741,mitochondrial outer membrane,77,10,5.13,0.38839,1
+GO:0005776,autophagosome,26,3,1.73,0.38936,1
+GO:0070652,HAUS complex,8,1,0.53,0.39382,1
+GO:0022625,cytosolic large ribosomal subunit,227,23,15.12,0.39408,1
+GO:0036464,cytoplasmic ribonucleoprotein granule,57,5,3.8,0.39480,1
+GO:0005770,late endosome,131,7,8.73,0.39854,1
+GO:1903561,extracellular vesicle,10,1,0.67,0.39993,1
+GO:0033588,Elongator holoenzyme complex,7,1,0.47,0.40212,1
+GO:0033557,Slx1-Slx4 complex,6,1,0.4,0.40650,1
+GO:0016471,vacuolar proton-transporting V-type ATPa...,15,2,1,0.40658,1
+GO:0071012,catalytic step 1 spliceosome,7,1,0.47,0.40886,1
+GO:0099080,supramolecular complex,325,23,21.65,0.41258,1
+GO:0071011,precatalytic spliceosome,29,3,1.93,0.41673,1
+GO:0008180,COP9 signalosome,17,2,1.13,0.42393,1
+GO:0044428,nuclear part,1672,117,111.37,0.42568,1
+GO:0005874,microtubule,308,23,20.52,0.42637,1
+GO:0019898,extrinsic component of membrane,190,12,12.66,0.43094,1
+GO:1905369,endopeptidase complex,129,7,8.59,0.43301,1
+GO:0009527,plastid outer membrane,76,6,5.06,0.43586,1
+GO:0000779,condensed chromosome, centromeric region,10,1,0.67,0.43758,1
+GO:0005819,spindle,118,11,7.86,0.43814,1
+GO:0005852,eukaryotic translation initiation factor...,47,4,3.13,0.43875,1
+GO:0070069,cytochrome complex,29,3,1.93,0.44099,1
+GO:1990351,transporter complex,29,3,1.93,0.44099,1
+GO:0005684,U2-type spliceosomal complex,42,4,2.8,0.44240,1
+GO:0000228,nuclear chromosome,189,15,12.59,0.44374,1
+GO:0005789,endoplasmic reticulum membrane,634,39,42.23,0.45482,1
+GO:0031082,BLOC complex,7,1,0.47,0.45711,1
+GO:0042807,central vacuole,14,1,0.93,0.45773,1
+GO:1904949,ATPase complex,35,3,2.33,0.46039,1
+GO:0071006,U2-type catalytic step 1 spliceosome,6,1,0.4,0.46483,1
+GO:0000307,cyclin-dependent protein kinase holoenzy...,22,2,1.47,0.46727,1
+GO:0005795,Golgi stack,109,6,7.26,0.46931,1
+GO:0071013,catalytic step 2 spliceosome,35,3,2.33,0.46959,1
+GO:0070993,translation preinitiation complex,35,3,2.33,0.47072,1
+GO:0010369,chromocenter,9,1,0.6,0.47240,1
+GO:0000794,condensed nuclear chromosome,35,3,2.33,0.47384,1
+GO:0031314,extrinsic component of mitochondrial inn...,13,2,0.87,0.47796,1
+GO:0005815,microtubule organizing center,39,3,2.6,0.48078,1
+GO:0009330,DNA topoisomerase complex (ATP-hydrolyzi...,9,1,0.6,0.48385,1
+GO:0034357,photosynthetic membrane,525,32,34.97,0.48450,1
+GO:0030880,RNA polymerase complex,149,11,9.92,0.48602,1
+GO:0000323,lytic vacuole,65,6,4.33,0.49179,1
+GO:0034715,pICln-Sm protein complex,9,1,0.6,0.49202,1
+GO:0034719,SMN-Sm protein complex,9,1,0.6,0.49202,1
+GO:0005689,U12-type spliceosomal complex,20,2,1.33,0.49292,1
+GO:0009535,chloroplast thylakoid membrane,475,30,31.64,0.49617,1
+GO:0044446,intracellular organelle part,7038,498,468.8,0.50000,1
+GO:0000974,Prp19 complex,8,1,0.53,0.50252,1
+GO:0030176,integral component of endoplasmic reticu...,65,4,4.33,0.50597,1
+GO:0030133,transport vesicle,76,5,5.06,0.50775,1
+GO:0031227,intrinsic component of endoplasmic retic...,65,4,4.33,0.50929,1
+GO:0031332,RNAi effector complex,7,1,0.47,0.51161,1
+GO:0031901,early endosome membrane,21,2,1.4,0.51246,1
+GO:0043230,extracellular organelle,10,1,0.67,0.51256,1
+GO:0000313,organellar ribosome,37,3,2.46,0.51531,1
+GO:0055029,nuclear DNA-directed RNA polymerase comp...,139,10,9.26,0.51803,1
+GO:0031300,intrinsic component of organelle membran...,110,7,7.33,0.51826,1
+GO:0005783,endoplasmic reticulum,1398,98,93.12,0.52484,1
+GO:0044454,nuclear chromosome part,170,13,11.32,0.53331,1
+GO:0019773,proteasome core complex, alpha-subunit c...,25,2,1.67,0.53712,1
+GO:0005669,transcription factor TFIID complex,15,1,1,0.53834,1
+GO:0055035,plastid thylakoid membrane,478,30,31.84,0.53841,1
+GO:0031902,late endosome membrane,89,7,5.93,0.53860,1
+GO:0098554,cytoplasmic side of endoplasmic reticulu...,12,1,0.8,0.53882,1
+GO:0106068,SUMO ligase complex,13,1,0.87,0.54034,1
+GO:0042645,mitochondrial nucleoid,8,1,0.53,0.54392,1
+GO:0000275,mitochondrial proton-transporting ATP sy...,13,2,0.87,0.55046,1
+GO:0035770,ribonucleoprotein granule,57,5,3.8,0.55336,1
+GO:0030014,CCR4-NOT complex,11,1,0.73,0.55441,1
+GO:0000164,protein phosphatase type 1 complex,11,1,0.73,0.56119,1
+GO:0016324,apical plasma membrane,22,1,1.47,0.56410,1
+GO:0016607,nuclear speck,83,4,5.53,0.56607,1
 GO:0071458,integral component of cytoplasmic side o...,12,1,0.8,0.56749,1
-GO:0072546,ER membrane protein complex,10,1,0.67,0.56989,1
-GO:0055029,nuclear DNA-directed RNA polymerase comp...,148,10,9.86,0.57103,1
-GO:0016604,nuclear body,134,7,8.93,0.57349,1
-GO:0043076,megasporocyte nucleus,12,1,0.8,0.57495,1
-GO:0030880,RNA polymerase complex,158,11,10.53,0.57842,1
-GO:1990351,transporter complex,53,4,3.53,0.58337,1
-GO:0030132,clathrin coat of coated pit,14,1,0.93,0.58339,1
-GO:0044436,thylakoid part,575,40,38.33,0.59088,1
-GO:0005770,late endosome,129,7,8.6,0.59488,1
-GO:0005680,anaphase-promoting complex,17,1,1.13,0.59524,1
-GO:0009509,chromoplast,11,1,0.73,0.59535,1
-GO:0030665,clathrin-coated vesicle membrane,52,3,3.47,0.59654,1
-GO:0071004,U2-type prespliceosome,18,2,1.2,0.59778,1
-GO:0005776,autophagosome,26,2,1.73,0.59869,1
-GO:0000795,synaptonemal complex,10,1,0.67,0.60108,1
-GO:0005885,Arp2/3 protein complex,12,1,0.8,0.60616,1
-GO:0000776,kinetochore,11,1,0.73,0.60712,1
+GO:0009534,chloroplast thylakoid,634,39,42.23,0.56963,1
+GO:0009509,chromoplast,11,1,0.73,0.56972,1
+GO:0031301,integral component of organelle membrane,107,6,7.13,0.57027,1
+GO:0072546,ER membrane protein complex,10,1,0.67,0.57149,1
+GO:0043076,megasporocyte nucleus,12,1,0.8,0.57227,1
+GO:0099086,synaptonemal structure,10,1,0.67,0.57559,1
+GO:0030665,clathrin-coated vesicle membrane,52,3,3.46,0.57614,1
+GO:0071004,U2-type prespliceosome,18,2,1.2,0.57958,1
+GO:0005663,DNA replication factor C complex,10,1,0.67,0.58143,1
+GO:0098852,lytic vacuole membrane,22,2,1.47,0.58664,1
+GO:0005769,early endosome,42,2,2.8,0.59179,1
+GO:0048500,signal recognition particle,27,2,1.8,0.59229,1
+GO:0005681,spliceosomal complex,163,13,10.86,0.59804,1
+GO:0045261,proton-transporting ATP synthase complex...,28,2,1.87,0.59836,1
+GO:0005685,U1 snRNP,27,3,1.8,0.60764,1
 GO:0046540,U4/U6 x U5 tri-snRNP complex,25,3,1.67,0.60943,1
-GO:0031976,plastid thylakoid,634,47,42.26,0.61255,1
-GO:0046930,pore complex,16,1,1.07,0.61397,1
-GO:0031414,N-terminal protein acetyltransferase com...,12,1,0.8,0.61579,1
-GO:0031988,membrane-bounded vesicle,261,17,17.4,0.62219,1
+GO:0000776,kinetochore,11,1,0.73,0.61016,1
+GO:0031985,Golgi cisterna,62,3,4.13,0.61390,1
+GO:0009505,plant-type cell wall,478,34,31.84,0.62290,1
+GO:0009295,nucleoid,64,4,4.26,0.62432,1
 GO:0005828,kinetochore microtubule,5,1,0.33,0.62436,1
-GO:0009528,plastid inner membrane,100,9,6.67,0.62705,1
-GO:0034702,ion channel complex,17,1,1.13,0.62769,1
-GO:0031261,DNA replication preinitiation complex,12,1,0.8,0.63440,1
-GO:0030915,Smc5-Smc6 complex,13,1,0.87,0.63670,1
-GO:0009524,phragmoplast,140,10,9.33,0.64017,1
-GO:0005929,cilium,14,1,0.93,0.64029,1
-GO:0010494,cytoplasmic stress granule,10,1,0.67,0.64115,1
-GO:0012510,trans-Golgi network transport vesicle me...,16,1,1.07,0.65195,1
-GO:0009534,chloroplast thylakoid,632,47,42.13,0.65341,1
-GO:1902555,endoribonuclease complex,12,1,0.8,0.65504,1
-GO:0030286,dynein complex,15,1,1,0.65996,1
-GO:0000275,mitochondrial proton-transporting ATP sy...,13,1,0.87,0.66430,1
-GO:0005741,mitochondrial outer membrane,78,8,5.2,0.66919,1
-GO:0000314,organellar small ribosomal subunit,10,1,0.67,0.67026,1
-GO:0030659,cytoplasmic vesicle membrane,150,9,10,0.67292,1
-GO:0031982,vesicle,309,20,20.6,0.67725,1
-GO:0031978,plastid thylakoid lumen,93,6,6.2,0.68223,1
-GO:0009543,chloroplast thylakoid lumen,93,6,6.2,0.68257,1
-GO:0000775,chromosome, centromeric region,38,2,2.53,0.68260,1
-GO:0098573,intrinsic component of mitochondrial mem...,51,5,3.4,0.68429,1
-GO:0009527,plastid outer membrane,75,5,5,0.68692,1
-GO:0000794,condensed nuclear chromosome,34,2,2.27,0.68881,1
-GO:0005786,signal recognition particle, endoplasmic...,24,3,1.6,0.69197,1
-GO:0000178,exosome (RNase complex),16,1,1.07,0.69422,1
-GO:0044435,plastid part,1870,136,124.64,0.69479,1
-GO:0005849,mRNA cleavage factor complex,15,1,1,0.69520,1
-GO:0097708,intracellular vesicle,292,19,19.46,0.69556,1
-GO:0030904,retromer complex,17,1,1.13,0.70593,1
-GO:0099080,supramolecular complex,315,19,21,0.70691,1
-GO:0098562,cytoplasmic side of membrane,122,6,8.13,0.71062,1
-GO:0009574,preprophase band,32,2,2.13,0.71178,1
-GO:0044421,extracellular region part,188,11,12.53,0.71491,1
-GO:0030119,AP-type membrane coat adaptor complex,32,2,2.13,0.71678,1
-GO:0005685,U1 snRNP,27,3,1.8,0.71760,1
-GO:0031903,microbody membrane,63,4,4.2,0.71763,1
-GO:0009533,chloroplast stromal thylakoid,16,1,1.07,0.71992,1
-GO:0043596,nuclear replication fork,18,1,1.2,0.72294,1
-GO:0005667,transcription factor complex,146,9,9.73,0.72356,1
-GO:0015935,small ribosomal subunit,170,17,11.33,0.72421,1
-GO:0009535,chloroplast thylakoid membrane,475,32,31.66,0.72651,1
-GO:0019897,extrinsic component of plasma membrane,106,5,7.07,0.72651,1
-GO:0000347,THO complex,16,1,1.07,0.72716,1
-GO:0016602,CCAAT-binding factor complex,21,1,1.4,0.72859,1
-GO:0016592,mediator complex,64,4,4.27,0.72896,1
-GO:0031977,thylakoid lumen,116,7,7.73,0.73199,1
-GO:0016023,cytoplasmic, membrane-bounded vesicle,253,16,16.86,0.73259,1
-GO:0009898,cytoplasmic side of plasma membrane,108,5,7.2,0.74106,1
-GO:0005779,integral component of peroxisomal membra...,17,1,1.13,0.74143,1
-GO:0044798,nuclear transcription factor complex,89,5,5.93,0.74161,1
-GO:0030117,membrane coat,109,7,7.27,0.74198,1
-GO:0030140,trans-Golgi network transport vesicle,19,1,1.27,0.74303,1
-GO:0031312,extrinsic component of organelle membran...,18,1,1.2,0.74901,1
-GO:0055035,plastid thylakoid membrane,478,32,31.86,0.75071,1
-GO:0008250,oligosaccharyltransferase complex,18,1,1.2,0.75319,1
-GO:0044438,microbody part,67,4,4.47,0.75388,1
-GO:0031231,intrinsic component of peroxisomal membr...,17,1,1.13,0.75569,1
-GO:1905354,exoribonuclease complex,16,1,1.07,0.75825,1
-GO:0009986,cell surface,20,1,1.33,0.76281,1
-GO:0030125,clathrin vesicle coat,33,2,2.2,0.76601,1
-GO:0005720,nuclear heterochromatin,17,1,1.13,0.76831,1
-GO:0009654,photosystem II oxygen evolving complex,31,2,2.07,0.77225,1
-GO:0097526,spliceosomal tri-snRNP complex,37,4,2.47,0.77346,1
-GO:0097525,spliceosomal snRNP complex,66,8,4.4,0.77700,1
-GO:0005778,peroxisomal membrane,63,4,4.2,0.77714,1
-GO:0005753,mitochondrial proton-transporting ATP sy...,50,3,3.33,0.77873,1
-GO:1990391,DNA repair complex,19,1,1.27,0.77910,1
-GO:0031410,cytoplasmic vesicle,289,19,19.26,0.78439,1
-GO:0031354,intrinsic component of plastid outer mem...,21,1,1.4,0.78684,1
-GO:0031355,integral component of plastid outer memb...,21,1,1.4,0.78684,1
-GO:0098552,side of membrane,129,6,8.6,0.78793,1
-GO:0010287,plastoglobule,89,5,5.93,0.78995,1
-GO:0031314,extrinsic component of mitochondrial inn...,13,1,0.87,0.79054,1
-GO:0090568,nuclear transcriptional repressor comple...,22,1,1.47,0.79170,1
-GO:0031965,nuclear membrane,39,2,2.6,0.79386,1
-GO:0044432,endoplasmic reticulum part,677,46,45.12,0.79427,1
-GO:0016471,vacuolar proton-transporting V-type ATPa...,37,2,2.47,0.79491,1
-GO:0042170,plastid membrane,326,21,21.73,0.79664,1
-GO:0031358,intrinsic component of chloroplast outer...,21,1,1.4,0.79675,1
-GO:0012505,endomembrane system,3416,226,227.69,0.79685,1
-GO:0031985,Golgi cisterna,63,2,4.2,0.79759,1
-GO:0048471,perinuclear region of cytoplasm,20,1,1.33,0.79776,1
-GO:0005578,proteinaceous extracellular matrix,25,2,1.67,0.80012,1
-GO:0032592,integral component of mitochondrial memb...,48,4,3.2,0.80030,1
-GO:0009505,plant-type cell wall,467,31,31.13,0.80064,1
-GO:0005813,centrosome,18,1,1.2,0.80338,1
-GO:0005764,lysosome,55,5,3.67,0.80426,1
-GO:0000784,nuclear chromosome, telomeric region,23,1,1.53,0.80614,1
-GO:0005634,nucleus,11515,792,767.52,0.80661,1
-GO:0031981,nuclear lumen,1292,94,86.12,0.80868,1
-GO:0000159,protein phosphatase type 2A complex,42,2,2.8,0.81156,1
-GO:0000791,euchromatin,12,1,0.8,0.81175,1
-GO:0009506,plasmodesma,1464,97,97.58,0.81434,1
-GO:0012506,vesicle membrane,153,9,10.2,0.81905,1
-GO:0019005,SCF ubiquitin ligase complex,55,2,3.67,0.82088,1
-GO:0031359,integral component of chloroplast outer ...,21,1,1.4,0.82186,1
-GO:0000322,storage vacuole,22,1,1.47,0.82539,1
-GO:0000932,cytoplasmic mRNA processing body,54,5,3.6,0.82792,1
-GO:0000220,vacuolar proton-transporting V-type ATPa...,22,1,1.47,0.83217,1
-GO:0030684,preribosome,78,6,5.2,0.83289,1
-GO:0005744,mitochondrial inner membrane presequence...,47,4,3.13,0.83488,1
-GO:0045259,proton-transporting ATP synthase complex,63,3,4.2,0.83702,1
-GO:0015030,Cajal body,30,1,2,0.83815,1
-GO:0031984,organelle subcompartment,1110,70,73.99,0.84240,1
-GO:0008023,transcription elongation factor complex,24,1,1.6,0.85104,1
-GO:0098852,lytic vacuole membrane,22,1,1.47,0.85133,1
-GO:0030135,coated vesicle,165,9,11,0.85272,1
-GO:0000407,pre-autophagosomal structure,24,1,1.6,0.85314,1
-GO:1902494,catalytic complex,1166,82,77.72,0.85431,1
-GO:0031234,extrinsic component of cytoplasmic side ...,101,5,6.73,0.85536,1
-GO:0005834,heterotrimeric G-protein complex,101,5,6.73,0.85566,1
-GO:0000781,chromosome, telomeric region,29,1,1.93,0.85622,1
-GO:1905360,GTPase complex,101,5,6.73,0.85778,1
-GO:0044434,chloroplast part,1844,134,122.91,0.85861,1
-GO:0044459,plasma membrane part,676,39,45.06,0.86400,1
-GO:0005732,small nucleolar ribonucleoprotein comple...,58,4,3.87,0.86521,1
-GO:0031351,integral component of plastid membrane,27,1,1.8,0.86562,1
-GO:0090575,RNA polymerase II transcription factor c...,77,4,5.13,0.86724,1
-GO:0031969,chloroplast membrane,318,19,21.2,0.87083,1
-GO:0005871,kinesin complex,34,1,2.27,0.87251,1
-GO:0000152,nuclear ubiquitin ligase complex,29,1,1.93,0.87294,1
+GO:0097526,spliceosomal tri-snRNP complex,37,4,2.46,0.63691,1
+GO:0000152,nuclear ubiquitin ligase complex,31,2,2.06,0.63768,1
+GO:0098552,side of membrane,130,7,8.66,0.64068,1
+GO:0010319,stromule,52,3,3.46,0.64183,1
+GO:0032300,mismatch repair complex,14,1,0.93,0.64183,1
+GO:0005667,transcription factor complex,153,10,10.19,0.64990,1
+GO:0033116,endoplasmic reticulum-Golgi intermediate...,14,1,0.93,0.65009,1
+GO:0048475,coated membrane,110,6,7.33,0.65013,1
+GO:0005686,U2 snRNP,19,2,1.27,0.65728,1
+GO:0005761,mitochondrial ribosome,27,3,1.8,0.65901,1
+GO:0000418,RNA polymerase IV complex,29,2,1.93,0.65917,1
+GO:0005929,cilium,15,1,1,0.66043,1
+GO:0030658,transport vesicle membrane,62,4,4.13,0.66210,1
+GO:0000322,storage vacuole,26,2,1.73,0.66917,1
+GO:0098562,cytoplasmic side of membrane,123,7,8.19,0.67235,1
+GO:0005765,lysosomal membrane,22,2,1.47,0.67299,1
+GO:0044798,nuclear transcription factor complex,96,6,6.39,0.67834,1
+GO:0030677,ribonuclease P complex,11,1,0.73,0.67914,1
+GO:0019005,SCF ubiquitin ligase complex,57,3,3.8,0.68056,1
+GO:0030119,AP-type membrane coat adaptor complex,32,2,2.13,0.68381,1
+GO:0030125,clathrin vesicle coat,33,2,2.2,0.68451,1
+GO:0005618,cell wall,1151,84,76.67,0.68531,1
+GO:0005634,nucleus,11758,803,783.2,0.68679,1
+GO:0009524,phragmoplast,140,9,9.33,0.68959,1
+GO:0000178,exosome (RNase complex),16,1,1.07,0.69071,1
+GO:0005750,mitochondrial respiratory chain complex ...,24,3,1.6,0.69182,1
+GO:1905354,exoribonuclease complex,16,1,1.07,0.69552,1
+GO:0005771,multivesicular body,20,1,1.33,0.69567,1
+GO:0044430,cytoskeletal part,469,31,31.24,0.69626,1
+GO:0005744,TIM23 mitochondrial import inner membran...,47,6,3.13,0.69827,1
+GO:0000419,RNA polymerase V complex,31,2,2.06,0.69968,1
+GO:0005788,endoplasmic reticulum lumen,49,3,3.26,0.70100,1
+GO:0030904,retromer complex,17,1,1.13,0.70196,1
+GO:0005971,ribonucleoside-diphosphate reductase com...,10,1,0.67,0.70316,1
+GO:0030140,trans-Golgi network transport vesicle,19,1,1.27,0.70687,1
+GO:0009508,plastid chromosome,19,1,1.27,0.70799,1
+GO:0017053,transcriptional repressor complex,29,2,1.93,0.71057,1
+GO:0046658,anchored component of plasma membrane,149,9,9.92,0.71363,1
+GO:0120038,plasma membrane bounded cell projection ...,35,1,2.33,0.71648,1
+GO:0044433,cytoplasmic vesicle part,353,23,23.51,0.71883,1
+GO:0097525,spliceosomal snRNP complex,66,7,4.4,0.72184,1
+GO:0009506,plasmodesma,1485,113,98.92,0.72904,1
+GO:1902911,protein kinase complex,34,2,2.26,0.73511,1
+GO:0030662,coated vesicle membrane,116,7,7.73,0.73738,1
+GO:0009986,cell surface,19,1,1.27,0.74127,1
+GO:0016604,nuclear body,136,6,9.06,0.74871,1
+GO:0005793,endoplasmic reticulum-Golgi intermediate...,19,1,1.27,0.75004,1
+GO:0042175,nuclear outer membrane-endoplasmic retic...,638,39,42.5,0.75170,1
+GO:0005849,mRNA cleavage factor complex,16,1,1.07,0.75178,1
+GO:0016602,CCAAT-binding factor complex,20,1,1.33,0.75303,1
+GO:1902493,acetyltransferase complex,66,3,4.4,0.75371,1
+GO:0000932,P-body,54,5,3.6,0.75530,1
+GO:0030915,Smc5-Smc6 complex,13,1,0.87,0.75856,1
+GO:0000790,nuclear chromatin,91,9,6.06,0.76089,1
+GO:0098573,intrinsic component of mitochondrial mem...,51,5,3.4,0.76374,1
+GO:0009654,photosystem II oxygen evolving complex,31,2,2.06,0.76621,1
+GO:0009504,cell plate,55,3,3.66,0.76934,1
+GO:0005764,lysosome,55,5,3.66,0.77213,1
+GO:0032580,Golgi cisterna membrane,50,2,3.33,0.77360,1
+GO:1990391,DNA repair complex,17,1,1.13,0.77360,1
+GO:0008250,oligosaccharyltransferase complex,19,1,1.27,0.77586,1
+GO:0048471,perinuclear region of cytoplasm,20,1,1.33,0.77698,1
+GO:0045271,respiratory chain complex I,87,15,5.8,0.77790,1
+GO:0000229,cytoplasmic chromosome,20,1,1.33,0.77832,1
+GO:0015030,Cajal body,30,1,2,0.78292,1
+GO:0009898,cytoplasmic side of plasma membrane,109,5,7.26,0.78334,1
+GO:0019897,extrinsic component of plasma membrane,107,5,7.13,0.78389,1
+GO:0005786,signal recognition particle, endoplasmic...,24,2,1.6,0.78632,1
+GO:0080008,Cul4-RING E3 ubiquitin ligase complex,171,9,11.39,0.78740,1
+GO:0044436,thylakoid part,576,36,38.37,0.80326,1
+GO:0016021,integral component of membrane,11290,639,752.02,0.80943,1
+GO:0031969,chloroplast membrane,319,17,21.25,0.81073,1
+GO:0030120,vesicle coat,79,4,5.26,0.81088,1
+GO:0000775,chromosome, centromeric region,38,2,2.53,0.81267,1
+GO:0030660,Golgi-associated vesicle membrane,93,5,6.19,0.81389,1
+GO:0000502,proteasome complex,129,7,8.59,0.81457,1
+GO:0030117,membrane coat,110,6,7.33,0.81571,1
+GO:0045257,succinate dehydrogenase complex (ubiquin...,9,4,0.6,0.81818,1
+GO:0010287,plastoglobule,89,4,5.93,0.81842,1
+GO:0009579,thylakoid,763,48,50.82,0.82171,1
+GO:0098791,Golgi subcompartment,840,42,55.95,0.82236,1
+GO:0030076,light-harvesting complex,24,1,1.6,0.82868,1
+GO:0044432,endoplasmic reticulum part,681,43,45.36,0.83583,1
+GO:0090575,RNA polymerase II transcription factor c...,84,5,5.6,0.83809,1
+GO:0000791,euchromatin,12,1,0.8,0.84051,1
+GO:0000407,phagophore assembly site,25,1,1.67,0.84679,1
+GO:0030136,clathrin-coated vesicle,102,5,6.79,0.84681,1
+GO:0009543,chloroplast thylakoid lumen,94,4,6.26,0.85047,1
+GO:0098588,bounding membrane of organelle,1838,134,122.43,0.85088,1
+GO:0005875,microtubule associated complex,86,5,5.73,0.85152,1
+GO:0031978,plastid thylakoid lumen,94,4,6.26,0.85187,1
+GO:0000784,nuclear chromosome, telomeric region,23,1,1.53,0.85267,1
+GO:0042170,plastid membrane,327,19,21.78,0.85391,1
+GO:0031981,nuclear lumen,1308,92,87.13,0.85414,1
+GO:0031248,protein acetyltransferase complex,66,3,4.4,0.85446,1
+GO:0005813,centrosome,18,1,1.2,0.85447,1
+GO:0031234,extrinsic component of cytoplasmic side ...,102,5,6.79,0.85559,1
+GO:0005834,heterotrimeric G-protein complex,102,5,6.79,0.85589,1
+GO:0009706,chloroplast inner membrane,98,4,6.53,0.85643,1
+GO:0005720,nuclear heterochromatin,17,1,1.13,0.85898,1
+GO:0015935,small ribosomal subunit,170,13,11.32,0.86044,1
+GO:0045177,apical part of cell,28,1,1.87,0.86367,1
+GO:0033178,proton-transporting two-sector ATPase co...,51,3,3.4,0.86512,1
+GO:1905360,GTPase complex,102,5,6.79,0.86993,1
+GO:0030663,COPI-coated vesicle membrane,31,1,2.06,0.87164,1
 GO:0030131,clathrin adaptor complex,22,1,1.47,0.87373,1
-GO:0031350,intrinsic component of plastid membrane,27,1,1.8,0.87607,1
-GO:0005657,replication fork,35,2,2.33,0.87788,1
-GO:0044433,cytoplasmic vesicle part,165,9,11,0.88287,1
-GO:0016282,eukaryotic 43S preinitiation complex,34,4,2.27,0.88571,1
-GO:0033290,eukaryotic 48S preinitiation complex,34,4,2.27,0.88571,1
-GO:0019028,viral capsid,43,5,2.87,0.88636,1
-GO:0019013,viral nucleocapsid,43,5,2.87,0.88636,1
-GO:0015629,actin cytoskeleton,85,3,5.67,0.88802,1
-GO:0005875,microtubule associated complex,86,4,5.73,0.89455,1
-GO:1902493,acetyltransferase complex,66,2,4.4,0.89825,1
-GO:0045261,proton-transporting ATP synthase complex...,31,1,2.07,0.89937,1
-GO:0017053,transcriptional repressor complex,29,1,1.93,0.90065,1
-GO:0005795,Golgi stack,108,4,7.2,0.90133,1
-GO:0009521,photosystem,119,7,7.93,0.90171,1
-GO:0010319,stromule,52,2,3.47,0.90310,1
-GO:0000502,proteasome complex,129,6,8.6,0.90524,1
-GO:0030136,clathrin-coated vesicle,100,4,6.67,0.91333,1
-GO:0032580,Golgi cisterna membrane,50,1,3.33,0.91355,1
-GO:0043231,intracellular membrane-bounded organelle,20739,1454,1382.34,0.91453,1
-GO:0005768,endosome,579,32,38.59,0.91550,1
-GO:0033180,proton-transporting V-type ATPase, V1 do...,18,1,1.2,0.91636,1
-GO:0044452,nucleolar part,75,3,5,0.91844,1
-GO:0044463,cell projection part,35,1,2.33,0.91945,1
-GO:0005681,spliceosomal complex,162,10,10.8,0.92111,1
-GO:0043227,membrane-bounded organelle,20759,1455,1383.67,0.92520,1
-GO:0070603,SWI/SNF superfamily-type complex,32,1,2.13,0.92600,1
-GO:0005802,trans-Golgi network,391,18,26.06,0.92605,1
-GO:0043229,intracellular organelle,21345,1505,1422.73,0.93028,1
-GO:0098588,bounding membrane of organelle,1834,130,122.24,0.93157,1
-GO:0005765,lysosomal membrane,22,1,1.47,0.93178,1
-GO:0005911,cell-cell junction,1467,97,97.78,0.93392,1
-GO:0022627,cytosolic small ribosomal subunit,124,9,8.27,0.93611,1
-GO:0000123,histone acetyltransferase complex,49,1,3.27,0.93780,1
-GO:0044439,peroxisomal part,67,4,4.47,0.94105,1
-GO:0044430,cytoskeletal part,460,26,30.66,0.94188,1
-GO:0000792,heterochromatin,21,1,1.4,0.95022,1
-GO:0009941,chloroplast envelope,902,57,60.12,0.95314,1
-GO:0031248,protein acetyltransferase complex,66,2,4.4,0.95436,1
-GO:0005677,chromatin silencing complex,21,1,1.4,0.95455,1
-GO:1905368,peptidase complex,145,6,9.66,0.95671,1
-GO:0000793,condensed chromosome,68,3,4.53,0.95715,1
-GO:0098589,membrane region,53,1,3.53,0.96168,1
-GO:0033178,proton-transporting two-sector ATPase co...,54,2,3.6,0.96464,1
-GO:0098687,chromosomal region,77,4,5.13,0.96493,1
-GO:0005615,extracellular space,126,5,8.4,0.96786,1
-GO:0005905,clathrin-coated pit,50,1,3.33,0.97266,1
-GO:0005654,nucleoplasm,541,30,36.06,0.97457,1
-GO:0000151,ubiquitin ligase complex,289,13,19.26,0.97532,1
-GO:0098791,Golgi subcompartment,472,21,31.46,0.97901,1
-GO:0030660,Golgi-associated vesicle membrane,54,1,3.6,0.97946,1
-GO:0009507,chloroplast,4945,384,329.6,0.98058,1
-GO:0044451,nucleoplasm part,443,23,29.53,0.98100,1
-GO:0005576,extracellular region,2892,167,192.76,0.98147,1
-GO:0005811,lipid particle,44,1,2.93,0.98166,1
-GO:0005794,Golgi apparatus,2062,124,137.44,0.98690,1
-GO:0016021,integral component of membrane,10971,619,731.26,0.98842,1
-GO:0005938,cell cortex,111,2,7.4,0.99024,1
-GO:1990234,transferase complex,652,36,43.46,0.99134,1
-GO:0031224,intrinsic component of membrane,11096,632,739.59,0.99320,1
-GO:0090406,pollen tube,109,1,7.27,0.99527,1
-GO:0042995,cell projection,132,3,8.8,0.99563,1
-GO:0009705,plant-type vacuole membrane,147,5,9.8,0.99567,1
-GO:0099023,tethring complex,97,2,6.47,0.99628,1
-GO:0000325,plant-type vacuole,206,7,13.73,0.99725,1
-GO:0009526,plastid envelope,929,59,61.92,0.99758,1
-GO:0005643,nuclear pore,75,1,5,0.99785,1
-GO:0043234,protein complex,2797,213,186.43,0.99849,1
-GO:0000139,Golgi membrane,563,25,37.53,0.99850,1
-GO:0099568,cytoplasmic region,111,2,7.4,0.99853,1
-GO:0005856,cytoskeleton,580,33,38.66,0.99896,1
-GO:0044431,Golgi apparatus part,882,44,58.79,0.99928,1
-GO:0044448,cell cortex part,96,1,6.4,0.99954,1
-GO:0005886,plasma membrane,5223,296,348.13,0.99967,1
-GO:0071944,cell periphery,6093,354,406.12,0.99997,1
-GO:0044425,membrane part,11727,683,781.65,1.00000,1
-GO:0016020,membrane,15557,927,1036.94,1.00000,1
-GO:0005575,cellular_component,31926,2128,2128,1.00000,1
+GO:0015629,actin cytoskeleton,86,4,5.73,0.87621,1
+GO:0008023,transcription elongation factor complex,24,1,1.6,0.87661,1
+GO:0044421,extracellular region part,169,8,11.26,0.88176,1
+GO:0005778,peroxisomal membrane,65,2,4.33,0.88662,1
+GO:0022626,cytosolic ribosome,473,45,31.51,0.88905,1
+GO:0031977,thylakoid lumen,117,5,7.79,0.88990,1
+GO:0098590,plasma membrane region,36,1,2.4,0.89170,1
+GO:0009941,chloroplast envelope,914,51,60.88,0.90042,1
+GO:0044459,plasma membrane part,696,39,46.36,0.90095,1
+GO:0005635,nuclear envelope,153,7,10.19,0.90358,1
+GO:0030137,COPI-coated vesicle,32,1,2.13,0.90537,1
+GO:0000793,condensed chromosome,69,4,4.6,0.90684,1
+GO:0009574,preprophase band,32,1,2.13,0.90811,1
+GO:0019028,viral capsid,44,4,2.93,0.91111,1
+GO:0019013,viral nucleocapsid,44,4,2.93,0.91111,1
+GO:1905368,peptidase complex,145,7,9.66,0.91113,1
+GO:0005666,RNA polymerase III complex,29,1,1.93,0.91196,1
+GO:0120025,plasma membrane bounded cell projection,131,4,8.73,0.91246,1
+GO:0000781,chromosome, telomeric region,29,1,1.93,0.91334,1
+GO:0016282,eukaryotic 43S preinitiation complex,34,3,2.26,0.91429,1
+GO:0033290,eukaryotic 48S preinitiation complex,34,3,2.26,0.91429,1
+GO:0044463,cell projection part,35,1,2.33,0.91719,1
+GO:0005911,cell-cell junction,1489,113,99.18,0.92416,1
+GO:0005871,kinesin complex,34,1,2.26,0.92537,1
+GO:0016592,mediator complex,67,3,4.46,0.92681,1
+GO:0098687,chromosomal region,77,5,5.13,0.92738,1
+GO:0030659,cytoplasmic vesicle membrane,153,7,10.19,0.93202,1
+GO:0045259,proton-transporting ATP synthase complex,60,2,4,0.93209,1
+GO:0008287,protein serine/threonine phosphatase com...,63,2,4.2,0.93632,1
+GO:0005732,small nucleolar ribonucleoprotein comple...,59,3,3.93,0.93877,1
+GO:0012506,vesicle membrane,156,7,10.39,0.94036,1
+GO:0005762,mitochondrial large ribosomal subunit,19,1,1.27,0.94117,1
+GO:0000151,ubiquitin ligase complex,300,15,19.98,0.94168,1
+GO:0000123,histone acetyltransferase complex,49,1,3.26,0.94305,1
+GO:0000315,organellar large ribosomal subunit,25,1,1.67,0.94452,1
+GO:0043231,intracellular membrane-bounded organelle,21056,1453,1402.53,0.94501,1
+GO:0042646,plastid nucleoid,37,1,2.46,0.94776,1
+GO:0070603,SWI/SNF superfamily-type complex,30,1,2,0.94782,1
+GO:1903293,phosphatase complex,63,2,4.2,0.94856,1
+GO:0098797,plasma membrane protein complex,160,8,10.66,0.95274,1
+GO:0031965,nuclear membrane,40,1,2.66,0.95375,1
+GO:0009521,photosystem,123,6,8.19,0.96080,1
+GO:0005856,cytoskeleton,590,41,39.3,0.96095,1
+GO:0044435,plastid part,1889,118,125.83,0.96101,1
+GO:0000792,heterochromatin,21,1,1.4,0.96287,1
+GO:0044438,microbody part,69,2,4.6,0.96335,1
+GO:0043227,membrane-bounded organelle,21154,1459,1409.06,0.96555,1
+GO:0012505,endomembrane system,3462,213,230.6,0.96654,1
+GO:0005768,endosome,586,27,39.03,0.96841,1
+GO:0016459,myosin complex,40,1,2.66,0.96927,1
+GO:0033180,proton-transporting V-type ATPase, V1 do...,18,1,1.2,0.97028,1
+GO:0031903,microbody membrane,65,2,4.33,0.97083,1
+GO:0005794,Golgi apparatus,2067,125,137.68,0.97114,1
+GO:0044451,nucleoplasm part,430,22,28.64,0.97325,1
+GO:0009507,chloroplast,4998,363,332.92,0.97331,1
+GO:0000139,Golgi membrane,568,30,37.83,0.97545,1
+GO:0005657,replication fork,33,1,2.2,0.97559,1
+GO:0009528,plastid inner membrane,101,5,6.73,0.97785,1
+GO:1902494,catalytic complex,1278,91,85.13,0.97796,1
+GO:0005654,nucleoplasm,531,28,35.37,0.97868,1
+GO:0005615,extracellular space,143,5,9.53,0.97967,1
+GO:1990234,transferase complex,678,39,45.16,0.98342,1
+GO:0043229,intracellular organelle,21766,1512,1449.83,0.98432,1
+GO:0042995,cell projection,134,4,8.93,0.98449,1
+GO:0090406,pollen tube,110,2,7.33,0.98700,1
+GO:0009705,plant-type vacuole membrane,156,7,10.39,0.98773,1
+GO:0030684,preribosome,79,3,5.26,0.98789,1
+GO:0044434,chloroplast part,1864,116,124.16,0.98837,1
+GO:0005576,extracellular region,2987,170,198.96,0.98951,1
+GO:0005802,trans-Golgi network,395,13,26.31,0.99013,1
+GO:0005938,cell cortex,114,2,7.59,0.99046,1
+GO:0099023,tethering complex,99,3,6.59,0.99162,1
+GO:0031982,vesicle,828,41,55.15,0.99221,1
+GO:0022627,cytosolic small ribosomal subunit,124,6,8.26,0.99296,1
+GO:0097708,intracellular vesicle,811,40,54.02,0.99325,1
+GO:0031984,organelle subcompartment,2000,111,133.22,0.99513,1
+GO:0044452,nucleolar part,75,1,5,0.99619,1
+GO:0005753,mitochondrial proton-transporting ATP sy...,49,2,3.26,0.99642,1
+GO:0044439,peroxisomal part,69,2,4.6,0.99652,1
+GO:0031410,cytoplasmic vesicle,808,40,53.82,0.99717,1
+GO:0009526,plastid envelope,941,53,62.68,0.99724,1
+GO:0044431,Golgi apparatus part,881,44,58.68,0.99734,1
+GO:0000325,plant-type vacuole,217,9,14.45,0.99790,1
+GO:0099568,cytoplasmic region,114,2,7.59,0.99830,1
+GO:0031224,intrinsic component of membrane,11418,648,760.55,0.99858,1
+GO:0044448,cell cortex part,99,1,6.59,0.99942,1
+GO:0005886,plasma membrane,5308,290,353.56,0.99998,1
+GO:0071944,cell periphery,6195,352,412.65,0.99999,1
+GO:0044425,membrane part,12086,705,805.04,1.00000,1
+GO:0016020,membrane,16000,957,1065.76,1.00000,1
+GO:0005575,cellular_component,32773,2183,2183,1.00000,1
 GO:0016442,RISC complex,7,1,0.47,1.00000,1
 GO:0031083,BLOC-1 complex,7,1,0.47,1.00000,1
-GO:0099081,supramolecular polymer,315,19,21,1.00000,1
-GO:1902554,serine/threonine protein kinase complex,34,3,2.27,1.00000,1
+GO:0099081,supramolecular polymer,325,23,21.65,1.00000,1
+GO:0030681,multimeric ribonuclease P complex,11,1,0.73,1.00000,1
+GO:0000795,synaptonemal complex,10,1,0.67,1.00000,1
+GO:1902554,serine/threonine protein kinase complex,34,2,2.26,1.00000,1
+GO:1902555,endoribonuclease complex,12,2,0.8,1.00000,1
 GO:0000126,transcription factor TFIIIB complex,7,1,0.47,1.00000,1
-GO:0045257,succinate dehydrogenase complex (ubiquin...,9,4,0.6,1.00000,1
-GO:0005618,cell wall,1135,83,75.65,1.00000,1
-GO:0034705,potassium channel complex,5,1,0.33,1.00000,1
-GO:0005777,peroxisome,380,39,25.33,1.00000,1
-GO:0000428,DNA-directed RNA polymerase complex,158,11,10.53,1.00000,1
-GO:0099512,supramolecular fiber,315,19,21,1.00000,1
+GO:0005677,chromatin silencing complex,21,1,1.4,1.00000,1
+GO:0005777,peroxisome,391,39,26.04,1.00000,1
+GO:0000428,DNA-directed RNA polymerase complex,149,11,9.92,1.00000,1
+GO:0005742,mitochondrial outer membrane translocase...,14,3,0.93,1.00000,1
+GO:0099512,supramolecular fiber,325,23,21.65,1.00000,1
 GO:0043078,polar nucleus,12,1,0.8,1.00000,1
 GO:0000015,phosphopyruvate hydratase complex,6,0,0.4,1.00000,1
 GO:0000118,histone deacetylase complex,8,0,0.53,1.00000,1
 GO:0000124,SAGA complex,8,0,0.53,1.00000,1
-GO:0000145,exocyst,53,0,3.53,1.00000,1
+GO:0000145,exocyst,55,0,3.66,1.00000,1
 GO:0000148,1,3-beta-D-glucan synthase complex,23,0,1.53,1.00000,1
+GO:0000159,protein phosphatase type 2A complex,43,0,2.86,1.00000,1
 GO:0000176,nuclear exosome (RNase complex),10,0,0.67,1.00000,1
 GO:0000177,cytoplasmic exosome (RNase complex),10,0,0.67,1.00000,1
 GO:0000221,vacuolar proton-transporting V-type ATPa...,8,0,0.53,1.00000,1
-GO:0000311,plastid large ribosomal subunit,7,0,0.47,1.00000,1
-GO:0000439,core TFIIH complex,8,0,0.53,1.00000,1
+GO:0000276,mitochondrial proton-transporting ATP sy...,17,0,1.13,1.00000,1
+GO:0000311,plastid large ribosomal subunit,6,0,0.4,1.00000,1
+GO:0000347,THO complex,15,0,1,1.00000,1
+GO:0000439,transcription factor TFIIH core complex,8,0,0.53,1.00000,1
 GO:0000777,condensed chromosome kinetochore,7,0,0.47,1.00000,1
 GO:0000782,telomere cap complex,10,0,0.67,1.00000,1
 GO:0000783,nuclear telomere cap complex,10,0,0.67,1.00000,1
 GO:0000796,condensin complex,9,0,0.6,1.00000,1
-GO:0000798,nuclear cohesin complex,9,0,0.6,1.00000,1
-GO:0000812,Swr1 complex,5,0,0.33,1.00000,1
+GO:0000798,nuclear cohesin complex,10,0,0.67,1.00000,1
+GO:0000808,origin recognition complex,8,0,0.53,1.00000,1
+GO:0000811,GINS complex,5,0,0.33,1.00000,1
+GO:0000812,Swr1 complex,6,0,0.4,1.00000,1
 GO:0000813,ESCRT I complex,10,0,0.67,1.00000,1
 GO:0000923,equatorial microtubule organizing center,8,0,0.53,1.00000,1
 GO:0000930,gamma-tubulin complex,11,0,0.73,1.00000,1
 GO:0000931,gamma-tubulin large complex,5,0,0.33,1.00000,1
-GO:0000938,GARP complex,6,0,0.4,1.00000,1
-GO:0005655,nucleolar ribonuclease P complex,11,0,0.73,1.00000,1
+GO:0005643,nuclear pore,77,0,5.13,1.00000,1
 GO:0005658,alpha DNA polymerase:primase complex,5,0,0.33,1.00000,1
-GO:0005672,transcription factor TFIIA complex,12,0,0.8,1.00000,1
-GO:0005674,transcription factor TFIIF complex,5,0,0.33,1.00000,1
-GO:0005675,holo TFIIH complex,8,0,0.53,1.00000,1
+GO:0005664,nuclear origin of replication recognitio...,5,0,0.33,1.00000,1
+GO:0005674,transcription factor TFIIF complex,6,0,0.4,1.00000,1
+GO:0005675,transcription factor TFIIH holo complex,8,0,0.53,1.00000,1
 GO:0005688,U6 snRNP,11,0,0.73,1.00000,1
-GO:0005697,telomerase holoenzyme complex,14,0,0.93,1.00000,1
+GO:0005697,telomerase holoenzyme complex,7,0,0.47,1.00000,1
 GO:0005719,nuclear euchromatin,8,0,0.53,1.00000,1
-GO:0005750,mitochondrial respiratory chain complex ...,24,0,1.6,1.00000,1
+GO:0005736,RNA polymerase I complex,31,0,2.06,1.00000,1
 GO:0005775,vacuolar lumen,6,0,0.4,1.00000,1
+GO:0005779,integral component of peroxisomal membra...,18,0,1.2,1.00000,1
 GO:0005787,signal peptidase complex,8,0,0.53,1.00000,1
 GO:0005791,rough endoplasmic reticulum,9,0,0.6,1.00000,1
-GO:0005797,Golgi medial cisterna,6,0,0.4,1.00000,1
+GO:0005797,Golgi medial cisterna,5,0,0.33,1.00000,1
+GO:0005811,lipid droplet,49,0,3.26,1.00000,1
 GO:0005816,spindle pole body,8,0,0.53,1.00000,1
-GO:0005838,proteasome regulatory particle,50,0,3.33,1.00000,1
+GO:0005838,proteasome regulatory particle,49,0,3.26,1.00000,1
 GO:0005844,polysome,7,0,0.47,1.00000,1
 GO:0005847,mRNA cleavage and polyadenylation specif...,6,0,0.4,1.00000,1
 GO:0005851,eukaryotic translation initiation factor...,9,0,0.6,1.00000,1
-GO:0005881,cytoplasmic microtubule,38,0,2.53,1.00000,1
+GO:0005881,cytoplasmic microtubule,39,0,2.6,1.00000,1
 GO:0005884,actin filament,14,0,0.93,1.00000,1
+GO:0005885,Arp2/3 protein complex,12,0,0.8,1.00000,1
+GO:0005905,clathrin-coated pit,51,0,3.4,1.00000,1
 GO:0005942,phosphatidylinositol 3-kinase complex,10,0,0.67,1.00000,1
 GO:0005946,alpha,alpha-trehalose-phosphate synthase...,5,0,0.33,1.00000,1
 GO:0005956,protein kinase CK2 complex,13,0,0.87,1.00000,1
+GO:0008076,voltage-gated potassium channel complex,5,0,0.33,1.00000,1
 GO:0008274,gamma-tubulin ring complex,5,0,0.33,1.00000,1
-GO:0008278,cohesin complex,13,0,0.87,1.00000,1
+GO:0008278,cohesin complex,14,0,0.93,1.00000,1
 GO:0008352,katanin complex,5,0,0.33,1.00000,1
-GO:0008540,proteasome regulatory particle, base sub...,26,0,1.73,1.00000,1
+GO:0008540,proteasome regulatory particle, base sub...,25,0,1.67,1.00000,1
 GO:0008541,proteasome regulatory particle, lid subc...,23,0,1.53,1.00000,1
 GO:0009317,acetyl-CoA carboxylase complex,6,0,0.4,1.00000,1
 GO:0009344,nitrite reductase complex [NAD(P)H],5,0,0.33,1.00000,1
+GO:0009346,citrate lyase complex,7,0,0.47,1.00000,1
 GO:0009360,DNA polymerase III complex,8,0,0.53,1.00000,1
-GO:0009368,endopeptidase Clp complex,13,0,0.87,1.00000,1
+GO:0009368,endopeptidase Clp complex,14,0,0.93,1.00000,1
 GO:0009501,amyloplast,15,0,1,1.00000,1
 GO:0009503,thylakoid light-harvesting complex,8,0,0.53,1.00000,1
 GO:0009513,etioplast,6,0,0.4,1.00000,1
 GO:0009514,glyoxysome,25,0,1.67,1.00000,1
 GO:0009517,PSII associated light-harvesting complex...,8,0,0.53,1.00000,1
+GO:0009533,chloroplast stromal thylakoid,17,0,1.13,1.00000,1
 GO:0009538,photosystem I reaction center,9,0,0.6,1.00000,1
-GO:0009547,plastid ribosome,11,0,0.73,1.00000,1
-GO:0009840,chloroplastic endopeptidase Clp complex,13,0,0.87,1.00000,1
+GO:0009547,plastid ribosome,10,0,0.67,1.00000,1
+GO:0009840,chloroplastic endopeptidase Clp complex,14,0,0.93,1.00000,1
 GO:0009897,external side of plasma membrane,6,0,0.4,1.00000,1
-GO:0009925,basal plasma membrane,8,0,0.53,1.00000,1
-GO:0010005,cortical microtubule, transverse to long...,14,0,0.93,1.00000,1
+GO:0009925,basal plasma membrane,9,0,0.6,1.00000,1
+GO:0010005,cortical microtubule, transverse to long...,15,0,1,1.00000,1
 GO:0010445,nuclear dicing body,8,0,0.53,1.00000,1
+GO:0010494,cytoplasmic stress granule,11,0,0.73,1.00000,1
 GO:0010598,NAD(P)H dehydrogenase complex (plastoqui...,14,0,0.93,1.00000,1
-GO:0012511,monolayer-surrounded lipid storage body,29,0,1.93,1.00000,1
-GO:0016323,basolateral plasma membrane,8,0,0.53,1.00000,1
-GO:0016324,apical plasma membrane,19,0,1.27,1.00000,1
-GO:0016328,lateral plasma membrane,9,0,0.6,1.00000,1
+GO:0012510,trans-Golgi network transport vesicle me...,16,0,1.07,1.00000,1
+GO:0012511,monolayer-surrounded lipid storage body,33,0,2.2,1.00000,1
+GO:0016323,basolateral plasma membrane,9,0,0.6,1.00000,1
+GO:0016328,lateral plasma membrane,10,0,0.67,1.00000,1
 GO:0016363,nuclear matrix,5,0,0.33,1.00000,1
-GO:0016459,myosin complex,39,0,2.6,1.00000,1
 GO:0016514,SWI/SNF complex,5,0,0.33,1.00000,1
 GO:0016593,Cdc73/Paf1 complex,11,0,0.73,1.00000,1
 GO:0016605,PML body,6,0,0.4,1.00000,1
 GO:0017101,aminoacyl-tRNA synthetase multienzyme co...,6,0,0.4,1.00000,1
-GO:0022624,proteasome accessory complex,50,0,3.33,1.00000,1
+GO:0022624,proteasome accessory complex,49,0,3.26,1.00000,1
 GO:0030008,TRAPP complex,7,0,0.47,1.00000,1
 GO:0030093,chloroplast photosystem I,5,0,0.33,1.00000,1
-GO:0030095,chloroplast photosystem II,18,0,1.2,1.00000,1
+GO:0030095,chloroplast photosystem II,19,0,1.27,1.00000,1
 GO:0030124,AP-4 adaptor complex,8,0,0.53,1.00000,1
-GO:0030126,COPI vesicle coat,25,0,1.67,1.00000,1
-GO:0030137,COPI-coated vesicle,31,0,2.07,1.00000,1
+GO:0030126,COPI vesicle coat,26,0,1.73,1.00000,1
+GO:0030130,clathrin coat of trans-Golgi network ves...,14,0,0.93,1.00000,1
+GO:0030132,clathrin coat of coated pit,14,0,0.93,1.00000,1
+GO:0030139,endocytic vesicle,11,0,0.73,1.00000,1
 GO:0030173,integral component of Golgi membrane,15,0,1,1.00000,1
 GO:0030427,site of polarized growth,33,0,2.2,1.00000,1
-GO:0030663,COPI-coated vesicle membrane,30,0,2,1.00000,1
-GO:0030677,ribonuclease P complex,11,0,0.73,1.00000,1
-GO:0030681,multimeric ribonuclease P complex,11,0,0.73,1.00000,1
 GO:0030686,90S preribosome,21,0,1.4,1.00000,1
-GO:0030687,preribosome, large subunit precursor,27,0,1.8,1.00000,1
-GO:0030863,cortical cytoskeleton,40,0,2.67,1.00000,1
+GO:0030687,preribosome, large subunit precursor,28,0,1.87,1.00000,1
+GO:0030688,preribosome, small subunit precursor,7,0,0.47,1.00000,1
+GO:0030863,cortical cytoskeleton,41,0,2.73,1.00000,1
 GO:0030867,rough endoplasmic reticulum membrane,6,0,0.4,1.00000,1
-GO:0030894,replisome,13,0,0.87,1.00000,1
+GO:0030894,replisome,11,0,0.73,1.00000,1
 GO:0030897,HOPS complex,6,0,0.4,1.00000,1
-GO:0030981,cortical microtubule cytoskeleton,38,0,2.53,1.00000,1
+GO:0030981,cortical microtubule cytoskeleton,39,0,2.6,1.00000,1
 GO:0031011,Ino80 complex,16,0,1.07,1.00000,1
 GO:0031209,SCAR complex,8,0,0.53,1.00000,1
 GO:0031228,intrinsic component of Golgi membrane,15,0,1,1.00000,1
+GO:0031231,intrinsic component of peroxisomal membr...,18,0,1.2,1.00000,1
+GO:0031261,DNA replication preinitiation complex,12,0,0.8,1.00000,1
+GO:0031298,replication fork protection complex,6,0,0.4,1.00000,1
 GO:0031306,intrinsic component of mitochondrial out...,28,0,1.87,1.00000,1
 GO:0031307,integral component of mitochondrial oute...,28,0,1.87,1.00000,1
+GO:0031350,intrinsic component of plastid membrane,27,0,1.8,1.00000,1
+GO:0031351,integral component of plastid membrane,27,0,1.8,1.00000,1
+GO:0031354,intrinsic component of plastid outer mem...,21,0,1.4,1.00000,1
+GO:0031355,integral component of plastid outer memb...,21,0,1.4,1.00000,1
+GO:0031358,intrinsic component of chloroplast outer...,21,0,1.4,1.00000,1
+GO:0031359,integral component of chloroplast outer ...,21,0,1.4,1.00000,1
 GO:0031371,ubiquitin conjugating enzyme complex,9,0,0.6,1.00000,1
 GO:0031372,UBC13-MMS2 complex,9,0,0.6,1.00000,1
 GO:0031415,NatA complex,7,0,0.47,1.00000,1
+GO:0031428,box C/D snoRNP complex,9,0,0.6,1.00000,1
 GO:0031429,box H/ACA snoRNP complex,8,0,0.53,1.00000,1
 GO:0031463,Cul3-RING ubiquitin ligase complex,6,0,0.4,1.00000,1
 GO:0031519,PcG protein complex,10,0,0.67,1.00000,1
@@ -598,17 +600,19 @@ GO:0031597,cytosolic proteasome complex,16,0,1.07,1.00000,1
 GO:0032044,DSIF complex,7,0,0.47,1.00000,1
 GO:0032153,cell division site,16,0,1.07,1.00000,1
 GO:0032155,cell division site part,9,0,0.6,1.00000,1
-GO:0032300,mismatch repair complex,14,0,0.93,1.00000,1
 GO:0032301,MutSalpha complex,6,0,0.4,1.00000,1
 GO:0032432,actin filament bundle,7,0,0.47,1.00000,1
-GO:0032586,protein storage vacuole membrane,8,0,0.53,1.00000,1
+GO:0032585,multivesicular body membrane,7,0,0.47,1.00000,1
 GO:0032588,trans-Golgi network membrane,8,0,0.53,1.00000,1
 GO:0032777,Piccolo NuA4 histone acetyltransferase c...,5,0,0.33,1.00000,1
 GO:0032806,carboxy-terminal domain protein kinase c...,8,0,0.53,1.00000,1
 GO:0033202,DNA helicase complex,16,0,1.07,1.00000,1
-GO:0033281,TAT protein transport complex,7,0,0.47,1.00000,1
-GO:0034045,pre-autophagosomal structure membrane,14,0,0.93,1.00000,1
+GO:0033597,mitotic checkpoint complex,5,0,0.33,1.00000,1
+GO:0034045,phagophore assembly site membrane,15,0,1,1.00000,1
 GO:0034399,nuclear periphery,16,0,1.07,1.00000,1
+GO:0034702,ion channel complex,17,0,1.13,1.00000,1
+GO:0034703,cation channel complex,5,0,0.33,1.00000,1
+GO:0034705,potassium channel complex,5,0,0.33,1.00000,1
 GO:0034707,chloride channel complex,12,0,0.8,1.00000,1
 GO:0034708,methyltransferase complex,15,0,1,1.00000,1
 GO:0035032,phosphatidylinositol 3-kinase complex, c...,7,0,0.47,1.00000,1
@@ -617,44 +621,44 @@ GO:0035267,NuA4 histone acetyltransferase complex,17,0,1.13,1.00000,1
 GO:0035838,growing cell tip,29,0,1.93,1.00000,1
 GO:0036513,Derlin-1 retrotranslocation complex,7,0,0.47,1.00000,1
 GO:0042555,MCM complex,14,0,0.93,1.00000,1
-GO:0042575,DNA polymerase complex,13,0,0.87,1.00000,1
+GO:0042575,DNA polymerase complex,16,0,1.07,1.00000,1
 GO:0042644,chloroplast nucleoid,14,0,0.93,1.00000,1
-GO:0042645,mitochondrial nucleoid,8,0,0.53,1.00000,1
 GO:0042765,GPI-anchor transamidase complex,5,0,0.33,1.00000,1
 GO:0043036,starch grain,5,0,0.33,1.00000,1
 GO:0043073,germ cell nucleus,7,0,0.47,1.00000,1
 GO:0043189,H4/H2A histone acetyltransferase complex,17,0,1.13,1.00000,1
 GO:0043527,tRNA methyltransferase complex,6,0,0.4,1.00000,1
-GO:0043601,nuclear replisome,12,0,0.8,1.00000,1
-GO:0044420,extracellular matrix component,8,0,0.53,1.00000,1
+GO:0043596,nuclear replication fork,16,0,1.07,1.00000,1
+GO:0043601,nuclear replisome,10,0,0.67,1.00000,1
+GO:0043667,pollen wall,5,0,0.33,1.00000,1
+GO:0043668,exine,5,0,0.33,1.00000,1
+GO:0043673,sexine,5,0,0.33,1.00000,1
+GO:0043674,columella,5,0,0.33,1.00000,1
+GO:0044426,cell wall part,5,0,0.33,1.00000,1
 GO:0044450,microtubule organizing center part,16,0,1.07,1.00000,1
-GO:0044614,nuclear pore cytoplasmic filaments,6,0,0.4,1.00000,1
-GO:0045177,apical part of cell,25,0,1.67,1.00000,1
-GO:0045178,basal part of cell,8,0,0.53,1.00000,1
+GO:0044462,external encapsulating structure part,10,0,0.67,1.00000,1
+GO:0044614,nuclear pore cytoplasmic filaments,7,0,0.47,1.00000,1
+GO:0045178,basal part of cell,9,0,0.6,1.00000,1
 GO:0045254,pyruvate dehydrogenase complex,7,0,0.47,1.00000,1
-GO:0045275,respiratory chain complex III,24,0,1.6,1.00000,1
+GO:0045263,proton-transporting ATP synthase complex...,21,0,1.4,1.00000,1
 GO:0045335,phagocytic vesicle,6,0,0.4,1.00000,1
 GO:0046861,glyoxysomal membrane,6,0,0.4,1.00000,1
 GO:0048188,Set1C/COMPASS complex,5,0,0.33,1.00000,1
 GO:0051286,cell tip,29,0,1.93,1.00000,1
-GO:0055028,cortical microtubule,36,0,2.4,1.00000,1
-GO:0070069,cytochrome complex,29,0,1.93,1.00000,1
+GO:0055028,cortical microtubule,37,0,2.46,1.00000,1
 GO:0070461,SAGA-type complex,20,0,1.33,1.00000,1
 GO:0070531,BRCA1-A complex,5,0,0.33,1.00000,1
 GO:0070545,PeBoW complex,9,0,0.6,1.00000,1
-GO:0070985,TFIIK complex,7,0,0.47,1.00000,1
+GO:0070985,transcription factor TFIIK complex,7,0,0.47,1.00000,1
 GO:0071556,integral component of lumenal side of en...,8,0,0.53,1.00000,1
 GO:0072588,box H/ACA RNP complex,9,0,0.6,1.00000,1
-GO:0072686,mitotic spindle,10,0,0.67,1.00000,1
-GO:0089701,U2AF,11,0,0.73,1.00000,1
+GO:0072686,mitotic spindle,9,0,0.6,1.00000,1
 GO:0090404,pollen tube tip,29,0,1.93,1.00000,1
-GO:0090544,BAF-type complex,8,0,0.53,1.00000,1
-GO:0097346,INO80-type complex,20,0,1.33,1.00000,1
+GO:0097346,INO80-type complex,21,0,1.4,1.00000,1
 GO:0098553,lumenal side of endoplasmic reticulum me...,8,0,0.53,1.00000,1
-GO:0098590,plasma membrane region,31,0,2.07,1.00000,1
-GO:0098807,chloroplast thylakoid membrane protein c...,35,0,2.33,1.00000,1
+GO:0098807,chloroplast thylakoid membrane protein c...,36,0,2.4,1.00000,1
 GO:1902562,H4 histone acetyltransferase complex,17,0,1.13,1.00000,1
-GO:1990316,ATG1/ULK1 kinase complex,7,0,0.47,1.00000,1
+GO:1990316,Atg1/ULK1 kinase complex,7,0,0.47,1.00000,1
 GO:1990415,Pex17p-Pex14p docking complex,5,0,0.33,1.00000,1
 GO:1990429,peroxisomal importomer complex,5,0,0.33,1.00000,1
 GO:1990726,Lsm1-7-Pat1 complex,9,0,0.6,1.00000,1

@@ -1,9 +1,9 @@
 sampleName,fileName,condition
-cabbage1,../cabbage1/gene_counts.tsv,cabbage
-cabbage2,../cabbage2/gene_counts.tsv,cabbage
-kale1,../kale1/gene_counts.tsv,kale
-kale2,../kale2/gene_counts.tsv,kale
-kale3,../kale3/gene_counts.tsv,kale
-TO10001,../TO10001/gene_counts.tsv,TO1000
-TO10002,../TO10002/gene_counts.tsv,TO1000
-TO10003,../TO10003/gene_counts.tsv,TO1000
+cabbage1,../cabbage1/alignment/counts.tsv,cabbage
+cabbage2,../cabbage2/alignment/counts.tsv,cabbage
+kale1,../kale1/alignment/counts.tsv,kale
+kale2,../kale2/alignment/counts.tsv,kale
+kale3,../kale3/alignment/counts.tsv,kale
+TO10001,../TO10001/alignment/counts.tsv,TO1000
+TO10002,../TO10002/alignment/counts.tsv,TO1000
+TO10003,../TO10003/alignment/counts.tsv,TO1000
