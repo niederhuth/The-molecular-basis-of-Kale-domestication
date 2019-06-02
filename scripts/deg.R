@@ -29,25 +29,47 @@ sampleHeatMap <- function(x){
 #Function for making a PCA plot of samples
 pcaPlot <- function(x){
     require(ggplot2)
-     d <- plotPCA(x, intgroup=c("condition"), returnData=TRUE)
-     pv <- round(100 * attr(d, "percentVar"))
-     ggplot(d, aes(PC1, PC2, color=condition)) +
-     geom_point(size=3) +
-     xlab(paste0("PC1: ",pv[1],"% variance")) +
-     ylab(paste0("PC2: ",pv[2],"% variance")) +
-     coord_fixed() +
-     theme(panel.background=element_blank(),
-           axis.line=element_line(color="black"),
-           axis.text=element_text(color="black"),
-           axis.title=element_text(color="black",face="bold"))
+    d <- plotPCA(x, intgroup=c("condition"), returnData=TRUE)
+    pv <- round(100 * attr(d, "percentVar"))
+    ggplot(d, aes(PC1, PC2, color=condition)) +
+    geom_point(size=3) +
+    xlab(paste0("PC1: ",pv[1],"% variance")) +
+    ylab(paste0("PC2: ",pv[2],"% variance")) +
+    coord_fixed() +
+    theme(panel.background=element_blank(),
+          axis.line=element_line(color="black"),
+          axis.text=element_text(color="black"),
+          axis.title=element_text(color="black",face="bold"))
+}
+#Function for making dot plots of Enriched GO terms
+GOdotplot <- function(x,cutoff=0.05){
+  require(ggplot2)
+  ggplot(x[x$fdr < cutoff,],aes(x=Significant/Annotated,y=reorder(Term,Significant/Annotated))) + 
+    geom_point(aes(color=fdr,size=Significant)) + 
+    theme_bw() +
+    scale_color_continuous(low="red",high="blue") +
+    xlab("Gene Ratio (DEGs/Annotated Genes)") + 
+    ylab("") +
+    labs(size="Gene Count",color="FDR") 
+}
+#Function for making combined dotplots of GOterms
+GOdotplot2 <- function(x){
+  ggplot(x) + 
+    geom_point(aes(x=c("TvC"),y=Term,size=TvC_sig,color=TvC_FDR)) +
+    geom_point(aes(x=c("TvK"),y=Term,size=TvK_sig,color=TvK_FDR)) +
+    geom_point(aes(x=c("KvC"),y=Term,size=KvC_sig,color=KvC_FDR)) + 
+    scale_color_continuous(low="red",high="blue",na.value="grey50") +
+    theme_bw() +
+    ylab("") +
+    xlab("Sample Comparisons") +
+    labs(size="Gene Count",color="FDR")
 }
 #Function for running topGO on a list of genes
 topGO <- function(genelist,goTerms,nodeSize,filename,writeData=FALSE){
     require(topGO)
     require(GO.db)
     path <- c("../../figures_tables/goTerms/")
-    ifelse(!dir.exists(path),
-    dir.create(path), FALSE)
+    ifelse(!dir.exists(path),dir.create(path), FALSE)
     BP <- new("topGOdata",description="Biological Process",ontology="BP",
               allGenes=genelist,annot=annFUN.gene2GO,nodeSize=nodeSize,gene2GO=goTerms)
     MF <- new("topGOdata",description="Molecular Function",ontology="MF",
@@ -64,8 +86,11 @@ topGO <- function(genelist,goTerms,nodeSize,filename,writeData=FALSE){
     MFgenTable$fdr <- p.adjust(MFgenTable$Fisher,method="BH")
     CCgenTable$fdr <- p.adjust(CCgenTable$Fisher,method="BH")
     write.csv(BPgenTable,paste(path,filename,"_BP.csv",sep=""),row.names=FALSE,quote=FALSE)
+    ggsave(paste(path,filename,"_BP.pdf"),plot=GOdotplot(as.data.frame(BPgenTable)))
     write.csv(MFgenTable,paste(path,filename,"_MF.csv",sep=""),row.names=FALSE,quote=FALSE)
+    ggsave(paste(path,filename,"_MF.pdf"),plot=GOdotplot(MFgenTable))
     write.csv(CCgenTable,paste(path,filename,"_CC.csv",sep=""),row.names=FALSE,quote=FALSE)
+    ggsave(paste(path,filename,"_CC.pdf"),plot=GOdotplot(CCgenTable))
     if(writeData){
       return(list(BP=BPgenTable,MF=MFgenTable,CC=CCgenTable))
     }
@@ -199,25 +224,78 @@ KvCgotermDOWN <- factor(as.integer(resKvC$id %in% KvCsig[KvCsig$log2FC < -1,]$id
 names(KvCgotermDOWN) <- resKvC$id
 KvCgotermDOWN <- topGO(KvCgotermDOWN,goTerms,nodeSize=5,"KvC_down",writeData=TRUE)
 
-upGoterm <- merge(TvCgotermUP$BP,TvKgotermUP$BP,by.x=GO.ID,by.y=GO.ID)
 upGoterm <- merge(TvCgotermUP$BP,TvKgotermUP$BP,by.x="GO.ID",by.y="GO.ID")
-upSig <- upGoterm[upGoterm$fdr.x <= 0.05 | upGoterm$fdr.y <= 0.05 | upGoterm$fdr <= 0.05, ]
-upSig <- data.frame(GO.ID = upSig$GO.ID, TvC_FDR = upSig$fdr.x, TvC_sig = upSig$Significant.x, TvK_FDR = upSig$fdr.y, TvK_sig = upSig$Significant.y, KvC_FDR = upSig$fdr, KvC_sig = upSig$Significant)
+upGoterm <- merge(upGoterm,KvCgotermUP$BP,by.x="GO.ID",by.y="GO.ID")
+upSig <- upGoterm[upGoterm$fdr.x < 0.05 | upGoterm$fdr.y < 0.05 | upGoterm$fdr < 0.05, ]
+upSig <- data.frame(Term = upSig$Term, TvC_FDR = upSig$fdr.x, TvC_sig = upSig$Significant.x, TvK_FDR = upSig$fdr.y, TvK_sig = upSig$Significant.y, KvC_FDR = upSig$fdr, KvC_sig = upSig$Significant)
+upSig$TvC_FDR <- ifelse(upSig$TvC_FDR < 0.05, upSig$TvC_FDR, NA)
+upSig$TvC_sig <- ifelse(upSig$TvC_FDR < 0.05, upSig$TvC_sig, NA)
+upSig$TvK_FDR <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_FDR, NA)
+upSig$TvK_sig <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_sig, NA)
+upSig$KvC_FDR <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_FDR, NA)
+upSig$KvC_sig <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_sig, NA)
+ggsave("../../figures_tables/goTerms/Up_BP.pdf",plot=GOdotplot2(upSig))
 
-ggplot() + geom_point(data = upSig,aes(x=c("TvC"),y=GO.ID,size=TvC_sig,color=TvC_FDR)) +
-           geom_point(data = upSig,aes(x=c("TvK"),y=GO.ID,size=TvK_sig,color=TvK_FDR)) +
-           geom_point(data = upSig,aes(x=c("KvC"),y=GO.ID,size=KvC_sig,color=KvC_FDR))
+upGoterm <- merge(TvCgotermUP$MF,TvKgotermUP$MF,by.x="GO.ID",by.y="GO.ID")
+upGoterm <- merge(upGoterm,KvCgotermUP$MF,by.x="GO.ID",by.y="GO.ID")
+upSig <- upGoterm[upGoterm$fdr.x < 0.05 | upGoterm$fdr.y < 0.05 | upGoterm$fdr < 0.05, ]
+upSig <- data.frame(Term = upSig$Term, TvC_FDR = upSig$fdr.x, TvC_sig = upSig$Significant.x, TvK_FDR = upSig$fdr.y, TvK_sig = upSig$Significant.y, KvC_FDR = upSig$fdr, KvC_sig = upSig$Significant)
+upSig$TvC_FDR <- ifelse(upSig$TvC_FDR < 0.05, upSig$TvC_FDR, NA)
+upSig$TvC_sig <- ifelse(upSig$TvC_FDR < 0.05, upSig$TvC_sig, NA)
+upSig$TvK_FDR <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_FDR, NA)
+upSig$TvK_sig <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_sig, NA)
+upSig$KvC_FDR <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_FDR, NA)
+upSig$KvC_sig <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_sig, NA)
+ggsave("../../figures_tables/goTerms/Up_MF.pdf",plot=GOdotplot2(upSig))
 
-tmp <- upSig
-tmp$KvC_FDR <- ifelse(tmp$KvC_FDR > 0.05, 0.6, tmp$KvC_FDR)
-tmp$TvC_FDR <- ifelse(tmp$TvC_FDR > 0.05, 0.6, tmp$TvC_FDR)
-tmp$TvK_FDR <- ifelse(tmp$TvK_FDR > 0.05, 0.6, tmp$TvK_FDR)
+upGoterm <- merge(TvCgotermUP$CC,TvKgotermUP$CC,by.x="GO.ID",by.y="GO.ID")
+upGoterm <- merge(upGoterm,KvCgotermUP$CC,by.x="GO.ID",by.y="GO.ID")
+upSig <- upGoterm[upGoterm$fdr.x < 0.05 | upGoterm$fdr.y < 0.05 | upGoterm$fdr < 0.05, ]
+upSig <- data.frame(Term = upSig$Term, TvC_FDR = upSig$fdr.x, TvC_sig = upSig$Significant.x, TvK_FDR = upSig$fdr.y, TvK_sig = upSig$Significant.y, KvC_FDR = upSig$fdr, KvC_sig = upSig$Significant)
+upSig$TvC_FDR <- ifelse(upSig$TvC_FDR < 0.05, upSig$TvC_FDR, NA)
+upSig$TvC_sig <- ifelse(upSig$TvC_FDR < 0.05, upSig$TvC_sig, NA)
+upSig$TvK_FDR <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_FDR, NA)
+upSig$TvK_sig <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_sig, NA)
+upSig$KvC_FDR <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_FDR, NA)
+upSig$KvC_sig <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_sig, NA)
+ggsave("../../figures_tables/goTerms/Up_CC.pdf",plot=GOdotplot2(upSig))
 
-ggplot() + geom_point(data = tmp,aes(x=c("TvC"),y=GO.ID,size=TvC_sig,color=TvC_FDR)) +
-           geom_point(data = tmp,aes(x=c("TvK"),y=GO.ID,size=TvK_sig,color=TvK_FDR)) +
-           geom_point(data = tmp,aes(x=c("KvC"),y=GO.ID,size=KvC_sig,color=KvC_FDR)) +
-           scale_color_gradient("q-value", low = "blue", high = "white") +
-           theme(panel.background=element_blank())
+downGoterm <- merge(TvCgotermDOWN$BP,TvKgotermDOWN$BP,by.x="GO.ID",by.y="GO.ID")
+downGoterm <- merge(downGoterm,KvCgotermDOWN$BP,by.x="GO.ID",by.y="GO.ID")
+downSig <- downGoterm[downGoterm$fdr.x < 0.05 | downGoterm$fdr.y < 0.05 | downGoterm$fdr < 0.05, ]
+downSig <- data.frame(Term = downSig$Term, TvC_FDR = downSig$fdr.x, TvC_sig = downSig$Significant.x, TvK_FDR = downSig$fdr.y, TvK_sig = downSig$Significant.y, KvC_FDR = downSig$fdr, KvC_sig = downSig$Significant)
+downSig$TvC_FDR <- ifelse(downSig$TvC_FDR < 0.05, downSig$TvC_FDR, NA)
+downSig$TvC_sig <- ifelse(downSig$TvC_FDR < 0.05, downSig$TvC_sig, NA)
+downSig$TvK_FDR <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_FDR, NA)
+downSig$TvK_sig <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_sig, NA)
+downSig$KvC_FDR <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_FDR, NA)
+downSig$KvC_sig <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_sig, NA)
+ggsave("../../figures_tables/goTerms/Down_BP.pdf",plot=GOdotplot2(downSig))
+
+downGoterm <- merge(TvCgotermDOWN$MF,TvKgotermDOWN$MF,by.x="GO.ID",by.y="GO.ID")
+downGoterm <- merge(downGoterm,KvCgotermDOWN$MF,by.x="GO.ID",by.y="GO.ID")
+downSig <- downGoterm[downGoterm$fdr.x < 0.05 | downGoterm$fdr.y < 0.05 | downGoterm$fdr < 0.05, ]
+downSig <- data.frame(Term = downSig$Term, TvC_FDR = downSig$fdr.x, TvC_sig = downSig$Significant.x, TvK_FDR = downSig$fdr.y, TvK_sig = downSig$Significant.y, KvC_FDR = downSig$fdr, KvC_sig = downSig$Significant)
+downSig$TvC_FDR <- ifelse(downSig$TvC_FDR < 0.05, downSig$TvC_FDR, NA)
+downSig$TvC_sig <- ifelse(downSig$TvC_FDR < 0.05, downSig$TvC_sig, NA)
+downSig$TvK_FDR <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_FDR, NA)
+downSig$TvK_sig <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_sig, NA)
+downSig$KvC_FDR <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_FDR, NA)
+downSig$KvC_sig <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_sig, NA)
+ggsave("../../figures_tables/goTerms/Down_MF.pdf",plot=GOdotplot2(downSig))
+
+downGoterm <- merge(TvCgotermDOWN$CC,TvKgotermDOWN$CC,by.x="GO.ID",by.y="GO.ID")
+downGoterm <- merge(downGoterm,KvCgotermDOWN$CC,by.x="GO.ID",by.y="GO.ID")
+downSig <- downGoterm[downGoterm$fdr.x < 0.05 | downGoterm$fdr.y < 0.05 | downGoterm$fdr < 0.05, ]
+downSig <- data.frame(Term = downSig$Term, TvC_FDR = downSig$fdr.x, TvC_sig = downSig$Significant.x, TvK_FDR = downSig$fdr.y, TvK_sig = downSig$Significant.y, KvC_FDR = downSig$fdr, KvC_sig = downSig$Significant)
+downSig$TvC_FDR <- ifelse(downSig$TvC_FDR < 0.05, downSig$TvC_FDR, NA)
+downSig$TvC_sig <- ifelse(downSig$TvC_FDR < 0.05, downSig$TvC_sig, NA)
+downSig$TvK_FDR <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_FDR, NA)
+downSig$TvK_sig <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_sig, NA)
+downSig$KvC_FDR <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_FDR, NA)
+downSig$KvC_sig <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_sig, NA)
+ggsave("../../figures_tables/goTerms/Down_CC.pdf",plot=GOdotplot2(downSig))
+
 
 #KEGG analysis
 
