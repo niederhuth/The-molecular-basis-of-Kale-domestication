@@ -11,7 +11,7 @@ cd $PBS_O_WORKDIR
 export PATH="$HOME/miniconda3/envs/RNA/bin:$PATH"
 #Define Variables
 sample=$(pwd | sed s/.*\\///)
-fastq=$(echo ../fastq/"$sample".fastq.gz)
+fastq='../fastq/trimmed.fastq.gz'
 
 #map reads
 cd alignment
