@@ -296,8 +296,10 @@ downSig$KvC_FDR <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_FDR, NA)
 downSig$KvC_sig <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_sig, NA)
 ggsave("../../figures_tables/goTerms/Down_CC.pdf",plot=GOdotplot2(downSig))
 
-
 #KEGG analysis
+library(clusterProfiler)
+xx <- enrichMKEGG(TvKsig$id, organism='boe', minGSSize=1)
+
 
 #Genes of interest
 path <- c("../../figures_tables/genes_of_interest/")
