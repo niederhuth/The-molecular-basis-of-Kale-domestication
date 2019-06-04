@@ -68,7 +68,7 @@ GOdotplot2 <- function(x){
 topGO <- function(genelist,goTerms,nodeSize,filename,writeData=FALSE){
     require(topGO)
     require(GO.db)
-    path <- c("../../figures_tables/goTerms/")
+    path <- c("goTerms/")
     ifelse(!dir.exists(path),dir.create(path), FALSE)
     BP <- new("topGOdata",description="Biological Process",ontology="BP",
               allGenes=genelist,annot=annFUN.gene2GO,nodeSize=nodeSize,gene2GO=goTerms)
@@ -111,7 +111,7 @@ geneHeatMap <- function(dds,geneList){
 #Load Deseq2
 library(DESeq2)
 #Read in sample metadata
-sampleTable <- read.csv("../../misc/sample_metadata.csv",header=T)
+sampleTable <- read.csv("../misc/sample_metadata.csv",header=T)
 #Read in Counts Table
 dds <- DESeqDataSetFromHTSeqCount(sampleTable,design= ~ condition)
 #Prefilter
@@ -128,11 +128,11 @@ dds <- nbinomWaldTest(dds)
 #Make diagnostic figures of samples
 #Make a heat map of samples
 rld <- rlog(dds, blind=TRUE)
-pdf("../../figures_tables/sampleHeatMap.pdf",width=6,height=6,paper='special')
+pdf("sampleHeatMap.pdf",width=6,height=6,paper='special')
 sampleHeatMap(rld)
 dev.off()
 #Make a PCA plot of samples
-pdf("../../figures_tables/samplePCA.pdf",width=6,height=6,paper='special')
+pdf("samplePCA.pdf",width=6,height=6,paper='special')
 pcaPlot(rld)
 dev.off()
 
@@ -148,7 +148,7 @@ resfull$padj <- p.adjust(resfull$pval,method="BH")
 #Extract raw counts and output a table
 rawCounts <- data.frame(gene = row.names(counts(dds,normalized=FALSE)),
                         counts(dds,normalized=FALSE))
-write.table(rawCounts, "../../figures_tables/raw_counts.tsv",sep="\t",
+write.table(rawCounts, "raw_counts.tsv",sep="\t",
             quote=FALSE, row.names=TRUE)
 
 #Extract and output a table of normalized counts
@@ -163,7 +163,7 @@ colnames(all_genes) <- c("gene","cabbage1", "cabbage2", "kale1", "kale2", "kale3
                          "TO10001", "TO10002", "TO10003", "cabbage_mean",
                          "kale_mean", "TO1000_mean", "TvC_log2FC", "TvC_padj",
                          "TvK_log2FC", "TvK_padj", "KvC_log2FC", "KvC_padj" )
-write.table(all_genes, "../../figures_tables/Gene_expression_table.tsv",sep="\t",
+write.table(all_genes, "Gene_expression_table.tsv",sep="\t",
             quote=FALSE, row.names=FALSE)
 
 #Extract significant DEGs
@@ -184,7 +184,7 @@ d2 <- data.frame(id=d2$id,TvC=ifelse(d2$id %in% sig[sig$sampleA == "TO1000" & si
 )
 #Make Venn Diagram
 library(VennDiagram)
-pdf("../../figures_tables/comparisonVennDiagram.pdf",width=6,height=6,paper='special')
+pdf("comparisonVennDiagram.pdf",width=6,height=6,paper='special')
 draw.triple.venn(area1=nrow(subset(d2,TvC==1)),
   area2=nrow(subset(d2,TvK==1)),
   area3=nrow(subset(d2,KvC==1)),
@@ -201,7 +201,7 @@ dev.off()
 ##GO term enrichment
 library(topGO)
 library(GO.db)
-goTerms <- readMappings(file="../../misc/topGO.txt")
+goTerms <- readMappings(file="../misc/topGO.txt")
 
 TvCgotermUP <- factor(as.integer(resTvC$id %in% TvCsig[TvCsig$log2FC > 1,]$id))
 names(TvCgotermUP) <- resTvC$id
@@ -234,7 +234,7 @@ upSig$TvK_FDR <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_FDR, NA)
 upSig$TvK_sig <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_sig, NA)
 upSig$KvC_FDR <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_FDR, NA)
 upSig$KvC_sig <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_sig, NA)
-ggsave("../../figures_tables/goTerms/Up_BP.pdf",plot=GOdotplot2(upSig))
+ggsave("goTerms/Up_BP.pdf",plot=GOdotplot2(upSig))
 
 upGoterm <- merge(TvCgotermUP$MF,TvKgotermUP$MF,by.x="GO.ID",by.y="GO.ID")
 upGoterm <- merge(upGoterm,KvCgotermUP$MF,by.x="GO.ID",by.y="GO.ID")
@@ -246,7 +246,7 @@ upSig$TvK_FDR <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_FDR, NA)
 upSig$TvK_sig <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_sig, NA)
 upSig$KvC_FDR <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_FDR, NA)
 upSig$KvC_sig <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_sig, NA)
-ggsave("../../figures_tables/goTerms/Up_MF.pdf",plot=GOdotplot2(upSig))
+ggsave("goTerms/Up_MF.pdf",plot=GOdotplot2(upSig))
 
 upGoterm <- merge(TvCgotermUP$CC,TvKgotermUP$CC,by.x="GO.ID",by.y="GO.ID")
 upGoterm <- merge(upGoterm,KvCgotermUP$CC,by.x="GO.ID",by.y="GO.ID")
@@ -258,7 +258,7 @@ upSig$TvK_FDR <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_FDR, NA)
 upSig$TvK_sig <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_sig, NA)
 upSig$KvC_FDR <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_FDR, NA)
 upSig$KvC_sig <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_sig, NA)
-ggsave("../../figures_tables/goTerms/Up_CC.pdf",plot=GOdotplot2(upSig))
+ggsave("goTerms/Up_CC.pdf",plot=GOdotplot2(upSig))
 
 downGoterm <- merge(TvCgotermDOWN$BP,TvKgotermDOWN$BP,by.x="GO.ID",by.y="GO.ID")
 downGoterm <- merge(downGoterm,KvCgotermDOWN$BP,by.x="GO.ID",by.y="GO.ID")
@@ -270,7 +270,7 @@ downSig$TvK_FDR <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_FDR, NA)
 downSig$TvK_sig <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_sig, NA)
 downSig$KvC_FDR <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_FDR, NA)
 downSig$KvC_sig <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_sig, NA)
-ggsave("../../figures_tables/goTerms/Down_BP.pdf",plot=GOdotplot2(downSig))
+ggsave("goTerms/Down_BP.pdf",plot=GOdotplot2(downSig))
 
 downGoterm <- merge(TvCgotermDOWN$MF,TvKgotermDOWN$MF,by.x="GO.ID",by.y="GO.ID")
 downGoterm <- merge(downGoterm,KvCgotermDOWN$MF,by.x="GO.ID",by.y="GO.ID")
@@ -282,7 +282,7 @@ downSig$TvK_FDR <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_FDR, NA)
 downSig$TvK_sig <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_sig, NA)
 downSig$KvC_FDR <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_FDR, NA)
 downSig$KvC_sig <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_sig, NA)
-ggsave("../../figures_tables/goTerms/Down_MF.pdf",plot=GOdotplot2(downSig))
+ggsave("goTerms/Down_MF.pdf",plot=GOdotplot2(downSig))
 
 downGoterm <- merge(TvCgotermDOWN$CC,TvKgotermDOWN$CC,by.x="GO.ID",by.y="GO.ID")
 downGoterm <- merge(downGoterm,KvCgotermDOWN$CC,by.x="GO.ID",by.y="GO.ID")
@@ -294,7 +294,7 @@ downSig$TvK_FDR <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_FDR, NA)
 downSig$TvK_sig <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_sig, NA)
 downSig$KvC_FDR <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_FDR, NA)
 downSig$KvC_sig <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_sig, NA)
-ggsave("../../figures_tables/goTerms/Down_CC.pdf",plot=GOdotplot2(downSig))
+ggsave("goTerms/Down_CC.pdf",plot=GOdotplot2(downSig))
 
 #KEGG analysis
 library(clusterProfiler)
@@ -302,10 +302,10 @@ xx <- enrichMKEGG(TvKsig$id, organism='boe', minGSSize=1)
 
 
 #Genes of interest
-path <- c("../../figures_tables/genes_of_interest/")
+path <- c("genes_of_interest/")
 ifelse(!dir.exists(path),
 dir.create(path), FALSE)
-goi <- read.csv("../../misc/goi.csv")
+goi <- read.csv("../misc/goi.csv")
 for(gene in goi$gene){
     tryCatch({
         x <- plotCounts(dds, gene, intgroup = "condition",
