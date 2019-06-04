@@ -1,9 +1,9 @@
 sampleName,fileName,condition
-cabbage1,../alignment/cabbage1_counts.tsv,cabbage
-cabbage2,../alignment/cabbage2_counts.tsv,cabbage
-kale1,../alignment/kale1_counts.tsv,kale
-kale2,../alignment/kale2_counts.tsv,kale
-kale3,../alignment/kale3_counts.tsv,kale
-TO10001,../alignment/TO10001_counts.tsv,TO1000
-TO10002,../alignment/TO10002_counts.tsv,TO1000
-TO10003,../alignment/TO10003_counts.tsv,TO1000
+cabbage1,raw_counts/cabbage1_counts.tsv,cabbage
+cabbage2,raw_counts/cabbage2_counts.tsv,cabbage
+kale1,raw_counts/kale1_counts.tsv,kale
+kale2,raw_counts/kale2_counts.tsv,kale
+kale3,raw_counts/kale3_counts.tsv,kale
+TO10001,raw_counts/TO10001_counts.tsv,TO1000
+TO10002,raw_counts/TO10002_counts.tsv,TO1000
+TO10003,raw_counts/TO10003_counts.tsv,TO1000
