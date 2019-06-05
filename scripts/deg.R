@@ -55,8 +55,8 @@ GOdotplot <- function(x,cutoff=0.05){
 #Function for making combined dotplots of GOterms
 GOdotplot2 <- function(x){
   ggplot(x) + 
-    geom_point(aes(x=c("TvC"),y=Term,size=TvC_sig,color=TvC_FDR)) +
-    geom_point(aes(x=c("TvK"),y=Term,size=TvK_sig,color=TvK_FDR)) +
+    geom_point(aes(x=c("CvT"),y=Term,size=CvT_sig,color=CvT_FDR)) +
+    geom_point(aes(x=c("KvT"),y=Term,size=KvT_sig,color=KvT_FDR)) +
     geom_point(aes(x=c("KvC"),y=Term,size=KvC_sig,color=KvC_FDR)) + 
     scale_color_continuous(low="red",high="blue",na.value="grey50") +
     theme_bw() +
@@ -137,32 +137,26 @@ pcaPlot(rld)
 dev.off()
 
 #Make results tables for each pairwise comparison
-resTvC <- makeResultsTable(dds,"TO1000","cabbage",filter=FALSE)
-resTvK <- makeResultsTable(dds,"TO1000","kale",filter=FALSE)
+resKvT <- makeResultsTable(dds,"kale","TO1000",filter=FALSE)
 resKvC <- makeResultsTable(dds,"kale","cabbage",filter=FALSE)
+resCvT <- makeResultsTable(dds,"cabbage","TO1000",filter=FALSE)
 #Combine results tables
-resfull <- as.data.frame(rbind(resTvC,resTvK,resKvC))
+resfull <- as.data.frame(rbind(resKvT,resKvC,resCvT))
 #Adjust p-values for all results
 resfull$padj <- p.adjust(resfull$pval,method="BH")
 
-#Extract raw counts and output a table
-rawCounts <- data.frame(gene = row.names(counts(dds,normalized=FALSE)),
-                        counts(dds,normalized=FALSE))
-write.table(rawCounts, "raw_counts.tsv",sep="\t",
-            quote=FALSE, row.names=TRUE)
-
 #Extract and output a table of normalized counts
 normalizedCounts <- counts(dds, normalized=TRUE)
-all_genes <- data.frame(gene=row.names(normalizedCounts), normalizedCounts,
+all_genes <- data.frame(gene=row.names(normalizedCounts), normalizedCounts[,c(3,4,5,1,2,6,7,8)],
              as.data.frame(sapply(levels(dds$condition),
              function(lvl) rowMeans(counts(dds,normalized=TRUE)[,dds$condition == lvl]))),
-             resfull[resfull$sampleA=="TO1000" & resfull$sampleB=="cabbage",c(6,8)],
-             resfull[resfull$sampleA=="TO1000" & resfull$sampleB=="kale",c(6,8)],
-             resfull[resfull$sampleA=="kale" & resfull$sampleB=="cabbage",c(6,8)])
-colnames(all_genes) <- c("gene","cabbage1", "cabbage2", "kale1", "kale2", "kale3",
-                         "TO10001", "TO10002", "TO10003", "cabbage_mean",
-                         "kale_mean", "TO1000_mean", "TvC_log2FC", "TvC_padj",
-                         "TvK_log2FC", "TvK_padj", "KvC_log2FC", "KvC_padj" )
+             resfull[resfull$sampleA=="kale" & resfull$sampleB=="TO1000",c(6,8)],
+             resfull[resfull$sampleA=="kale" & resfull$sampleB=="cabbage",c(6,8)],
+             resfull[resfull$sampleA=="cabbage" & resfull$sampleB=="TO1000",c(6,8)])
+colnames(all_genes) <- c("gene","kale1", "kale2", "kale3", "cabbage1", "cabbage2", 
+                         "TO10001", "TO10002", "TO10003", "kale_mean",
+                         "cabbage_mean", "TO1000_mean", "KvT_log2FC", "KvT_padj",
+                         "KvC_log2FC", "KvC_padj", "CvT_log2FC", "CvT_padj" )
 write.table(all_genes, "Gene_expression_table.tsv",sep="\t",
             quote=FALSE, row.names=FALSE)
 
@@ -171,28 +165,28 @@ sig <- na.omit(resfull[resfull$padj <= 0.05 & resfull$log2FC >= 1 | resfull$padj
 #Count number of DEGs for each comparison
 table(sig$sampleA,sig$sampleB)
 #For each pairwise comparison, extract the DEGs
-TvCsig <- sig[sig$sampleA == "TO1000" & sig$sampleB == "cabbage",]
-TvKsig <- sig[sig$sampleA == "TO1000" & sig$sampleB == "kale",]
+CvTsig <- sig[sig$sampleA == "cabbage" & sig$sampleB == "TO1000",]
+KvTsig <- sig[sig$sampleA == "kale" & sig$sampleB == "TO1000",]
 KvCsig <- sig[sig$sampleA == "kale" & sig$sampleB == "cabbage",]
 
 #Venn Diagram of DEGs
 #Make a table of overlap between pairwise comparisons
 d2 <- data.frame(id=unique(sig$id))
-d2 <- data.frame(id=d2$id,TvC=ifelse(d2$id %in% sig[sig$sampleA == "TO1000" & sig$sampleB == "cabbage",]$id, 1, 0),
-  TvK=ifelse(d2$id %in% sig[sig$sampleA == "TO1000" & sig$sampleB == "kale",]$id, 1, 0),
-  KvC=ifelse(d2$id %in% sig[sig$sampleA == "kale" & sig$sampleB == "cabbage",]$id, 1, 0)
+d2 <- data.frame(id=d2$id,KvT=ifelse(d2$id %in% sig[sig$sampleA == "kale" & sig$sampleB == "TO1000",]$id, 1, 0),
+  KvC=ifelse(d2$id %in% sig[sig$sampleA == "kale" & sig$sampleB == "cabbage",]$id, 1, 0),
+  CvT=ifelse(d2$id %in% sig[sig$sampleA == "cabbage" & sig$sampleB == "TO1000",]$id, 1, 0)
 )
 #Make Venn Diagram
 library(VennDiagram)
 pdf("comparisonVennDiagram.pdf",width=6,height=6,paper='special')
-draw.triple.venn(area1=nrow(subset(d2,TvC==1)),
-  area2=nrow(subset(d2,TvK==1)),
+draw.triple.venn(area1=nrow(subset(d2,CvT==1)),
+  area2=nrow(subset(d2,KvT==1)),
   area3=nrow(subset(d2,KvC==1)),
-  n12=nrow(subset(d2,TvC==1 & TvK==1)),
-  n23=nrow(subset(d2,TvK==1 & KvC==1)),
-  n13=nrow(subset(d2,TvC==1 & KvC==1)),
-  n123=nrow(subset(d2,TvC==1 & TvK==1 & KvC==1)),
-  category = c("TO1000 v Cabbage", "TO1000 v Kale", "Kale v Cabbage"),
+  n12=nrow(subset(d2,CvT==1 & KvT==1)),
+  n23=nrow(subset(d2,KvT==1 & KvC==1)),
+  n13=nrow(subset(d2,CvT==1 & KvC==1)),
+  n123=nrow(subset(d2,CvT==1 & KvT==1 & KvC==1)),
+  category = c("Cabbage v TO1000", "Kale v TO100", "Kale v Cabbage"),
   lty = "blank",
   fill = c("skyblue", "pink1", "mediumorchid")
 )
@@ -203,19 +197,19 @@ library(topGO)
 library(GO.db)
 goTerms <- readMappings(file="../misc/topGO.txt")
 
-TvCgotermUP <- factor(as.integer(resTvC$id %in% TvCsig[TvCsig$log2FC > 1,]$id))
-names(TvCgotermUP) <- resTvC$id
-TvCgotermUP <- topGO(TvCgotermUP,goTerms,nodeSize=5,"TvC_up",writeData=TRUE)
-TvCgotermDOWN <- factor(as.integer(resTvC$id %in% TvCsig[TvCsig$log2FC < -1,]$id))
-names(TvCgotermDOWN) <- resTvC$id
-TvCgotermDOWN <- topGO(TvCgotermDOWN,goTerms,nodeSize=5,"TvC_down",writeData=TRUE)
+CvTgotermUP <- factor(as.integer(resCvT$id %in% CvTsig[CvTsig$log2FC > 1,]$id))
+names(CvTgotermUP) <- resCvT$id
+CvTgotermUP <- topGO(CvTgotermUP,goTerms,nodeSize=5,"CvT_up",writeData=TRUE)
+CvTgotermDOWN <- factor(as.integer(resCvT$id %in% CvTsig[CvTsig$log2FC < -1,]$id))
+names(CvTgotermDOWN) <- resCvT$id
+CvTgotermDOWN <- topGO(CvTgotermDOWN,goTerms,nodeSize=5,"CvT_down",writeData=TRUE)
 
-TvKgotermUP <- factor(as.integer(resTvK$id %in% TvKsig[TvKsig$log2FC > 1,]$id))
-names(TvKgotermUP) <- resTvK$id
-TvKgotermUP <- topGO(TvKgotermUP,goTerms,nodeSize=5,"TvK_up",writeData=TRUE)
-TvKgotermDOWN <- factor(as.integer(resTvK$id %in% TvKsig[TvKsig$log2FC < -1,]$id))
-names(TvKgotermDOWN) <- resTvK$id
-TvKgotermDOWN <- topGO(TvKgotermDOWN,goTerms,nodeSize=5,"TvK_down",writeData=TRUE)
+KvTgotermUP <- factor(as.integer(resKvT$id %in% KvTsig[KvTsig$log2FC > 1,]$id))
+names(KvTgotermUP) <- resKvT$id
+KvTgotermUP <- topGO(KvTgotermUP,goTerms,nodeSize=5,"KvT_up",writeData=TRUE)
+KvTgotermDOWN <- factor(as.integer(resKvT$id %in% KvTsig[KvTsig$log2FC < -1,]$id))
+names(KvTgotermDOWN) <- resKvT$id
+KvTgotermDOWN <- topGO(KvTgotermDOWN,goTerms,nodeSize=5,"KvT_down",writeData=TRUE)
 
 KvCgotermUP <- factor(as.integer(resKvC$id %in% KvCsig[KvCsig$log2FC > 1,]$id))
 names(KvCgotermUP) <- resKvC$id
@@ -224,81 +218,81 @@ KvCgotermDOWN <- factor(as.integer(resKvC$id %in% KvCsig[KvCsig$log2FC < -1,]$id
 names(KvCgotermDOWN) <- resKvC$id
 KvCgotermDOWN <- topGO(KvCgotermDOWN,goTerms,nodeSize=5,"KvC_down",writeData=TRUE)
 
-upGoterm <- merge(TvCgotermUP$BP,TvKgotermUP$BP,by.x="GO.ID",by.y="GO.ID")
+upGoterm <- merge(CvTgotermUP$BP,KvTgotermUP$BP,by.x="GO.ID",by.y="GO.ID")
 upGoterm <- merge(upGoterm,KvCgotermUP$BP,by.x="GO.ID",by.y="GO.ID")
 upSig <- upGoterm[upGoterm$fdr.x < 0.05 | upGoterm$fdr.y < 0.05 | upGoterm$fdr < 0.05, ]
-upSig <- data.frame(Term = upSig$Term, TvC_FDR = upSig$fdr.x, TvC_sig = upSig$Significant.x, TvK_FDR = upSig$fdr.y, TvK_sig = upSig$Significant.y, KvC_FDR = upSig$fdr, KvC_sig = upSig$Significant)
-upSig$TvC_FDR <- ifelse(upSig$TvC_FDR < 0.05, upSig$TvC_FDR, NA)
-upSig$TvC_sig <- ifelse(upSig$TvC_FDR < 0.05, upSig$TvC_sig, NA)
-upSig$TvK_FDR <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_FDR, NA)
-upSig$TvK_sig <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_sig, NA)
+upSig <- data.frame(Term = upSig$Term, CvT_FDR = upSig$fdr.x, CvT_sig = upSig$Significant.x, KvT_FDR = upSig$fdr.y, KvT_sig = upSig$Significant.y, KvC_FDR = upSig$fdr, KvC_sig = upSig$Significant)
+upSig$CvT_FDR <- ifelse(upSig$CvT_FDR < 0.05, upSig$CvT_FDR, NA)
+upSig$CvT_sig <- ifelse(upSig$CvT_FDR < 0.05, upSig$CvT_sig, NA)
+upSig$KvT_FDR <- ifelse(upSig$KvT_FDR < 0.05, upSig$KvT_FDR, NA)
+upSig$KvT_sig <- ifelse(upSig$KvT_FDR < 0.05, upSig$KvT_sig, NA)
 upSig$KvC_FDR <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_FDR, NA)
 upSig$KvC_sig <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_sig, NA)
 ggsave("goTerms/Up_BP.pdf",plot=GOdotplot2(upSig))
 
-upGoterm <- merge(TvCgotermUP$MF,TvKgotermUP$MF,by.x="GO.ID",by.y="GO.ID")
+upGoterm <- merge(CvTgotermUP$MF,KvTgotermUP$MF,by.x="GO.ID",by.y="GO.ID")
 upGoterm <- merge(upGoterm,KvCgotermUP$MF,by.x="GO.ID",by.y="GO.ID")
 upSig <- upGoterm[upGoterm$fdr.x < 0.05 | upGoterm$fdr.y < 0.05 | upGoterm$fdr < 0.05, ]
-upSig <- data.frame(Term = upSig$Term, TvC_FDR = upSig$fdr.x, TvC_sig = upSig$Significant.x, TvK_FDR = upSig$fdr.y, TvK_sig = upSig$Significant.y, KvC_FDR = upSig$fdr, KvC_sig = upSig$Significant)
-upSig$TvC_FDR <- ifelse(upSig$TvC_FDR < 0.05, upSig$TvC_FDR, NA)
-upSig$TvC_sig <- ifelse(upSig$TvC_FDR < 0.05, upSig$TvC_sig, NA)
-upSig$TvK_FDR <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_FDR, NA)
-upSig$TvK_sig <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_sig, NA)
+upSig <- data.frame(Term = upSig$Term, CvT_FDR = upSig$fdr.x, CvT_sig = upSig$Significant.x, KvT_FDR = upSig$fdr.y, KvT_sig = upSig$Significant.y, KvC_FDR = upSig$fdr, KvC_sig = upSig$Significant)
+upSig$CvT_FDR <- ifelse(upSig$CvT_FDR < 0.05, upSig$CvT_FDR, NA)
+upSig$CvT_sig <- ifelse(upSig$CvT_FDR < 0.05, upSig$CvT_sig, NA)
+upSig$KvT_FDR <- ifelse(upSig$KvT_FDR < 0.05, upSig$KvT_FDR, NA)
+upSig$KvT_sig <- ifelse(upSig$KvT_FDR < 0.05, upSig$KvT_sig, NA)
 upSig$KvC_FDR <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_FDR, NA)
 upSig$KvC_sig <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_sig, NA)
 ggsave("goTerms/Up_MF.pdf",plot=GOdotplot2(upSig))
 
-upGoterm <- merge(TvCgotermUP$CC,TvKgotermUP$CC,by.x="GO.ID",by.y="GO.ID")
+upGoterm <- merge(CvTgotermUP$CC,KvTgotermUP$CC,by.x="GO.ID",by.y="GO.ID")
 upGoterm <- merge(upGoterm,KvCgotermUP$CC,by.x="GO.ID",by.y="GO.ID")
 upSig <- upGoterm[upGoterm$fdr.x < 0.05 | upGoterm$fdr.y < 0.05 | upGoterm$fdr < 0.05, ]
-upSig <- data.frame(Term = upSig$Term, TvC_FDR = upSig$fdr.x, TvC_sig = upSig$Significant.x, TvK_FDR = upSig$fdr.y, TvK_sig = upSig$Significant.y, KvC_FDR = upSig$fdr, KvC_sig = upSig$Significant)
-upSig$TvC_FDR <- ifelse(upSig$TvC_FDR < 0.05, upSig$TvC_FDR, NA)
-upSig$TvC_sig <- ifelse(upSig$TvC_FDR < 0.05, upSig$TvC_sig, NA)
-upSig$TvK_FDR <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_FDR, NA)
-upSig$TvK_sig <- ifelse(upSig$TvK_FDR < 0.05, upSig$TvK_sig, NA)
+upSig <- data.frame(Term = upSig$Term, CvT_FDR = upSig$fdr.x, CvT_sig = upSig$Significant.x, KvT_FDR = upSig$fdr.y, KvT_sig = upSig$Significant.y, KvC_FDR = upSig$fdr, KvC_sig = upSig$Significant)
+upSig$CvT_FDR <- ifelse(upSig$CvT_FDR < 0.05, upSig$CvT_FDR, NA)
+upSig$CvT_sig <- ifelse(upSig$CvT_FDR < 0.05, upSig$CvT_sig, NA)
+upSig$KvT_FDR <- ifelse(upSig$KvT_FDR < 0.05, upSig$KvT_FDR, NA)
+upSig$KvT_sig <- ifelse(upSig$KvT_FDR < 0.05, upSig$KvT_sig, NA)
 upSig$KvC_FDR <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_FDR, NA)
 upSig$KvC_sig <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_sig, NA)
 ggsave("goTerms/Up_CC.pdf",plot=GOdotplot2(upSig))
 
-downGoterm <- merge(TvCgotermDOWN$BP,TvKgotermDOWN$BP,by.x="GO.ID",by.y="GO.ID")
+downGoterm <- merge(CvTgotermDOWN$BP,KvTgotermDOWN$BP,by.x="GO.ID",by.y="GO.ID")
 downGoterm <- merge(downGoterm,KvCgotermDOWN$BP,by.x="GO.ID",by.y="GO.ID")
 downSig <- downGoterm[downGoterm$fdr.x < 0.05 | downGoterm$fdr.y < 0.05 | downGoterm$fdr < 0.05, ]
-downSig <- data.frame(Term = downSig$Term, TvC_FDR = downSig$fdr.x, TvC_sig = downSig$Significant.x, TvK_FDR = downSig$fdr.y, TvK_sig = downSig$Significant.y, KvC_FDR = downSig$fdr, KvC_sig = downSig$Significant)
-downSig$TvC_FDR <- ifelse(downSig$TvC_FDR < 0.05, downSig$TvC_FDR, NA)
-downSig$TvC_sig <- ifelse(downSig$TvC_FDR < 0.05, downSig$TvC_sig, NA)
-downSig$TvK_FDR <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_FDR, NA)
-downSig$TvK_sig <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_sig, NA)
+downSig <- data.frame(Term = downSig$Term, CvT_FDR = downSig$fdr.x, CvT_sig = downSig$Significant.x, KvT_FDR = downSig$fdr.y, KvT_sig = downSig$Significant.y, KvC_FDR = downSig$fdr, KvC_sig = downSig$Significant)
+downSig$CvT_FDR <- ifelse(downSig$CvT_FDR < 0.05, downSig$CvT_FDR, NA)
+downSig$CvT_sig <- ifelse(downSig$CvT_FDR < 0.05, downSig$CvT_sig, NA)
+downSig$KvT_FDR <- ifelse(downSig$KvT_FDR < 0.05, downSig$KvT_FDR, NA)
+downSig$KvT_sig <- ifelse(downSig$KvT_FDR < 0.05, downSig$KvT_sig, NA)
 downSig$KvC_FDR <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_FDR, NA)
 downSig$KvC_sig <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_sig, NA)
 ggsave("goTerms/Down_BP.pdf",plot=GOdotplot2(downSig))
 
-downGoterm <- merge(TvCgotermDOWN$MF,TvKgotermDOWN$MF,by.x="GO.ID",by.y="GO.ID")
+downGoterm <- merge(CvTgotermDOWN$MF,KvTgotermDOWN$MF,by.x="GO.ID",by.y="GO.ID")
 downGoterm <- merge(downGoterm,KvCgotermDOWN$MF,by.x="GO.ID",by.y="GO.ID")
 downSig <- downGoterm[downGoterm$fdr.x < 0.05 | downGoterm$fdr.y < 0.05 | downGoterm$fdr < 0.05, ]
-downSig <- data.frame(Term = downSig$Term, TvC_FDR = downSig$fdr.x, TvC_sig = downSig$Significant.x, TvK_FDR = downSig$fdr.y, TvK_sig = downSig$Significant.y, KvC_FDR = downSig$fdr, KvC_sig = downSig$Significant)
-downSig$TvC_FDR <- ifelse(downSig$TvC_FDR < 0.05, downSig$TvC_FDR, NA)
-downSig$TvC_sig <- ifelse(downSig$TvC_FDR < 0.05, downSig$TvC_sig, NA)
-downSig$TvK_FDR <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_FDR, NA)
-downSig$TvK_sig <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_sig, NA)
+downSig <- data.frame(Term = downSig$Term, CvT_FDR = downSig$fdr.x, CvT_sig = downSig$Significant.x, KvT_FDR = downSig$fdr.y, KvT_sig = downSig$Significant.y, KvC_FDR = downSig$fdr, KvC_sig = downSig$Significant)
+downSig$CvT_FDR <- ifelse(downSig$CvT_FDR < 0.05, downSig$CvT_FDR, NA)
+downSig$CvT_sig <- ifelse(downSig$CvT_FDR < 0.05, downSig$CvT_sig, NA)
+downSig$KvT_FDR <- ifelse(downSig$KvT_FDR < 0.05, downSig$KvT_FDR, NA)
+downSig$KvT_sig <- ifelse(downSig$KvT_FDR < 0.05, downSig$KvT_sig, NA)
 downSig$KvC_FDR <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_FDR, NA)
 downSig$KvC_sig <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_sig, NA)
 ggsave("goTerms/Down_MF.pdf",plot=GOdotplot2(downSig))
 
-downGoterm <- merge(TvCgotermDOWN$CC,TvKgotermDOWN$CC,by.x="GO.ID",by.y="GO.ID")
+downGoterm <- merge(CvTgotermDOWN$CC,KvTgotermDOWN$CC,by.x="GO.ID",by.y="GO.ID")
 downGoterm <- merge(downGoterm,KvCgotermDOWN$CC,by.x="GO.ID",by.y="GO.ID")
 downSig <- downGoterm[downGoterm$fdr.x < 0.05 | downGoterm$fdr.y < 0.05 | downGoterm$fdr < 0.05, ]
-downSig <- data.frame(Term = downSig$Term, TvC_FDR = downSig$fdr.x, TvC_sig = downSig$Significant.x, TvK_FDR = downSig$fdr.y, TvK_sig = downSig$Significant.y, KvC_FDR = downSig$fdr, KvC_sig = downSig$Significant)
-downSig$TvC_FDR <- ifelse(downSig$TvC_FDR < 0.05, downSig$TvC_FDR, NA)
-downSig$TvC_sig <- ifelse(downSig$TvC_FDR < 0.05, downSig$TvC_sig, NA)
-downSig$TvK_FDR <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_FDR, NA)
-downSig$TvK_sig <- ifelse(downSig$TvK_FDR < 0.05, downSig$TvK_sig, NA)
+downSig <- data.frame(Term = downSig$Term, CvT_FDR = downSig$fdr.x, CvT_sig = downSig$Significant.x, KvT_FDR = downSig$fdr.y, KvT_sig = downSig$Significant.y, KvC_FDR = downSig$fdr, KvC_sig = downSig$Significant)
+downSig$CvT_FDR <- ifelse(downSig$CvT_FDR < 0.05, downSig$CvT_FDR, NA)
+downSig$CvT_sig <- ifelse(downSig$CvT_FDR < 0.05, downSig$CvT_sig, NA)
+downSig$KvT_FDR <- ifelse(downSig$KvT_FDR < 0.05, downSig$KvT_FDR, NA)
+downSig$KvT_sig <- ifelse(downSig$KvT_FDR < 0.05, downSig$KvT_sig, NA)
 downSig$KvC_FDR <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_FDR, NA)
 downSig$KvC_sig <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_sig, NA)
 ggsave("goTerms/Down_CC.pdf",plot=GOdotplot2(downSig))
 
 #KEGG analysis
 library(clusterProfiler)
-xx <- enrichMKEGG(TvKsig$id, organism='boe', minGSSize=1)
+xx <- enrichMKEGG(KvTsig$id, organism='boe', minGSSize=1)
 
 
 #Genes of interest
