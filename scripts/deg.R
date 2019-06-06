@@ -1,10 +1,10 @@
 #Define functions
 #Function for making a table of results for two conditions from dds
-makeResultsTable <- function(x,conditionA,conditionB,filter=FALSE){
+makeResultsTable <- function(x,conditionA,conditionB,lfcThreshold=0,filter=FALSE){
     require(DESeq2)
     bml <- sapply(levels(dds$condition),function(lvl) rowMeans(counts(dds,normalized=TRUE)[,dds$condition == lvl]))
     bml <- as.data.frame(bml)
-    y <- results(x,contrast=c("condition",conditionA,conditionB),independentFiltering=filter)
+    y <- results(x,contrast=c("condition",conditionA,conditionB),lfcThreshold=lfcThreshold,independentFiltering=filter)
     y <- data.frame(id=gsub(pattern = "gene:",replacement = "",row.names(y)),
                     sampleA=c(conditionA),sampleB=c(conditionB),
                     baseMeanA=bml[,conditionA],baseMeanB=bml[,conditionB],
@@ -114,8 +114,6 @@ library(DESeq2)
 sampleTable <- read.csv("../misc/sample_metadata.csv",header=T)
 #Read in Counts Table
 dds <- DESeqDataSetFromHTSeqCount(sampleTable,design= ~ condition)
-#Prefilter
-dds <- dds[rowSums(counts(dds)) > 1,]
 #Set reference level
 dds$condition <- relevel(dds$condition, ref="TO1000")
 #Estimate Size Factors
@@ -137,9 +135,9 @@ pcaPlot(rld)
 dev.off()
 
 #Make results tables for each pairwise comparison
-resKvT <- makeResultsTable(dds,"kale","TO1000",filter=FALSE)
-resKvC <- makeResultsTable(dds,"kale","cabbage",filter=FALSE)
-resCvT <- makeResultsTable(dds,"cabbage","TO1000",filter=FALSE)
+resKvT <- makeResultsTable(dds,"kale","TO1000",lfcThreshold=0,filter=F)
+resKvC <- makeResultsTable(dds,"kale","cabbage",lfcThreshold=0,filter=F)
+resCvT <- makeResultsTable(dds,"cabbage","TO1000",lfcThreshold=0,filter=F)
 #Combine results tables
 resfull <- as.data.frame(rbind(resKvT,resKvC,resCvT))
 #Adjust p-values for all results
