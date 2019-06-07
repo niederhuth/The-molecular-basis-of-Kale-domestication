@@ -44,13 +44,15 @@ pcaPlot <- function(x){
 #Function for making dot plots of Enriched GO terms
 GOdotplot <- function(x,cutoff=0.05){
   require(ggplot2)
+  x=head(x[x$fdr < cutoff,],10)
   ggplot(x[x$fdr < cutoff,],aes(x=Significant/Annotated,y=reorder(Term,Significant/Annotated))) + 
     geom_point(aes(color=fdr,size=Significant)) + 
     theme_bw() +
     scale_color_continuous(low="red",high="blue") +
     xlab("Gene Ratio (DEGs/Annotated Genes)") + 
     ylab("") +
-    labs(size="Gene Count",color="FDR") 
+    labs(size="Gene Count",color="FDR") +
+    ggtitle("Top 10 Enriched GO Terms")
 }
 #Function for making combined dotplots of GOterms
 GOdotplot2 <- function(x){
