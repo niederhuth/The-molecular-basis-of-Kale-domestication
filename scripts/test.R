@@ -1,11 +1,7 @@
-syn <- read.table("../misc/Bo_At_syntelogs.tsv",header=T,sep="\t")
+syn <- read.table("../misc/Bo-At-syntelogs.tsv",header=T,sep="\t")
 
-nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="kale" & sig$sampleB=="TO1000",])
-nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="kale" & sig$sampleB=="TO1000",])
-nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="kale" & sig$sampleB=="TO1000",])/length(syn$Bo_gene %in% all_genes$gene)
-nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="kale" & sig$sampleB=="TO1000",])/(nrow(all_genes)-length(syn$Bo_gene %in% all_genes$gene))
-nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="kale" & sig$sampleB=="TO1000",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="TO1000",])
-nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="kale" & sig$sampleB=="TO1000",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="TO1000",])
+
+
 
 nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="kale" & sig$sampleB=="cabbage",])
 nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="kale" & sig$sampleB=="cabbage",])

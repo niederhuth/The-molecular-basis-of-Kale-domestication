@@ -311,3 +311,156 @@ for(gene in goi$gene){
                    legend.position="none") + xlab("Genotype")
     ggsave(paste(path,gene,"_counts.pdf",sep=""), p, width=5, height=4)}, error=function(e){})
 }
+
+#Syntenic genes
+#
+syn <- read.table("../misc/Bo-At-syntelogs.tsv",header=T,sep="\t")
+synSig <- merge(sig,syn,by.x="id",by.y="Bo_gene")
+
+#KvT
+pSyn=data.frame(
+  row.names=c("Genome: Percent Syntenic",
+              "KvT DEGs: Percent Syntenic",
+              "KvC DEGs: Percent Syntenic",
+              "CvT DEGs: Percent Syntenic",
+              "Genome: Percent Non-Syntenic",
+              "KvT DEGs: Percent Non-Syntenic",
+              "KvC DEGs: Percent Non-Syntenic",
+              "CvT DEGs: Percent Non-Syntenic"),
+  percent=c(length(syn$Bo_gene %in% all_genes$gene)/nrow(all_genes),
+            nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="kale" & sig$sampleB=="TO1000",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="TO1000",]),
+            nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="kale" & sig$sampleB=="cabbage",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="cabbage",]),
+            nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="cabbage" & sig$sampleB=="TO1000",])/nrow(sig[sig$sampleA=="cabbage" & sig$sampleB=="TO1000",]),
+            (nrow(all_genes)-length(syn$Bo_gene %in% all_genes$gene))/nrow(all_genes),
+            nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="kale" & sig$sampleB=="TO1000",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="TO1000",]),
+            nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="kale" & sig$sampleB=="cabbage",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="cabbage",]),
+            nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="cabbage" & sig$sampleB=="TO1000",])/nrow(sig[sig$sampleA=="cabbage" & sig$sampleB=="TO1000",])),
+  order=c(1,2,3,4,5,6,7,8)
+)
+#Make Plot
+ggsave("Syntenic_genes.pdf",
+ggplot(pSyn,aes(x=reorder(row.names(pSyn),order),y=percent,fill=reorder(row.names(pSyn),order))) + 
+  geom_bar(stat="identity") + 
+  theme(panel.background=element_blank(),
+        axis.line=element_line(color="black"),
+        axis.text=element_text(color="black"),
+        axis.title=element_text(color="black",face="bold"),
+        axis.text.x=element_text(angle=315,hjust=0),
+        legend.position="none") + 
+  scale_y_continuous(expand=c(0,0),labels=percent) + 
+  scale_fill_manual(values=c("tomato2",
+                             "dodgerblue3",
+                             "palegreen4",
+                             "khaki3",
+                             "tomato2",
+                             "dodgerblue3",
+                             "palegreen4",
+                             "khaki3")) +
+  ylab("Percentage of Genes") +
+  xlab(""))
+
+#KvT subgenome
+KvTsub=data.frame(
+  row.names=c("Genome: Percent LF",
+              "DEGs: Percent LF",
+              "Genome: Percent MF1",
+              "DEGs: Percent MF1",
+              "Genome: Percent MF2",
+              "DEGs: Percent MF2"),
+  percent=c(nrow(syn[syn$subgenome=="LF",])/nrow(all_genes),
+            nrow(synSig[synSig$sampleA=="kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="LF",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="TO1000",]),
+            nrow(syn[syn$subgenome=="MF1",])/nrow(all_genes),
+            nrow(synSig[synSig$sampleA=="kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF1",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="TO1000",]),
+            nrow(syn[syn$subgenome=="MF1",])/nrow(all_genes),
+            nrow(synSig[synSig$sampleA=="kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF2",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="TO1000",])),
+  order=c(1,2,3,4,5,6))
+#Make Plot
+ggsave("KvT_subgenome.pdf",
+       ggplot(KvTsub,aes(x=reorder(row.names(KvTsub),order),y=percent,fill=reorder(row.names(KvTsub),order))) + 
+         geom_bar(stat="identity") + 
+         theme(panel.background=element_blank(),
+               axis.line=element_line(color="black"),
+               axis.text=element_text(color="black"),
+               axis.title=element_text(color="black",face="bold"),
+               axis.text.x=element_text(angle=315,hjust=0),
+               legend.position="none") + 
+         scale_y_continuous(expand=c(0,0),labels=percent) + 
+         scale_fill_manual(values=c("tomato2",
+                                    "tomato2",
+                                    "dodgerblue3",
+                                    "dodgerblue3",
+                                    "palegreen4",
+                                    "palegreen4")) +
+         ylab("Percentage of Genes") +
+         xlab(""))
+
+#KvC subgenome
+KvCsub=data.frame(
+  row.names=c("Genome: Percent LF",
+              "DEGs: Percent LF",
+              "Genome: Percent MF1",
+              "DEGs: Percent MF1",
+              "Genome: Percent MF2",
+              "DEGs: Percent MF2"),
+  percent=c(nrow(syn[syn$subgenome=="LF",])/nrow(all_genes),
+            nrow(synSig[synSig$sampleA=="kale" & synSig$sampleB=="cabbage" & synSig$subgenome=="LF",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="cabbage",]),
+            nrow(syn[syn$subgenome=="MF1",])/nrow(all_genes),
+            nrow(synSig[synSig$sampleA=="kale" & synSig$sampleB=="cabbage" & synSig$subgenome=="MF1",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="cabbage",]),
+            nrow(syn[syn$subgenome=="MF1",])/nrow(all_genes),
+            nrow(synSig[synSig$sampleA=="kale" & synSig$sampleB=="cabbage" & synSig$subgenome=="MF2",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="cabbage",])),
+  order=c(1,2,3,4,5,6))
+#Make Plot
+ggsave("KvC_subgenome.pdf",
+       ggplot(KvCsub,aes(x=reorder(row.names(KvCsub),order),y=percent,fill=reorder(row.names(KvCsub),order))) + 
+         geom_bar(stat="identity") + 
+         theme(panel.background=element_blank(),
+               axis.line=element_line(color="black"),
+               axis.text=element_text(color="black"),
+               axis.title=element_text(color="black",face="bold"),
+               axis.text.x=element_text(angle=315,hjust=0),
+               legend.position="none") + 
+         scale_y_continuous(expand=c(0,0),labels=percent) + 
+         scale_fill_manual(values=c("tomato2",
+                                    "tomato2",
+                                    "dodgerblue3",
+                                    "dodgerblue3",
+                                    "palegreen4",
+                                    "palegreen4")) +
+         ylab("Percentage of Genes") +
+         xlab(""))
+
+#CvT subgenome
+CvTsub=data.frame(
+  row.names=c("Genome: Percent LF",
+              "DEGs: Percent LF",
+              "Genome: Percent MF1",
+              "DEGs: Percent MF1",
+              "Genome: Percent MF2",
+              "DEGs: Percent MF2"),
+  percent=c(nrow(syn[syn$subgenome=="LF",])/nrow(all_genes),
+            nrow(synSig[synSig$sampleA=="cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="LF",])/nrow(sig[sig$sampleA=="cabbage" & sig$sampleB=="TO1000",]),
+            nrow(syn[syn$subgenome=="MF1",])/nrow(all_genes),
+            nrow(synSig[synSig$sampleA=="cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF1",])/nrow(sig[sig$sampleA=="cabbage" & sig$sampleB=="TO1000",]),
+            nrow(syn[syn$subgenome=="MF1",])/nrow(all_genes),
+            nrow(synSig[synSig$sampleA=="cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF2",])/nrow(sig[sig$sampleA=="cabbage" & sig$sampleB=="TO1000",])),
+  order=c(1,2,3,4,5,6))
+#Make Plot
+ggsave("CvT_subgenome.pdf",
+       ggplot(CvTsub,aes(x=reorder(row.names(CvTsub),order),y=percent,fill=reorder(row.names(CvTsub),order))) + 
+         geom_bar(stat="identity") + 
+         theme(panel.background=element_blank(),
+               axis.line=element_line(color="black"),
+               axis.text=element_text(color="black"),
+               axis.title=element_text(color="black",face="bold"),
+               axis.text.x=element_text(angle=315,hjust=0),
+               legend.position="none") + 
+         scale_y_continuous(expand=c(0,0),labels=percent) + 
+         scale_fill_manual(values=c("tomato2",
+                                    "tomato2",
+                                    "dodgerblue3",
+                                    "dodgerblue3",
+                                    "palegreen4",
+                                    "palegreen4")) +
+         ylab("Percentage of Genes") +
+         xlab(""))
+
