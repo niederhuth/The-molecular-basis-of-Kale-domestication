@@ -17,7 +17,7 @@ brassica_fa="Brassica_oleracea.BOL.pep.all.fa"
 uniprot_db="uniprot.dmnd"
 output="blast.m8"
 evalue=0.00001
-max_target=5
+max_target=1
 
 #
 
@@ -34,5 +34,3 @@ diamond makedb --db $uniprot_db --in $uniprot_fa
 
 #BLAST Brassica oleracea against uniprot db
 diamond blastp --max-target-seqs $max_target --evalue $evalue --db $uniprot_db --query $brassica_fa --out $output
-
-
