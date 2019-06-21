@@ -317,9 +317,10 @@ for(gene in goi$gene){
 #Syntenic genes
 #
 syn <- read.table("../misc/Bo-At-syntelogs.tsv",header=T,sep="\t")
+synRes <- merge(resfull,syn,by.x="id",by.y="Bo_gene")
 synSig <- merge(sig,syn,by.x="id",by.y="Bo_gene")
 
-#KvT
+#Syntenic vs Non-Syntenic
 pSyn=data.frame(
   row.names=c("Genome: Percent Syntenic",
               "KvT DEGs: Percent Syntenic",
@@ -337,8 +338,7 @@ pSyn=data.frame(
             nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="kale" & sig$sampleB=="TO1000",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="TO1000",]),
             nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="kale" & sig$sampleB=="cabbage",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="cabbage",]),
             nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="cabbage" & sig$sampleB=="TO1000",])/nrow(sig[sig$sampleA=="cabbage" & sig$sampleB=="TO1000",])),
-  order=c(1,2,3,4,5,6,7,8)
-)
+  order=c(1,2,3,4,5,6,7,8))
 #Make Plot
 ggsave("Syntenic_genes.pdf",
 ggplot(pSyn,aes(x=reorder(row.names(pSyn),order),y=percent,fill=reorder(row.names(pSyn),order))) + 
@@ -373,7 +373,7 @@ KvTsub=data.frame(
             nrow(synSig[synSig$sampleA=="kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="LF",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="TO1000",]),
             nrow(syn[syn$subgenome=="MF1",])/nrow(all_genes),
             nrow(synSig[synSig$sampleA=="kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF1",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="TO1000",]),
-            nrow(syn[syn$subgenome=="MF1",])/nrow(all_genes),
+            nrow(syn[syn$subgenome=="MF2",])/nrow(all_genes),
             nrow(synSig[synSig$sampleA=="kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF2",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="TO1000",])),
   order=c(1,2,3,4,5,6))
 #Make Plot
@@ -391,10 +391,50 @@ ggsave("KvT_subgenome.pdf",
                                     "tomato2",
                                     "dodgerblue3",
                                     "dodgerblue3",
-                                    "palegreen4",
-                                    "palegreen4")) +
+                                    "black",
+                                    "black")) +
          ylab("Percentage of Genes") +
          xlab(""))
+#Log2FC distribution
+tmp <- synRes[synRes$sampleA=="kale" & synRes$sampleB=="TO1000",]
+tmp$direction <- ifelse(tmp$log2FC > 0 & tmp$padj < 0.05,1,ifelse(tmp$log2FC < 0 & tmp$padj < 0.05,-1,0))
+tmp2 <- tmp[tmp$direction != 0,]$At_gene
+tmp2 <- as.vector(unique(tmp[tmp$direction != 0,]$At_gene))
+tmp3 <- tmp[tmp$At_gene %in% tmp2,]
+ggsave("KvT_subgenome_log2FC.pdf",
+  ggplot(tmp3[tmp3$padj<=0.05,],aes(x=log2FC,color=subgenome)) + 
+    geom_density(size=1) +
+    theme(panel.background=element_blank(),
+          axis.line=element_line(color="black"),
+          axis.text=element_text(color="black"),
+          axis.title=element_text(color="black",face="bold"),
+          axis.text.x=element_text(),
+          legend.position="right") + 
+    scale_y_continuous(expand=c(0,0)) +
+    scale_color_manual(values=c("dodgerblue","tomato2","black")) +
+    ylab("Density") +
+    xlab("Log2 Fold Change"))
+#Homoeolog direction
+tmp4 <- tmp[,c(10,9,11)]
+tmp5 <- as.data.frame.matrix(table(tmp4$At_gene,tmp4$subgenome))
+tmp5$sum <- rowSums(tmp5)
+tmp6 <- as.vector(row.names(tmp5[tmp5$sum != tmp5$LF & tmp5$sum != tmp5$MF1 & tmp5$sum != tmp5$MF2,]))
+tmp5 <- as.data.frame.matrix(table(tmp4$At_gene,tmp4$direction))
+tmp5 <- tmp5[row.names(tmp5) %in% as.vector(unique(tmp$At_gene)),]
+tmp5$sum <- rowSums(tmp5)
+tmp7 <- tmp5[tmp5$sum > 1 & row.names(tmp5) %in% tmp6,]
+pdf("KvT_homoeologs_VennDiagram.pdf",width=6,height=6,paper='special')
+draw.triple.venn(area1=nrow(tmp7[tmp7$`-1`> 0,]),
+                 area2=nrow(tmp7[tmp7$`1`> 0,]),
+                 area3=nrow(tmp7[tmp7$`0`> 0,]),
+                 n12=nrow(tmp7[tmp7$`-1`> 0 & tmp7$`1`> 0,]),
+                 n23=nrow(tmp7[tmp7$`1`> 0 & tmp7$`0`> 0,]),
+                 n13=nrow(tmp7[tmp7$`0`> 0 & tmp7$`-1`> 0,]),
+                 n123=nrow(tmp7[tmp7$`-1`> 0 & tmp7$`1`> 0 & tmp7$`0`> 0,]),
+                 category = c("Lower Expression", "Higher Expression", "No Difference"),
+                 lty = "blank",
+                 fill = c("skyblue", "pink1", "mediumorchid"))
+dev.off()
 
 #KvC subgenome
 KvCsub=data.frame(
@@ -408,7 +448,7 @@ KvCsub=data.frame(
             nrow(synSig[synSig$sampleA=="kale" & synSig$sampleB=="cabbage" & synSig$subgenome=="LF",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="cabbage",]),
             nrow(syn[syn$subgenome=="MF1",])/nrow(all_genes),
             nrow(synSig[synSig$sampleA=="kale" & synSig$sampleB=="cabbage" & synSig$subgenome=="MF1",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="cabbage",]),
-            nrow(syn[syn$subgenome=="MF1",])/nrow(all_genes),
+            nrow(syn[syn$subgenome=="MF2",])/nrow(all_genes),
             nrow(synSig[synSig$sampleA=="kale" & synSig$sampleB=="cabbage" & synSig$subgenome=="MF2",])/nrow(sig[sig$sampleA=="kale" & sig$sampleB=="cabbage",])),
   order=c(1,2,3,4,5,6))
 #Make Plot
@@ -426,10 +466,50 @@ ggsave("KvC_subgenome.pdf",
                                     "tomato2",
                                     "dodgerblue3",
                                     "dodgerblue3",
-                                    "palegreen4",
-                                    "palegreen4")) +
+                                    "black",
+                                    "black")) +
          ylab("Percentage of Genes") +
          xlab(""))
+#Log2FC distribution
+tmp <- synRes[synRes$sampleA=="kale" & synRes$sampleB=="cabbage",]
+tmp$direction <- ifelse(tmp$log2FC > 0 & tmp$padj < 0.05,1,ifelse(tmp$log2FC < 0 & tmp$padj < 0.05,-1,0))
+tmp2 <- tmp[tmp$direction != 0,]$At_gene
+tmp2 <- as.vector(unique(tmp[tmp$direction != 0,]$At_gene))
+tmp3 <- tmp[tmp$At_gene %in% tmp2,]
+ggsave("KvC_subgenome_log2FC.pdf",
+       ggplot(tmp3[tmp3$padj<=0.05,],aes(x=log2FC,color=subgenome)) + 
+         geom_density(size=1) +
+         theme(panel.background=element_blank(),
+               axis.line=element_line(color="black"),
+               axis.text=element_text(color="black"),
+               axis.title=element_text(color="black",face="bold"),
+               axis.text.x=element_text(),
+               legend.position="right") + 
+         scale_y_continuous(expand=c(0,0)) +
+         scale_color_manual(values=c("dodgerblue","tomato2","black")) +
+         ylab("Density") +
+         xlab("Log2 Fold Change"))
+#Homoeolog direction
+tmp4 <- tmp[,c(10,9,11)]
+tmp5 <- as.data.frame.matrix(table(tmp4$At_gene,tmp4$subgenome))
+tmp5$sum <- rowSums(tmp5)
+tmp6 <- as.vector(row.names(tmp5[tmp5$sum != tmp5$LF & tmp5$sum != tmp5$MF1 & tmp5$sum != tmp5$MF2,]))
+tmp5 <- as.data.frame.matrix(table(tmp4$At_gene,tmp4$direction))
+tmp5 <- tmp5[row.names(tmp5) %in% as.vector(unique(tmp$At_gene)),]
+tmp5$sum <- rowSums(tmp5)
+tmp7 <- tmp5[tmp5$sum > 1 & row.names(tmp5) %in% tmp6,]
+pdf("KvC_homoeologs_VennDiagram.pdf",width=6,height=6,paper='special')
+draw.triple.venn(area1=nrow(tmp7[tmp7$`-1`> 0,]),
+                 area2=nrow(tmp7[tmp7$`1`> 0,]),
+                 area3=nrow(tmp7[tmp7$`0`> 0,]),
+                 n12=nrow(tmp7[tmp7$`-1`> 0 & tmp7$`1`> 0,]),
+                 n23=nrow(tmp7[tmp7$`1`> 0 & tmp7$`0`> 0,]),
+                 n13=nrow(tmp7[tmp7$`0`> 0 & tmp7$`-1`> 0,]),
+                 n123=nrow(tmp7[tmp7$`-1`> 0 & tmp7$`1`> 0 & tmp7$`0`> 0,]),
+                 category = c("Lower Expression", "Higher Expression", "No Difference"),
+                 lty = "blank",
+                 fill = c("skyblue", "pink1", "mediumorchid"))
+dev.off()
 
 #CvT subgenome
 CvTsub=data.frame(
@@ -443,7 +523,7 @@ CvTsub=data.frame(
             nrow(synSig[synSig$sampleA=="cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="LF",])/nrow(sig[sig$sampleA=="cabbage" & sig$sampleB=="TO1000",]),
             nrow(syn[syn$subgenome=="MF1",])/nrow(all_genes),
             nrow(synSig[synSig$sampleA=="cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF1",])/nrow(sig[sig$sampleA=="cabbage" & sig$sampleB=="TO1000",]),
-            nrow(syn[syn$subgenome=="MF1",])/nrow(all_genes),
+            nrow(syn[syn$subgenome=="MF2",])/nrow(all_genes),
             nrow(synSig[synSig$sampleA=="cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF2",])/nrow(sig[sig$sampleA=="cabbage" & sig$sampleB=="TO1000",])),
   order=c(1,2,3,4,5,6))
 #Make Plot
@@ -461,8 +541,48 @@ ggsave("CvT_subgenome.pdf",
                                     "tomato2",
                                     "dodgerblue3",
                                     "dodgerblue3",
-                                    "palegreen4",
-                                    "palegreen4")) +
+                                    "black",
+                                    "black")) +
          ylab("Percentage of Genes") +
          xlab(""))
+#Log2FC distribution
+tmp <- synRes[synRes$sampleA=="cabbage" & synRes$sampleB=="TO1000",]
+tmp$direction <- ifelse(tmp$log2FC > 0 & tmp$padj < 0.05,1,ifelse(tmp$log2FC < 0 & tmp$padj < 0.05,-1,0))
+tmp2 <- tmp[tmp$direction != 0,]$At_gene
+tmp2 <- as.vector(unique(tmp[tmp$direction != 0,]$At_gene))
+tmp3 <- tmp[tmp$At_gene %in% tmp2,]
+ggsave("CvT_subgenome_log2FC.pdf",
+       ggplot(tmp3[tmp3$padj<=0.05,],aes(x=log2FC,color=subgenome)) + 
+         geom_density(size=1) +
+         theme(panel.background=element_blank(),
+               axis.line=element_line(color="black"),
+               axis.text=element_text(color="black"),
+               axis.title=element_text(color="black",face="bold"),
+               axis.text.x=element_text(),
+               legend.position="right") + 
+         scale_y_continuous(expand=c(0,0)) +
+         scale_color_manual(values=c("dodgerblue","tomato2","black")) +
+         ylab("Density") +
+         xlab("Log2 Fold Change"))
+#Homoeolog direction
+tmp4 <- tmp[,c(10,9,11)]
+tmp5 <- as.data.frame.matrix(table(tmp4$At_gene,tmp4$subgenome))
+tmp5$sum <- rowSums(tmp5)
+tmp6 <- as.vector(row.names(tmp5[tmp5$sum != tmp5$LF & tmp5$sum != tmp5$MF1 & tmp5$sum != tmp5$MF2,]))
+tmp5 <- as.data.frame.matrix(table(tmp4$At_gene,tmp4$direction))
+tmp5 <- tmp5[row.names(tmp5) %in% as.vector(unique(tmp$At_gene)),]
+tmp5$sum <- rowSums(tmp5)
+tmp7 <- tmp5[tmp5$sum > 1 & row.names(tmp5) %in% tmp6,]
+pdf("CvT_homoeologs_VennDiagram.pdf",width=6,height=6,paper='special')
+  draw.triple.venn(area1=nrow(tmp7[tmp7$`-1`> 0,]),
+                  area2=nrow(tmp7[tmp7$`1`> 0,]),
+                  area3=nrow(tmp7[tmp7$`0`> 0,]),
+                  n12=nrow(tmp7[tmp7$`-1`> 0 & tmp7$`1`> 0,]),
+                  n23=nrow(tmp7[tmp7$`1`> 0 & tmp7$`0`> 0,]),
+                  n13=nrow(tmp7[tmp7$`0`> 0 & tmp7$`-1`> 0,]),
+                  n123=nrow(tmp7[tmp7$`-1`> 0 & tmp7$`1`> 0 & tmp7$`0`> 0,]),
+                  category = c("Lower Expression", "Higher Expression", "No Difference"),
+                  lty = "blank",
+                  fill = c("skyblue", "pink1", "mediumorchid"))
+dev.off()
 
