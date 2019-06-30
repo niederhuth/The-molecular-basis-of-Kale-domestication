@@ -321,6 +321,7 @@ synRes <- merge(resfull,syn,by.x="id",by.y="Bo_gene")
 synSig <- merge(sig,syn,by.x="id",by.y="Bo_gene")
 
 #Syntenic vs Non-Syntenic
+library(scales)
 pSyn=data.frame(
   row.names=c("Genome: Percent Syntenic",
               "KvT DEGs: Percent Syntenic",
