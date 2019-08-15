@@ -8,7 +8,8 @@
 #SBATCH --output=job_reports/%x-%j.SLURMout
 
 cd $PBS_O_WORKDIR
-export PATH="$HOME/miniconda3/envs/RNA/bin:$PATH"
+export PATH="$HOME/miniconda3/envs/Boleracea_rnaseq/bin:$PATH"
+
 #Define Variables
 sample=$(pwd | sed s/.*\\///)
 fastq='../fastq/trimmed.fastq.gz'
@@ -35,5 +36,5 @@ STAR \
  --quantMode GeneCounts
 
 #make counts table
-cut -f1,2 ReadsPerGene.out.tab | sed '1,4d' > counts.tsv
+cut -f1,2 ReadsPerGene.out.tab | sed '1,4d' > "$sample"_counts.tsv
 

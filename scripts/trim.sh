@@ -8,28 +8,22 @@
 #SBATCH --output=job_reports/%x-%j.SLURMout
 
 cd $PBS_O_WORKDIR
-export PATH="$HOME/miniconda3/envs/RNA/bin:$PATH"
+export PATH="$HOME/miniconda3/envs/Boleracea_rnaseq/bin:$PATH"
 
-#Sample
-sample=$(pwd | sed s/.*data\\/// | sed s/\\/.*//)
-
-#Input fastq file
-p1="$sample.fastq.gz"
-
-#Output fastq file
-t1="trimmed.fastq.gz"
-
-#Adapter sequences
-a1="file:../../../misc/adapters.fa"
+#Define variables
+sample=$(pwd | sed s/.*\\///)
+input="$sample.fastq.gz"
+output="trimmed.fastq.gz"
+adaptors="file:../../../misc/adapters.fa"
 
 #Cutadapt
 cd fastq
 echo "Running cutadapt"
-cutadapt -j 10 --trim-n -m 30 -g $a1 -o $t1 $p1
+cutadapt -j 10 --trim-n -m 30 -g $adaptors -o $output $input
 
 #Fastqc
 mkdir fastqc
 echo "Running fastqc"
-fastqc -t 10 -o fastqc/ $t1 $p1
+fastqc -t 10 -o fastqc/ $input $output
 
 echo "Done"
