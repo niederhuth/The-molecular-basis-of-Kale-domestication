@@ -1,5 +1,5 @@
 #!/bin/bash --login
-#SBATCH --time=3:59:00
+#SBATCH --time=12:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=20
@@ -10,18 +10,30 @@
 cd $PBS_O_WORKDIR
 export PATH="$HOME/miniconda3/envs/Boleracea_rnaseq/bin:$PATH"
 
-#Define Variables
+#Define variables
 sample=$(pwd | sed s/.*\\///)
-fastq='../fastq/trimmed.fastq.gz'
+input="$sample.fastq.gz"
+trimmed="trimmed.fastq.gz"
+adaptors="file:../../../misc/adapters.fa"
+
+#Cutadapt
+cd fastq
+echo "Running cutadapt"
+cutadapt -j 10 --trim-n -m 30 -g $adaptors -o $trimmed $input
+
+#Fastqc
+mkdir fastqc
+echo "Running fastqc"
+fastqc -t 10 -o fastqc/ $input $trimmed
 
 #map reads
-cd alignment
+cd ../alignment
 echo "Running STAR"
 STAR \
  --runThreadN 20 \
  --runMode alignReads \
  --genomeDir ../../ref \
- --readFilesIn $fastq \
+ --readFilesIn $trimmed \
  --readFilesCommand zcat \
  --outSAMtype BAM SortedByCoordinate \
  --outSAMstrandField intronMotif \
