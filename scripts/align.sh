@@ -19,12 +19,12 @@ adaptors="file:../../../misc/adapters.fa"
 #Cutadapt
 cd fastq
 echo "Running cutadapt"
-cutadapt -j 10 --trim-n -m 30 -g $adaptors -o $trimmed $input
+cutadapt -j 20 --trim-n -m 30 -g $adaptors -o $trimmed $input
 
 #Fastqc
 mkdir fastqc
 echo "Running fastqc"
-fastqc -t 10 -o fastqc/ $input $trimmed
+fastqc -t 20 -o fastqc/ $input $trimmed
 
 #map reads
 cd ../alignment
