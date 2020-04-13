@@ -13,7 +13,7 @@ export PATH="$HOME/miniconda3/envs/Boleraceae_rnaseq/bin:$PATH"
 #Set Variables
 genome='ftp://ftp.ensemblgenomes.org/pub/plants/release-44/fasta/brassica_oleracea/dna/Brassica_oleracea.BOL.dna.toplevel.fa.gz'
 annotations='ftp://ftp.ensemblgenomes.org/pub/plants/release-44/gff3/brassica_oleracea/Brassica_oleracea.BOL.44.gff3.gz'
-samples=$(sed '1d' ../misc/samples.csv | cut -d ',' -f 1)
+samples=$(sed '1d' ../misc/samples.csv | cut -d ',' -f 1 | tr '\n' ' ')
 
 #Prepare reference
 mkdir ref
