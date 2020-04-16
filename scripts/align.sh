@@ -12,10 +12,11 @@ export PATH="$HOME/miniconda3/envs/Boleracea_rnaseq/bin:$PATH"
 
 #Define variables
 samples=$(sed '1d' ../misc/samples.csv | cut -d ',' -f 1 | tr '\n' ' ')
+index="../../ref/STAR"
 output1="rnaseq1"
 output2="rnaseq2"
 threads=20
-fastq="../fastq/RNA/trimmed.fastq.gz"
+fastq="../fastq/trimmed.fastq.gz"
 
 #Star 1st pass
 echo "Running star 1st pass"
@@ -33,13 +34,15 @@ do
 		--outSAMtype BAM SortedByCoordinate \
 		--outSAMstrandField intronMotif \
 		--outFilterType BySJout \
-		--outFilterMultimapNmax 20 \
-		--alignSJoverhangMin 8 \
-		--alignSJDBoverhangMin 1 \
+		--outFilterMultimapNmax 10 \
+		--alignSJoverhangMin 5 \
+		--alignSJDBoverhangMin 3 \
 		--alignIntronMin 20 \
-		--alignIntronMax 1000000 \
-		--outFilterMismatchNmax 999 \
-		--outFilterMismatchNoverReadLmax 0.04
+		--alignIntronMax 0 \
+		--outFilterScoreMinOverLread 0.33 \
+		--outFilterMatchNminOverLread 0.33 \
+		--outFilterMismatchNmax 10 \
+		--outFilterMismatchNoverReadLmax 0.1
 	junctions="../../"$i"/"$output1"/SJ.out.tab $junctions"
 	cd ../../
 done
@@ -61,15 +64,18 @@ do
 		--outSAMtype BAM SortedByCoordinate \
 		--outSAMstrandField intronMotif \
 		--outFilterType BySJout \
-		--outFilterMultimapNmax 20 \
-		--alignSJoverhangMin 8 \
-		--alignSJDBoverhangMin 1 \
+		--outFilterMultimapNmax 10 \
+		--alignSJoverhangMin 5 \
+		--alignSJDBoverhangMin 3 \
 		--alignIntronMin 20 \
-		--alignIntronMax 1000000 \
-		--outFilterMismatchNmax 999 \
-		--outFilterMismatchNoverReadLmax 0.04 \
+		--alignIntronMax 0 \
+		--outFilterScoreMinOverLread 0.3 \
+		--outFilterMatchNminOverLread 0.3 \
+		--outFilterMismatchNmax 10 \
+		--outFilterMismatchNoverReadLmax 0.1 \
 		--quantMode GeneCounts
 	cut -f1,4 ReadsPerGene.out.tab | sed '1,4d' > counts.tsv 
+	cp counts.tsv ../../../figures_tables/raw_counts/"$i"_counts.tsv
 	cd ../../
 done
 

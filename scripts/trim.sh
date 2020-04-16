@@ -14,7 +14,7 @@ export PATH="$HOME/miniconda3/envs/Boleracea_rnaseq/bin:$PATH"
 sample=$(pwd | sed s/.*\\///)
 input=fastq/*.fastq.gz
 trimmed="fastq/trimmed.fastq.gz"
-adaptors="file:../../../misc/adapters.fa"
+adaptors="file:../../misc/adapters.fa"
 threads=20
 
 #Cutadapt

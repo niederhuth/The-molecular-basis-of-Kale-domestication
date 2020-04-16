@@ -3,12 +3,12 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=10
-#SBATCH --mem=50GB
+#SBATCH --mem=60GB
 #SBATCH --job-name setup
-#SBATCH --output=%x-%j.SLURMout
+#SBATCH --output=job_reports/%x-%j.SLURMout
 
 cd $PBS_O_WORKDIR
-export PATH="$HOME/miniconda3/envs/Boleraceae_rnaseq/bin:$PATH"
+export PATH="$HOME/miniconda3/envs/Boleracea_rnaseq/bin:$PATH"
 
 #Set Variables
 genome='ftp://ftp.ensemblgenomes.org/pub/plants/release-44/fasta/brassica_oleracea/dna/Brassica_oleracea.BOL.dna.toplevel.fa.gz'
@@ -39,7 +39,7 @@ echo "Making index files"
 STAR \
 	--runThreadN 10 \
 	--runMode genomeGenerate \
-	--genomeDir ./STAR/ \
+	--genomeDir STAR/ \
 	--genomeFastaFiles TO1000.fa \
 	--sjdbGTFfile annotations/TO1000.gtf \
 	--sjdbOverhang 96
@@ -51,7 +51,7 @@ echo "Creating sample directories and downloading data"
 for i in $samples
 do
 	echo "Sample $a"
-	mkdir $i $i/fastq $i/alignment $i/job_reports
+	mkdir $i $i/fastq $i/job_reports
 	cd $i/fastq
 	#Download data from SRA
 	sra_list=$(awk -v FS=',' -v a="$i" '{if ($1==a) print $2}' ../../../misc/samples.tsv)
