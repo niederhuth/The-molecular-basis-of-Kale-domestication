@@ -1,6 +1,6 @@
 goi <- read.csv("../misc/goi.csv")
 
-tmp <- synRes[synRes$sampleA=="kale" & synRes$sampleB=="TO1000",]
+tmp <- synRes[synRes$sampleA=="Kale" & synRes$sampleB=="TO1000",]
 tmp$direction <- ifelse(tmp$log2FC > 0 & tmp$padj < 0.05,1,ifelse(tmp$log2FC < 0 & tmp$padj < 0.05,-1,0))
 tmp2 <- tmp[tmp$direction != 0,]$At_gene
 tmp2 <- as.vector(unique(tmp[tmp$direction != 0,]$At_gene))
@@ -90,14 +90,14 @@ for(i in "Bo8g002920"){
 
 
 
-pSyn$number=c(length(syn$Bo_gene %in% all_genes$gene),
-          nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="kale" & sig$sampleB=="TO1000",]),
-          nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="kale" & sig$sampleB=="cabbage",]),
-          nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="cabbage" & sig$sampleB=="TO1000",]),
-          (nrow(all_genes)-length(syn$Bo_gene %in% all_genes$gene)),
-          nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="kale" & sig$sampleB=="TO1000",]),
-          nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="kale" & sig$sampleB=="cabbage",]),
-          nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="cabbage" & sig$sampleB=="TO1000",]))
+pSyn$number=c(length(syn$Bo_gene %in% geneEx$Gene),
+          nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="Kale" & sig$sampleB=="TO1000",]),
+          nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="Kale" & sig$sampleB=="Cabbage",]),
+          nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",]),
+          (nrow(geneEx)-length(syn$Bo_gene %in% geneEx$Gene)),
+          nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="Kale" & sig$sampleB=="TO1000",]),
+          nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="Kale" & sig$sampleB=="Cabbage",]),
+          nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",]))
 
 test <- data.frame(row.names=c("Genome","KvT DEG","KvT Non-DEG","KvC DEG","KvC Non-DEG","CvT DEG","CvT Non-DEG"),
                    syntenic=c(24521,3519,21002,3469,21052,3514,21007),nonsyntenic=c(34704,4596,30108,3875,30829,3915,30789))
