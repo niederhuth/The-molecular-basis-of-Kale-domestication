@@ -1,12 +1,12 @@
-Sample,SRA_Data,
-Cabbage_1,
-Cabbage_2,
-Kale_1,
-Kale_2,
-Kale_3,
-TO1000_1,
-TO1000_2,
-TO1000_3,
+Sample,SRA_Data,Data_source
+Cabbage_1,,this_study
+Cabbage_2,,this_study
+Kale_1,,this_study
+Kale_2,,this_study
+Kale_3,,this_study
+TO1000_1,,this_study
+TO1000_2,,this_study
+TO1000_3,,this_study
 #Public Data
 TO1000_DH3,SRR6453838,public_data
 Kale_A12,SRR6453636,public_data
