@@ -32,7 +32,7 @@ gunzip annotations/TO1000.gff.gz
 
 #Make gtf file
 echo "Converting gff to gtf"
-gffread annotations/TO1000.gff -T -o annotations/TO1000.gtf
+gffread annotations/TO1000.gff -T | grep -v ENS >  annotations/TO1000.gtf
 
 #Create STAR index files
 echo "Making index files"
