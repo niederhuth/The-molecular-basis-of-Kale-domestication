@@ -1,0 +1,11 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0044455,mitochondrial membrane part,292,38,19.47,1.4e-06,0.0011368
+GO:0005622,intracellular,19714,1369,1314.43,6.6e-05,0.0141288
+GO:0044424,intracellular part,19714,1369,1314.43,6.6e-05,0.0141288
+GO:0070469,respiratory chain,160,22,10.67,7.2e-05,0.0141288
+GO:0005840,ribosome,779,81,51.94,8.7e-05,0.0141288
+GO:0098798,mitochondrial protein complex,259,37,17.27,0.00016,0.0216533333333333
+GO:0043076,megasporocyte nucleus,15,6,1,0.00029,0.03364
+GO:0098796,membrane protein complex,883,80,58.87,0.00037,0.0351866666666667
+GO:0098805,whole membrane,1749,135,116.61,0.00039,0.0351866666666667
+GO:0032991,protein-containing complex,4655,362,310.37,0.00050,0.0406

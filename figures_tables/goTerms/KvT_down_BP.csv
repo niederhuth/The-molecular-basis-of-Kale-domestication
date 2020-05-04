@@ -1,0 +1,11 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0034641,cellular nitrogen compound metabolic pro...,7015,655,569.7,2.8e-07,0.001267
+GO:0009116,nucleoside metabolic process,140,29,11.37,1.8e-06,0.0040725
+GO:0019693,ribose phosphate metabolic process,497,66,40.36,3.3e-06,0.0049775
+GO:0006139,nucleobase-containing compound metabolic...,5606,527,455.27,1.2e-05,0.013575
+GO:0050684,regulation of mRNA processing,77,18,6.25,3.5e-05,0.031675
+GO:1901135,carbohydrate derivative metabolic proces...,1295,146,105.17,5.5e-05,0.0414791666666667
+GO:0065003,protein-containing complex assembly,999,99,81.13,7.8e-05,0.0429875
+GO:0006753,nucleoside phosphate metabolic process,630,71,51.16,8.1e-05,0.0429875
+GO:0022613,ribonucleoprotein complex biogenesis,781,87,63.43,9.4e-05,0.0429875
+GO:1903311,regulation of mRNA metabolic process,112,22,9.1,9.5e-05,0.0429875

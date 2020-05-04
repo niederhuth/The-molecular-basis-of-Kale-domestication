@@ -11,8 +11,8 @@ library(scales)
 library(flextable)
 mapStats <- read.csv("Mapping_Stats.csv",header=TRUE)
 #Add a percentage mapped column
-mapStats$Pecent.Uniquely.Mapped <- percent(mapStats$Uniquely.Mapped/mapStats$Trimmed.Reads,
-											accuracy=0.1)
+mapStats$Pecent.Uniquely.Mapped <- percent(
+  mapStats$Uniquely.Mapped/mapStats$Trimmed.Reads,accuracy=0.1)
 #Get rid of period in the column names
 colnames(mapStats) <- gsub("\\."," ",colnames(mapStats))
 #Create table with flextable
@@ -183,40 +183,43 @@ names(KvTgotermUP) <- resKvT$id
 #It combines multiple steps for each category of GO term and outputs a formatted table
 #Here I am restricting analysis to only GO terms with ...
 #at least 5 genes mapping to that to that term in the entire gene list
-KvTgotermUP <- topGO(KvTgotermUP,goTerms,nodeSize=5,"KvT_up",writeData=TRUE)
+KvTgotermUP <- topGO(KvTgotermUP,goTerms,nodeSize=5,fdr=0.05,filename="KvT_up",
+  path="goTerms",writeData=TRUE)
 #Analyze GO term enrichment for decreased expression genes in Kale vs TO1000
 KvTgotermDOWN <- factor(as.integer(resKvT$id %in% KvTsig[KvTsig$log2FC < -1,]$id))
 names(KvTgotermDOWN) <- resKvT$id
-KvTgotermDOWN <- topGO(KvTgotermDOWN,goTerms,nodeSize=5,"KvT_down",writeData=TRUE)
+KvTgotermDOWN <- topGO(KvTgotermDOWN,goTerms,nodeSize=5,fdr=0.05,filename="KvT_down",
+  path="goTerms/",writeData=TRUE)
 #Analyze GO terms for increased expression genes in Kale vs Cabbage
 KvCgotermUP <- factor(as.integer(resKvC$id %in% KvCsig[KvCsig$log2FC > 1,]$id))
 names(KvCgotermUP) <- resKvC$id
-KvCgotermUP <- topGO(KvCgotermUP,goTerms,nodeSize=5,"KvC_up",writeData=TRUE)
+KvCgotermUP <- topGO(KvCgotermUP,goTerms,nodeSize=5,fdr=0.05,filename="KvC_up",
+  path="goTerms/",writeData=TRUE)
 #Analyze GO term enrichment for decreased expression genes in Kale vs Cabbage
 KvCgotermDOWN <- factor(as.integer(resKvC$id %in% KvCsig[KvCsig$log2FC < -1,]$id))
 names(KvCgotermDOWN) <- resKvC$id
-KvCgotermDOWN <- topGO(KvCgotermDOWN,goTerms,nodeSize=5,"KvC_down",writeData=TRUE)
+KvCgotermDOWN <- topGO(KvCgotermDOWN,goTerms,nodeSize=5,fdr=0.05,filename="KvC_down",
+  path="goTerms/",writeData=TRUE)
 #Analyze GO terms for increased expression genes in Cabbage vs TO1000 
 CvTgotermUP <- factor(as.integer(resCvT$id %in% CvTsig[CvTsig$log2FC > 1,]$id))
 names(CvTgotermUP) <- resCvT$id
-CvTgotermUP <- topGO(CvTgotermUP,goTerms,nodeSize=5,"CvT_up",writeData=TRUE)
+CvTgotermUP <- topGO(CvTgotermUP,goTerms,nodeSize=5,fdr=0.05,filename="CvT_up",
+  path="goTerms/",writeData=TRUE)
 #Analyze GO term enrichment for decreased expression genes in Cabbage vs TO1000
 CvTgotermDOWN <- factor(as.integer(resCvT$id %in% CvTsig[CvTsig$log2FC < -1,]$id))
 names(CvTgotermDOWN) <- resCvT$id
-CvTgotermDOWN <- topGO(CvTgotermDOWN,goTerms,nodeSize=5,"CvT_down",writeData=TRUE)
+CvTgotermDOWN <- topGO(CvTgotermDOWN,goTerms,nodeSize=5,fdr=0.05,filename="CvT_down",
+  path="goTerms/",writeData=TRUE)
 #Analyze GO terms for increased expression genes in Kale shared
 KsharedGOtermUP <- factor(as.integer(geneEx$Gene %in% KsharedUp$Gene))
-names(CvTgotermUP) <- geneEx$Gene
-KsharedGOtermUP <- topGO(KsharedGOtermUP,goTerms,nodeSize=5,
-  "Kale_shared_up",writeData=TRUE)
+names(KsharedGOtermUP) <- geneEx$Gene
+KsharedGOtermUP <- topGO(KsharedGOtermUP,goTerms,nodeSize=5,fdr=0.05,
+  filename="Kale_shared_up",path="goTerms/",writeData=TRUE)
 #Analyze GO term enrichment for decreased expression genes in Kale shared
-KsharedGOtermDOWN <- factor(as.integer(geneEx$Gene %in% KsharedDown$Gene)))
-names(CvTgotermDOWN) <- geneEx$Gene
-KsharedGOtermDOWN <- topGO(KsharedGOtermDOWN,goTerms,nodeSize=5,
-  "Kale_shared_down",writeData=TRUE)
-
-
-
+KsharedGOtermDOWN <- factor(as.integer(geneEx$Gene %in% KsharedDown$Gene))
+names(KsharedGOtermDOWN) <- geneEx$Gene
+KsharedGOtermDOWN <- topGO(KsharedGOtermDOWN,goTerms,nodeSize=5,fdr=0.05,
+  filename="Kale_shared_down",path="goTerms/",writeData=TRUE)
 
 upGoterm <- merge(CvTgotermUP$BP,KvTgotermUP$BP,by.x="GO.ID",by.y="GO.ID")
 upGoterm <- merge(upGoterm,KvCgotermUP$BP,by.x="GO.ID",by.y="GO.ID")
@@ -290,42 +293,72 @@ downSig$KvC_FDR <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_FDR, NA)
 downSig$KvC_sig <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_sig, NA)
 ggsave("goTerms/Down_CC.pdf",plot=GOdotplot2(downSig))
 
-#KEGG analysis
-ncbi <- read.csv("../misc/Bo2ncbi.csv",header=TRUE)
 
+#KEGG analysis
+#Check if directory "kegg" exists and if not create it
+if(!dir.exists("kegg")){
+  dir.create("kegg")
+}
+#Read in mappings to Bo ncbi gene names
+#These are the ones supported by KEGG for B. oleracea
+ncbi <- read.csv("../misc/Bo2ncbi.csv",header=TRUE)
+#Merge those mappings with Kale vs TO1000 results
 KvTncbi <- merge(ncbi,resKvT,by.x="Boleracea_gene",by.y="id")
+#Separate those results into genes with increased & decreased expresion
 KvTncbiSigUp <- na.omit(KvTncbi[KvTncbi$padj < 0.05 & KvTncbi$log2FC >= 1,])
 KvTncbiSigDown <- na.omit(KvTncbi[KvTncbi$padj < 0.05 & KvTncbi$log2FC <= -1,])
-
+#Merge those mappings with Kale vs Cabbage results
 KvCncbi <- merge(ncbi,resKvC,by.x="Boleracea_gene",by.y="id")
+#Separate those results into genes with increased & decreased expresion
 KvCncbiSigUp <- na.omit(KvCncbi[KvCncbi$padj < 0.05 & KvCncbi$log2FC >= 1,])
 KvCncbiSigDown <- na.omit(KvCncbi[KvCncbi$padj < 0.05 & KvCncbi$log2FC <= -1,])
-
+#Merge those mappings with Cabbage vs TO1000 results
 CvTncbi <- merge(ncbi,resCvT,by.x="Boleracea_gene",by.y="id")
+#Separate those results into genes with increased & decreased expresion
 CvTncbiSigUp <- na.omit(CvTncbi[CvTncbi$padj < 0.05 & CvTncbi$log2FC >= 1,])
 CvTncbiSigDown <- na.omit(CvTncbi[CvTncbi$padj < 0.05 & CvTncbi$log2FC <= -1,])
-
+#Merge those mappings with Kale shared results for increased/decreased expression
+KncbiSharedUp <- merge(ncbi,KsharedUp,by.x="Boleracea_gene",by.y="Gene")
+KncbiSharedDown <- merge(ncbi,KsharedDown,by.x="Boleracea_gene",by.y="Gene")
+#Use the package clusterProfiler to do KEGG enrichment
 library(clusterProfiler)
+#Perform enrichment test for Kale vs TO1000 genes with increased expression
+#and export the results to table
 KvTupKEGG <- enrichKEGG(KvTncbiSigUp$NCBI_gene, organism="boe")@result
 write.table(KvTupKEGG[KvTupKEGG$p.adjust < 0.05,],"kegg/KvT_up.csv",sep=","
   ,quote=FALSE,row.names=FALSE)
+#Perform enrichment test for Kale vs TO1000 genes with decreased expression
+#and export the results to table
 KvTdownKEGG <- enrichKEGG(KvTncbiSigDown$NCBI_gene, organism="boe")@result
 write.table(KvTdownKEGG[KvTdownKEGG$p.adjust < 0.05,],"kegg/KvT_down.csv",sep=","
   ,quote=FALSE,row.names=FALSE)
-
+#Perform enrichment test for Kale vs Cabbage genes with increased expression
+#and export the results to table
 KvCupKEGG <- enrichKEGG(KvCncbiSigUp$NCBI_gene, organism="boe")@result
 write.table(KvCupKEGG[KvCupKEGG$p.adjust < 0.05,],"kegg/KvC_up.csv",sep=","
   ,quote=FALSE,row.names=FALSE)
+#Perform enrichment test for Kale vs Cabbage genes with decreased expression
+#and export the results to table
 KvCdownKEGG <- enrichKEGG(KvCncbiSigDown$NCBI_gene, organism="boe")@result
 write.table(KvCdownKEGG[KvCdownKEGG$p.adjust < 0.05,],"kegg/KvC_down.csv",sep=","
   ,quote=FALSE,row.names=FALSE)
-
+#Perform enrichment test for Cabbage vs TO1000 genes with increased expression
+#and export the results to table
 CvTupKEGG <- enrichKEGG(CvTncbiSigUp$NCBI_gene, organism="boe")@result
 write.table(CvTupKEGG[CvTupKEGG$p.adjust < 0.05,],"kegg/CvT_up.csv",sep=","
   ,quote=FALSE,row.names=FALSE)
+#Perform enrichment test for Cabbage vs TO1000 genes with decreased expression
+#and export the results to table
 CvTdownKEGG <- enrichKEGG(CvTncbiSigDown$NCBI_gene, organism="boe")@result
 write.table(CvTdownKEGG[CvTdownKEGG$p.adjust < 0.05,],"kegg/CvT_down.csv",sep=","
   ,quote=FALSE,row.names=FALSE)
-
-
-
+#Perform enrichment test for Kale shared genes with increased expression
+#and export the results to table
+KsharedUpKEGG <- enrichKEGG(KncbiSharedUp$NCBI_gene, organism="boe")@result
+write.table(KsharedUpKEGG[KsharedUpKEGG$p.adjust < 0.05,],"kegg/Kale_shared_up.csv",
+  sep=",",quote=FALSE,row.names=FALSE)
+#Perform enrichment test for Kale shared genes with decreased expression
+#and export the results to table
+KsharedDownKEGG <- enrichKEGG(KncbiSharedDown$NCBI_gene, organism="boe")@result
+write.table(KsharedDownKEGG[KsharedDownKEGG$p.adjust < 0.05,],"kegg/Kale_shared_down.csv",
+  sep=",",quote=FALSE,row.names=FALSE)

@@ -1,0 +1,3 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0044435,plastid part,2027,290,209.17,9.9e-08,8.0388e-05
+GO:0009536,plastid,3612,464,372.72,6.1e-07,0.00024766

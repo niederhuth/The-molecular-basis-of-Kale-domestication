@@ -1,0 +1,23 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0016491,oxidoreductase activity,2141,246,156.47,1.6e-14,2.8464e-11
+GO:0048037,cofactor binding,1466,174,107.14,1.1e-12,9.7845e-10
+GO:0046906,tetrapyrrole binding,485,68,35.44,7.6e-11,4.5068e-08
+GO:0016209,antioxidant activity,195,40,14.25,2.1e-09,9.33975e-07
+GO:0001067,regulatory region nucleic acid binding,656,68,47.94,9.7e-07,0.000345126
+GO:0044212,transcription regulatory region DNA bind...,656,68,47.94,3.9e-06,0.00115635
+GO:0004020,adenylylsulfate kinase activity,13,6,0.95,6.6e-06,0.00167734285714286
+GO:0050661,NADP binding,116,20,8.48,8.6e-06,0.001912425
+GO:0043169,cation binding,5529,440,404.06,1.0e-05,0.00197666666666667
+GO:0005506,iron ion binding,437,57,31.94,1.7e-05,0.0030243
+GO:0043565,sequence-specific DNA binding,1403,117,102.53,2.4e-05,0.003558
+GO:0016782,transferase activity, transferring sulfu...,72,15,5.26,2.4e-05,0.003558
+GO:0047631,ADP-ribose diphosphatase activity,14,6,1.02,5.0e-05,0.00684230769230769
+GO:0070401,NADP+ binding,5,4,0.37,5.5e-05,0.00698892857142857
+GO:0016667,oxidoreductase activity, acting on a sul...,166,36,12.13,6.3e-05,0.0074718
+GO:0016229,steroid dehydrogenase activity,19,9,1.39,9.9e-05,0.0110075625
+GO:0016758,transferase activity, transferring hexos...,559,56,40.85,0.00012,0.0125576470588235
+GO:0019842,vitamin binding,236,28,17.25,0.00014,0.0138366666666667
+GO:0048029,monosaccharide binding,71,13,5.19,0.00016,0.0149810526315789
+GO:0004551,nucleotide diphosphatase activity,33,8,2.41,0.00028,0.024906
+GO:0008171,O-methyltransferase activity,80,15,5.85,0.00045,0.0381214285714286
+GO:0019904,protein domain specific binding,174,24,12.72,0.00053,0.0428577272727273

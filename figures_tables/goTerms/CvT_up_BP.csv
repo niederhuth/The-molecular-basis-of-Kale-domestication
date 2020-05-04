@@ -1,0 +1,58 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0050896,response to stimulus,9629,836,710.58,6.8e-11,3.077e-07
+GO:0019758,glycosinolate biosynthetic process,83,27,6.13,1.8e-10,4.0725e-07
+GO:0006790,sulfur compound metabolic process,659,92,48.63,2.9e-10,4.37416666666667e-07
+GO:0044550,secondary metabolite biosynthetic proces...,303,57,22.36,8.5e-10,9.615625e-07
+GO:0044281,small molecule metabolic process,3038,294,224.19,1.2e-08,1.086e-05
+GO:0044272,sulfur compound biosynthetic process,273,50,20.15,2.6e-08,1.96083333333333e-05
+GO:0006082,organic acid metabolic process,2051,207,151.36,9.8e-08,5.43e-05
+GO:0019757,glycosinolate metabolic process,232,41,17.12,1.1e-07,5.43e-05
+GO:0009611,response to wounding,391,70,28.85,1.2e-07,5.43e-05
+GO:0019748,secondary metabolic process,766,95,56.53,1.2e-07,5.43e-05
+GO:0006970,response to osmotic stress,1239,162,91.43,2.2e-07,9.05e-05
+GO:0016144,S-glycoside biosynthetic process,83,27,6.13,2.9e-07,0.000109354166666667
+GO:1901615,organic hydroxy compound metabolic proce...,569,71,41.99,1.6e-06,0.000549464285714286
+GO:0009414,response to water deprivation,684,102,50.48,1.7e-06,0.000549464285714286
+GO:0009415,response to water,702,102,51.8,2.8e-06,0.000844666666666667
+GO:0010438,cellular response to sulfur starvation,16,10,1.18,3.0e-06,0.0008484375
+GO:0032774,RNA biosynthetic process,2467,190,182.06,3.6e-06,0.000958235294117647
+GO:1901576,organic substance biosynthetic process,6936,559,511.85,4.1e-06,0.00100026315789474
+GO:0006979,response to oxidative stress,662,98,48.85,4.2e-06,0.00100026315789474
+GO:1901659,glycosyl compound biosynthetic process,156,30,11.51,5.0e-06,0.00113125
+GO:0009625,response to insect,85,21,6.27,6.9e-06,0.00148678571428571
+GO:0019761,glucosinolate biosynthetic process,83,27,6.13,1.5e-05,0.00308522727272727
+GO:0006950,response to stress,5784,558,426.84,1.8e-05,0.00354130434782609
+GO:0015772,oligosaccharide transport,25,10,1.84,1.9e-05,0.00358229166666667
+GO:0070813,hydrogen sulfide metabolic process,15,8,1.11,2.2e-05,0.003982
+GO:0042430,indole-containing compound metabolic pro...,156,26,11.51,2.4e-05,0.00417692307692308
+GO:1901657,glycosyl compound metabolic process,381,52,28.12,3.7e-05,0.00620092592592592
+GO:0009403,toxin biosynthetic process,40,12,2.95,4.0e-05,0.00646428571428571
+GO:0006351,transcription, DNA-templated,2453,189,181.02,4.3e-05,0.00670948275862069
+GO:0010035,response to inorganic substance,1713,204,126.41,4.8e-05,0.00700645161290323
+GO:0009058,biosynthetic process,7111,577,524.76,4.8e-05,0.00700645161290323
+GO:0051707,response to other organism,1965,174,145.01,6.0e-05,0.008484375
+GO:0042744,hydrogen peroxide catabolic process,96,17,7.08,6.5e-05,0.00891287878787879
+GO:0042435,indole-containing compound biosynthetic ...,90,19,6.64,8.5e-05,0.0113125
+GO:0051252,regulation of RNA metabolic process,2399,181,177.04,0.00010,0.01244375
+GO:0031668,cellular response to extracellular stimu...,368,50,27.16,0.00010,0.01244375
+GO:0010200,response to chitin,220,41,16.24,0.00011,0.01244375
+GO:0010431,seed maturation,104,18,7.67,0.00011,0.01244375
+GO:0016053,organic acid biosynthetic process,1004,113,74.09,0.00011,0.01244375
+GO:1901617,organic hydroxy compound biosynthetic pr...,342,48,25.24,0.00011,0.01244375
+GO:0018208,peptidyl-proline modification,55,9,4.06,0.00012,0.0132439024390244
+GO:0006415,translational termination,25,8,1.84,0.00015,0.0157848837209302
+GO:0019725,cellular homeostasis,507,59,37.41,0.00015,0.0157848837209302
+GO:1901700,response to oxygen-containing compound,2995,324,221.02,0.00020,0.0205681818181818
+GO:0006629,lipid metabolic process,1593,148,117.56,0.00021,0.0211166666666667
+GO:0006575,cellular modified amino acid metabolic p...,193,28,14.24,0.00025,0.0245923913043478
+GO:0044283,small molecule biosynthetic process,1274,137,94.02,0.00033,0.0310539215686274
+GO:0006520,cellular amino acid metabolic process,739,76,54.54,0.00033,0.0310539215686274
+GO:0045454,cell redox homeostasis,211,31,15.57,0.00034,0.0310539215686274
+GO:0051259,protein complex oligomerization,137,19,10.11,0.00035,0.0310539215686274
+GO:0006749,glutathione metabolic process,79,18,5.83,0.00035,0.0310539215686274
+GO:0001558,regulation of cell growth,183,22,13.5,0.00041,0.0356778846153846
+GO:0042221,response to chemical,5157,494,380.57,0.00043,0.0367122641509434
+GO:0060255,regulation of macromolecule metabolic pr...,3599,258,265.59,0.00044,0.0368703703703704
+GO:0010439,regulation of glucosinolate biosynthetic...,25,8,1.84,0.00051,0.0419590909090909
+GO:0010117,photoprotection,14,6,1.03,0.00059,0.0476315789473684
+GO:0034599,cellular response to oxidative stress,153,26,11.29,0.00060,0.0476315789473684

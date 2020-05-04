@@ -1,0 +1,24 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0080027,response to herbivore,56,22,5.96,6.5e-07,0.001696875
+GO:0080028,nitrile biosynthetic process,20,11,2.13,7.5e-07,0.001696875
+GO:0050898,nitrile metabolic process,20,11,2.13,1.3e-06,0.00196083333333333
+GO:0006950,response to stress,5784,711,615.97,3.0e-06,0.00339375
+GO:0015979,photosynthesis,379,71,40.36,3.8e-06,0.003439
+GO:0015977,carbon fixation,71,22,7.56,4.8e-06,0.00362
+GO:0009605,response to external stimulus,2691,360,286.58,8.4e-06,0.00543
+GO:0010629,negative regulation of gene expression,943,133,100.42,1.6e-05,0.00905
+GO:0010605,negative regulation of macromolecule met...,1109,155,118.1,3.3e-05,0.0165916666666667
+GO:0005975,carbohydrate metabolic process,1658,232,176.57,5.5e-05,0.0248875
+GO:0071902,positive regulation of protein serine/th...,22,8,2.34,6.4e-05,0.0263272727272727
+GO:0032879,regulation of localization,359,60,38.23,7.1e-05,0.0267729166666667
+GO:1901568,fatty acid derivative metabolic process,140,31,14.91,0.00012,0.0387857142857143
+GO:0008299,isoprenoid biosynthetic process,275,50,29.29,0.00012,0.0387857142857143
+GO:0010021,amylopectin biosynthetic process,10,6,1.06,0.00015,0.042421875
+GO:0051707,response to other organism,1965,260,209.26,0.00015,0.042421875
+GO:0043271,negative regulation of ion transport,13,7,1.38,0.00019,0.04525
+GO:0019759,glycosinolate catabolic process,47,15,5.01,0.00019,0.04525
+GO:2000896,amylopectin metabolic process,10,6,1.06,0.00020,0.04525
+GO:1903960,negative regulation of anion transmembra...,7,5,0.75,0.00021,0.04525
+GO:0007033,vacuole organization,122,27,12.99,0.00022,0.04525
+GO:0010361,regulation of anion channel activity by ...,5,5,0.53,0.00023,0.04525
+GO:1903792,negative regulation of anion transport,7,5,0.75,0.00023,0.04525

@@ -1,0 +1,21 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0048037,cofactor binding,1466,269,157.05,1.5e-22,2.6685e-19
+GO:0016491,oxidoreductase activity,2141,352,229.36,4.3e-15,3.82485e-12
+GO:0046906,tetrapyrrole binding,485,102,51.96,3.5e-14,2.0755e-11
+GO:0019137,thioglucosidase activity,18,13,1.93,2.1e-08,9.33975e-06
+GO:0005506,iron ion binding,437,88,46.81,9.4e-08,3.34452e-05
+GO:0102799,glucosinolate glucohydrolase activity,17,12,1.82,1.2e-07,3.558e-05
+GO:0019904,protein domain specific binding,174,40,18.64,1.7e-07,4.32042857142857e-05
+GO:0016209,antioxidant activity,195,44,20.89,1.3e-06,0.0002890875
+GO:0016168,chlorophyll binding,51,18,5.46,3.2e-06,0.000632533333333333
+GO:0008171,O-methyltransferase activity,80,18,8.57,4.6e-05,0.0081834
+GO:0001067,regulatory region nucleic acid binding,656,82,70.27,0.00011,0.01779
+GO:0016829,lyase activity,528,88,56.56,0.00012,0.01779
+GO:0044212,transcription regulatory region DNA bind...,656,82,70.27,0.00013,0.01779
+GO:0010181,FMN binding,64,17,6.86,0.00014,0.01779
+GO:0050661,NADP binding,116,25,12.43,0.00016,0.018976
+GO:0003824,catalytic activity,12746,1447,1365.42,0.00020,0.0209294117647059
+GO:0016746,transferase activity, transferring acyl ...,584,82,62.56,0.00020,0.0209294117647059
+GO:0004197,cysteine-type endopeptidase activity,123,22,13.18,0.00022,0.0217433333333333
+GO:0070401,NADP+ binding,5,4,0.54,0.00046,0.0430705263157895
+GO:0019842,vitamin binding,236,40,25.28,0.00049,0.0435855

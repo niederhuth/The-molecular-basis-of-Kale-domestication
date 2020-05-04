@@ -1,0 +1,5 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0006139,nucleobase-containing compound metabolic...,5606,628,517.88,7.3e-07,0.00330325
+GO:0046483,heterocycle metabolic process,6096,662,563.14,4.0e-06,0.00739083333333333
+GO:0006725,cellular aromatic compound metabolic pro...,6352,686,586.79,4.9e-06,0.00739083333333333
+GO:0034641,cellular nitrogen compound metabolic pro...,7015,752,648.04,8.0e-06,0.00905

@@ -1,0 +1,5 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0016817,hydrolase activity, acting on acid anhyd...,1562,205,144.92,4.6e-07,0.00081834
+GO:0004386,helicase activity,320,69,29.69,3.0e-06,0.0026685
+GO:0102799,glucosinolate glucohydrolase activity,17,8,1.58,1.6e-05,0.009488
+GO:0019137,thioglucosidase activity,18,8,1.67,2.7e-05,0.01200825

@@ -1,0 +1,3 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0010181,FMN binding,64,11,2.36,9.7e-06,0.0172563
+GO:0016829,lyase activity,528,42,19.51,2.0e-05,0.01779

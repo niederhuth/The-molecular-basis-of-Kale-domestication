@@ -2,9 +2,11 @@
 #Function for making a table of results for two conditions from dds
 makeResultsTable <- function(x,conditionA,conditionB,lfcThreshold=0,filter=FALSE){
     require(DESeq2)
-    bml <- sapply(levels(dds$condition),function(lvl) rowMeans(counts(dds,normalized=TRUE)[,dds$condition == lvl]))
+    bml <- sapply(levels(dds$condition),function(lvl) rowMeans(counts(dds,
+        normalized=TRUE)[,dds$condition == lvl]))
     bml <- as.data.frame(bml)
-    y <- results(x,contrast=c("condition",conditionA,conditionB),lfcThreshold=lfcThreshold,independentFiltering=filter)
+    y <- results(x,contrast=c("condition",conditionA,conditionB),
+        lfcThreshold=lfcThreshold,independentFiltering=filter)
     y <- data.frame(id=gsub(pattern = "gene:",replacement = "",row.names(y)),
                     sampleA=c(conditionA),sampleB=c(conditionB),
                     baseMeanA=bml[,conditionA],baseMeanB=bml[,conditionB],
@@ -12,6 +14,7 @@ makeResultsTable <- function(x,conditionA,conditionB,lfcThreshold=0,filter=FALSE
     row.names(y) <- c(1:nrow(y))
     return(y)
 }
+
 
 #Function for making a heat map of samples
 sampleHeatMap <- function(x){
@@ -27,6 +30,7 @@ sampleHeatMap <- function(x){
          clustering_distance_cols=sampleDists,
          col=colors)
 }
+
 
 #Function for making a PCA plot of samples
 pcaPlot <- function(x){
@@ -44,6 +48,7 @@ pcaPlot <- function(x){
           axis.title=element_text(color="black",face="bold"))
 }
 
+
 #Function for making a heat map of genes
 geneHeatMap <- function(dds,geneList){
     require(pheatmap)
@@ -55,11 +60,13 @@ geneHeatMap <- function(dds,geneList){
              cluster_cols=FALSE, annotation_col=df)
 }
 
+
 #Function for making dot plots of Enriched GO terms
-GOdotplot <- function(x,cutoff=0.05){
+GOdotplot <- function(x,fdr=0.05){
   require(ggplot2)
-  x=head(x[x$fdr < cutoff,],10)
-  ggplot(x[x$fdr < cutoff,],aes(x=Significant/Annotated,y=reorder(Term,Significant/Annotated))) + 
+  x=head(x[x$fdr < fdr,],10)
+  ggplot(x[x$fdr < fdr,],aes(x=Significant/Annotated,
+    y=reorder(Term,Significant/Annotated))) + 
     geom_point(aes(color=fdr,size=Significant)) + 
     theme_bw() +
     scale_color_continuous(low="red",high="blue") +
@@ -81,11 +88,11 @@ GOdotplot2 <- function(x){
     labs(size="Gene Count",color="FDR")
 }
 
+
 #Function for running topGO on a list of genes
-topGO <- function(genelist,goTerms,nodeSize,filename,writeData=FALSE){
+topGO <- function(genelist,goTerms,nodeSize,fdr=0.05,filename,path="",writeData=FALSE){
     require(topGO)
     require(GO.db)
-    path <- c("goTerms/")
     ifelse(!dir.exists(path),dir.create(path), FALSE)
     BP <- new("topGOdata",description="Biological Process",ontology="BP",
               allGenes=genelist,annot=annFUN.gene2GO,nodeSize=nodeSize,gene2GO=goTerms)
@@ -96,18 +103,24 @@ topGO <- function(genelist,goTerms,nodeSize,filename,writeData=FALSE){
     FisherBP <- runTest(BP,algorithm="parentchild",statistic="fisher")
     FisherMF <- runTest(MF,algorithm="parentchild",statistic="fisher")
     FisherCC <- runTest(CC,algorithm="parentchild",statistic="fisher")
-    BPgenTable <- GenTable(BP,Fisher=FisherBP,ranksOf="Fisher",topNodes=length(score(FisherBP)))
-    MFgenTable <- GenTable(MF,Fisher=FisherMF,ranksOf="Fisher",topNodes=length(score(FisherMF)))
-    CCgenTable <- GenTable(CC,Fisher=FisherCC,ranksOf="Fisher",topNodes=length(score(FisherCC)))
+    BPgenTable <- GenTable(BP,Fisher=FisherBP,ranksOf="Fisher",
+        topNodes=length(score(FisherBP)))
+    MFgenTable <- GenTable(MF,Fisher=FisherMF,ranksOf="Fisher",
+        topNodes=length(score(FisherMF)))
+    CCgenTable <- GenTable(CC,Fisher=FisherCC,ranksOf="Fisher",
+        topNodes=length(score(FisherCC)))
     BPgenTable$fdr <- p.adjust(BPgenTable$Fisher,method="BH")
     MFgenTable$fdr <- p.adjust(MFgenTable$Fisher,method="BH")
     CCgenTable$fdr <- p.adjust(CCgenTable$Fisher,method="BH")
-    write.csv(BPgenTable,paste(path,filename,"_BP.csv",sep=""),row.names=FALSE,quote=FALSE)
-    ggsave(paste(path,filename,"_BP.pdf"),plot=GOdotplot(as.data.frame(BPgenTable)))
-    write.csv(MFgenTable,paste(path,filename,"_MF.csv",sep=""),row.names=FALSE,quote=FALSE)
-    ggsave(paste(path,filename,"_MF.pdf"),plot=GOdotplot(MFgenTable))
-    write.csv(CCgenTable,paste(path,filename,"_CC.csv",sep=""),row.names=FALSE,quote=FALSE)
-    ggsave(paste(path,filename,"_CC.pdf"),plot=GOdotplot(CCgenTable))
+    write.csv(BPgenTable[BPgenTable$fdr <= fdr,],paste(path,filename,"_BP.csv",sep=""),
+        row.names=FALSE,quote=FALSE)
+    ggsave(paste(path,filename,"_BP.pdf"),plot=GOdotplot(BPgenTable,fdr=fdr))
+    write.csv(MFgenTable[MFgenTable$fdr <= fdr,],paste(path,filename,"_MF.csv",sep=""),
+        row.names=FALSE,quote=FALSE)
+    ggsave(paste(path,filename,"_MF.pdf"),plot=GOdotplot(MFgenTable,fdr=fdr))
+    write.csv(CCgenTable[CCgenTable$fdr <= fdr,],paste(path,filename,"_CC.csv",sep=""),
+        row.names=FALSE,quote=FALSE)
+    ggsave(paste(path,filename,"_CC.pdf"),plot=GOdotplot(CCgenTable,fdr=fdr))
     if(writeData){
       return(list(BP=BPgenTable,MF=MFgenTable,CC=CCgenTable))
     }

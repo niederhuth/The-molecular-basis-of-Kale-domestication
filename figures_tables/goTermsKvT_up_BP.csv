@@ -1,0 +1,67 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0015979,photosynthesis,379,86,40.23,1.1e-12,4.9775e-09
+GO:0044281,small molecule metabolic process,3038,426,322.45,7.9e-11,1.3575e-07
+GO:0050896,response to stimulus,9629,1168,1022,1.1e-10,1.3575e-07
+GO:1901568,fatty acid derivative metabolic process,140,42,14.86,1.2e-10,1.3575e-07
+GO:0006629,lipid metabolic process,1593,241,169.08,3.4e-10,3.077e-07
+GO:0006082,organic acid metabolic process,2051,298,217.69,1.1e-09,8.29583333333333e-07
+GO:0018298,protein-chromophore linkage,83,25,8.81,1.5e-08,9.69642857142857e-06
+GO:0010035,response to inorganic substance,1713,267,181.81,1.1e-07,6.221875e-05
+GO:1901615,organic hydroxy compound metabolic proce...,569,99,60.39,1.7e-07,8.54722222222222e-05
+GO:0051707,response to other organism,1965,266,208.56,3.7e-07,0.000167425
+GO:0080028,nitrile biosynthetic process,20,11,2.12,6.3e-07,0.000259159090909091
+GO:1901570,fatty acid derivative biosynthetic proce...,96,28,10.19,8.1e-07,0.0003054375
+GO:0080027,response to herbivore,56,22,5.94,9.8e-07,0.000341115384615385
+GO:0050898,nitrile metabolic process,20,11,2.12,1.2e-06,0.000362
+GO:0019757,glycosinolate metabolic process,232,51,24.62,1.2e-06,0.000362
+GO:0010119,regulation of stomatal movement,189,40,20.06,2.9e-06,0.00082015625
+GO:0015977,carbon fixation,71,21,7.54,6.8e-06,0.00181
+GO:0019725,cellular homeostasis,507,83,53.81,7.8e-06,0.00196083333333333
+GO:1903960,negative regulation of anion transmembra...,7,6,0.74,8.9e-06,0.00206857142857143
+GO:1903792,negative regulation of anion transport,7,6,0.74,9.4e-06,0.00206857142857143
+GO:0009765,photosynthesis, light harvesting,59,20,6.26,9.6e-06,0.00206857142857143
+GO:0006950,response to stress,5784,767,613.9,1.5e-05,0.00308522727272727
+GO:0019748,secondary metabolic process,766,119,81.3,1.6e-05,0.00314782608695652
+GO:0044255,cellular lipid metabolic process,1227,173,130.23,1.8e-05,0.00339375
+GO:0008610,lipid biosynthetic process,923,142,97.97,2.6e-05,0.004706
+GO:0051252,regulation of RNA metabolic process,2399,231,254.62,3.4e-05,0.00569814814814815
+GO:0009415,response to water,702,121,74.51,3.4e-05,0.00569814814814815
+GO:0044550,secondary metabolite biosynthetic proces...,303,57,32.16,4.0e-05,0.00646428571428571
+GO:0065008,regulation of biological quality,1971,242,209.2,4.6e-05,0.00717758620689655
+GO:1901136,carbohydrate derivative catabolic proces...,121,30,12.84,5.8e-05,0.00874833333333333
+GO:0010118,stomatal movement,281,50,29.82,6.0e-05,0.00875806451612903
+GO:0009611,response to wounding,391,78,41.5,8.3e-05,0.01173671875
+GO:0034763,negative regulation of transmembrane tra...,9,6,0.96,9.8e-05,0.0129285714285714
+GO:0016143,S-glycoside metabolic process,232,51,24.62,9.9e-05,0.0129285714285714
+GO:0090693,plant organ senescence,266,43,28.23,0.00010,0.0129285714285714
+GO:0034766,negative regulation of ion transmembrane...,9,6,0.96,0.00013,0.0162435897435897
+GO:0009698,phenylpropanoid metabolic process,228,39,24.2,0.00014,0.0162435897435897
+GO:0007568,aging,300,47,31.84,0.00014,0.0162435897435897
+GO:0010363,regulation of plant-type hypersensitive ...,38,11,4.03,0.00014,0.0162435897435897
+GO:0006639,acylglycerol metabolic process,84,18,8.92,0.00016,0.0181
+GO:0006970,response to osmotic stress,1239,199,131.5,0.00017,0.0183154761904762
+GO:0009657,plastid organization,404,49,42.88,0.00017,0.0183154761904762
+GO:0043271,negative regulation of ion transport,13,7,1.38,0.00018,0.0185113636363636
+GO:0030003,cellular cation homeostasis,230,45,24.41,0.00018,0.0185113636363636
+GO:0006790,sulfur compound metabolic process,659,97,69.94,0.00020,0.0196739130434783
+GO:0009625,response to insect,85,24,9.02,0.00020,0.0196739130434783
+GO:0019758,glycosinolate biosynthetic process,83,21,8.81,0.00021,0.020218085106383
+GO:0001101,response to acid chemical,2306,322,244.75,0.00022,0.0207395833333333
+GO:0032410,negative regulation of transporter activ...,9,6,0.96,0.00024,0.0221632653061225
+GO:0019759,glycosinolate catabolic process,47,16,4.99,0.00025,0.0221813725490196
+GO:0080184,response to phenylpropanoid,13,7,1.38,0.00025,0.0221813725490196
+GO:1901657,glycosyl compound metabolic process,381,67,40.44,0.00028,0.0243653846153846
+GO:0000302,response to reactive oxygen species,308,60,32.69,0.00030,0.0256132075471698
+GO:0019685,photosynthesis, dark reaction,54,18,5.73,0.00033,0.0276527777777778
+GO:0008299,isoprenoid biosynthetic process,275,48,29.19,0.00034,0.0279727272727273
+GO:0010360,negative regulation of anion channel act...,7,6,0.74,0.00035,0.02828125
+GO:0006355,regulation of transcription, DNA-templat...,2254,220,239.23,0.00036,0.0285789473684211
+GO:1901617,organic hydroxy compound biosynthetic pr...,342,59,36.3,0.00040,0.0309208333333333
+GO:0009414,response to water deprivation,684,120,72.6,0.00041,0.0309208333333333
+GO:0019682,glyceraldehyde-3-phosphate metabolic pro...,67,17,7.11,0.00041,0.0309208333333333
+GO:0009734,auxin-activated signaling pathway,420,67,44.58,0.00044,0.0326393442622951
+GO:0042545,cell wall modification,180,28,19.1,0.00045,0.0328427419354839
+GO:0045454,cell redox homeostasis,211,37,22.4,0.00050,0.0359126984126984
+GO:0010150,leaf senescence,258,43,27.38,0.00051,0.03605859375
+GO:0055129,L-proline biosynthetic process,11,6,1.17,0.00069,0.0480346153846154
+GO:0032413,negative regulation of ion transmembrane...,9,6,0.96,0.00072,0.0493636363636364

@@ -1,0 +1,14 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0080028,nitrile biosynthetic process,20,7,0.74,1.8e-06,0.008145
+GO:0050898,nitrile metabolic process,20,7,0.74,3.9e-06,0.00882375
+GO:0008299,isoprenoid biosynthetic process,275,25,10.13,1.6e-05,0.0241333333333333
+GO:0051707,response to other organism,1965,107,72.42,4.5e-05,0.0326805555555556
+GO:1903792,negative regulation of anion transport,7,4,0.26,5.1e-05,0.0326805555555556
+GO:0009657,plastid organization,404,24,14.89,5.5e-05,0.0326805555555556
+GO:1901568,fatty acid derivative metabolic process,140,16,5.16,5.9e-05,0.0326805555555556
+GO:1901570,fatty acid derivative biosynthetic proce...,96,13,3.54,6.2e-05,0.0326805555555556
+GO:0010106,cellular response to iron ion starvation,22,7,0.81,6.5e-05,0.0326805555555556
+GO:0000272,polysaccharide catabolic process,273,23,10.06,8.7e-05,0.0377083333333333
+GO:0043271,negative regulation of ion transport,13,5,0.48,9.2e-05,0.0377083333333333
+GO:0006629,lipid metabolic process,1593,87,58.71,0.00010,0.0377083333333333
+GO:0008610,lipid biosynthetic process,923,57,34.02,0.00011,0.0382884615384615

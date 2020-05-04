@@ -1,0 +1,5 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0044455,mitochondrial membrane part,292,20,7.4,7.0e-06,0.005684
+GO:0070469,respiratory chain,160,13,4.05,3.6e-05,0.014616
+GO:1990204,oxidoreductase complex,189,15,4.79,0.00012,0.02436
+GO:0032991,protein-containing complex,4655,155,117.96,0.00012,0.02436
