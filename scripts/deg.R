@@ -255,9 +255,41 @@ downSig$KvC_sig <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_sig, NA)
 ggsave("goTerms/Down_CC.pdf",plot=GOdotplot2(downSig))
 
 #KEGG analysis
-#library(clusterProfiler)
-#xx <- enrichMKEGG(KvTsig$id, organism='boe', minGSSize=1)
+ncbi <- read.csv("../misc/Bo2ncbi.csv",header=TRUE)
 
+KvTncbi <- merge(ncbi,resKvT,by.x="Boleracea_gene",by.y="id")
+KvTncbiSigUp <- na.omit(KvTncbi[KvTncbi$padj < 0.05 & KvTncbi$log2FC >= 1,])
+KvTncbiSigDown <- na.omit(KvTncbi[KvTncbi$padj < 0.05 & KvTncbi$log2FC <= -1,])
+
+KvCncbi <- merge(ncbi,resKvC,by.x="Boleracea_gene",by.y="id")
+KvCncbiSigUp <- na.omit(KvCncbi[KvCncbi$padj < 0.05 & KvCncbi$log2FC >= 1,])
+KvCncbiSigDown <- na.omit(KvCncbi[KvCncbi$padj < 0.05 & KvCncbi$log2FC <= -1,])
+
+CvTncbi <- merge(ncbi,resCvT,by.x="Boleracea_gene",by.y="id")
+CvTncbiSigUp <- na.omit(CvTncbi[CvTncbi$padj < 0.05 & CvTncbi$log2FC >= 1,])
+CvTncbiSigDown <- na.omit(CvTncbi[CvTncbi$padj < 0.05 & CvTncbi$log2FC <= -1,])
+
+library(clusterProfiler)
+KvTupKEGG <- enrichKEGG(KvTncbiSigUp$NCBI_gene, organism="boe")@result
+write.table(KvTupKEGG[KvTupKEGG$p.adjust < 0.05,],"kegg/KvT_up.csv",sep=","
+  ,quote=FALSE,row.names=FALSE)
+KvTdownKEGG <- enrichKEGG(KvTncbiSigDown$NCBI_gene, organism="boe")@result
+write.table(KvTdownKEGG[KvTdownKEGG$p.adjust < 0.05,],"kegg/KvT_down.csv",sep=","
+  ,quote=FALSE,row.names=FALSE)
+
+KvCupKEGG <- enrichKEGG(KvCncbiSigUp$NCBI_gene, organism="boe")@result
+write.table(KvCupKEGG[KvCupKEGG$p.adjust < 0.05,],"kegg/KvC_up.csv",sep=","
+  ,quote=FALSE,row.names=FALSE)
+KvCdownKEGG <- enrichKEGG(KvCncbiSigDown$NCBI_gene, organism="boe")@result
+write.table(KvCdownKEGG[KvCdownKEGG$p.adjust < 0.05,],"kegg/KvC_down.csv",sep=","
+  ,quote=FALSE,row.names=FALSE)
+
+CvTupKEGG <- enrichKEGG(CvTncbiSigUp$NCBI_gene, organism="boe")@result
+write.table(CvTupKEGG[CvTupKEGG$p.adjust < 0.05,],"kegg/CvT_up.csv",sep=","
+  ,quote=FALSE,row.names=FALSE)
+CvTdownKEGG <- enrichKEGG(CvTncbiSigDown$NCBI_gene, organism="boe")@result
+write.table(CvTdownKEGG[CvTdownKEGG$p.adjust < 0.05,],"kegg/CvT_down.csv",sep=","
+  ,quote=FALSE,row.names=FALSE)
 
 #Genes of interest
 path <- c("genes_of_interest/")
