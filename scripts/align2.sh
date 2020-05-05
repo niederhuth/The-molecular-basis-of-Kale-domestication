@@ -4,19 +4,21 @@
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=20
 #SBATCH --mem=20GB
-#SBATCH --job-name align
+#SBATCH --job-name align2
 #SBATCH --output=job_reports/%x-%j.SLURMout
 
 cd $PBS_O_WORKDIR
 export PATH="$HOME/miniconda3/envs/Boleracea_rnaseq/bin:$PATH"
 
 #Define variables
-samples=$(awk -v FS="," '$3=="this_study"' ../misc/samples.csv | cut -d ',' -f 1 | tr '\n' ' ')
+samples=$(awk -v FS="," '$3=="public_data"' ../misc/samples.csv | cut -d ',' -f 1 | tr '\n' ' ')
 index="../../ref/STAR"
 output1="rnaseq1"
 output2="rnaseq2"
 threads=20
-fastq="../fastq/trimmed.fastq.gz"
+fastq1="../fastq/SRR*_1.fastq.gz"
+fastq2="../fastq/SRR*_2.fastq.gz"
+
 
 #Star 1st pass
 echo "Running star 1st pass"
@@ -29,7 +31,7 @@ do
 		--runThreadN $threads \
 		--runMode alignReads \
 		--genomeDir $index \
-		--readFilesIn $fastq \
+		--readFilesIn $fastq1 $fastq2 \
 		--readFilesCommand zcat \
 		--outSAMtype BAM SortedByCoordinate \
 		--outSAMstrandField intronMotif \
@@ -58,7 +60,7 @@ do
 		--runThreadN $threads \
 		--runMode alignReads \
 		--genomeDir $index \
-		--readFilesIn $fastq \
+		--readFilesIn $fastq1 $fastq2 \
 		--sjdbFileChrStartEnd $junctions \
 		--readFilesCommand zcat \
 		--outSAMtype BAM SortedByCoordinate \
@@ -75,7 +77,7 @@ do
 		--outFilterMismatchNoverReadLmax 0.1 \
 		--quantMode GeneCounts
 	cut -f1,4 ReadsPerGene.out.tab | sed '1,4d' > counts.tsv 
-	cp counts.tsv ../../../figures_tables/raw_counts/"$i"_counts.tsv
+	cp counts.tsv ../../../figures_tables/raw_counts2/"$i"_counts.tsv
 	cd ../../
 done
 
