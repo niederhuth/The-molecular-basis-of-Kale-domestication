@@ -362,3 +362,6 @@ write.table(KsharedUpKEGG[KsharedUpKEGG$p.adjust < 0.05,],"kegg/Kale_shared_up.c
 KsharedDownKEGG <- enrichKEGG(KncbiSharedDown$NCBI_gene, organism="boe")@result
 write.table(KsharedDownKEGG[KsharedDownKEGG$p.adjust < 0.05,],"kegg/Kale_shared_down.csv",
   sep=",",quote=FALSE,row.names=FALSE)
+
+
+#Plot out data for specific genes of interest
