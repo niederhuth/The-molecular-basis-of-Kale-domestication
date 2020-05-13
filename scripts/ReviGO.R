@@ -1,0 +1,9 @@
+#Run plotting scripts for ReviGO results
+library(treemap)
+source("GO_terms/ReviGO_scripts/KvT_up.r")
+source("GO_terms/ReviGO_scripts/KvT_down.r")
+source("GO_terms/ReviGO_scripts/KvC_up.r")
+source("GO_terms/ReviGO_scripts/KvC_down.r")
+source("GO_terms/ReviGO_scripts/CvT_up.r")
+source("GO_terms/ReviGO_scripts/CvT_down.r")
+source("GO_terms/ReviGO_scripts/Kshared_up.r")

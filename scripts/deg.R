@@ -1,11 +1,12 @@
 #Import user-defined functions
 source("../scripts/functions.R")
+library(Cairo)
 
-if(!dir.exists("paper")){
-	dir.create("paper")
+#Create a directory for finalized paper figures & tables
+path <- "Paper/"
+if(!dir.exists(path)){
+	dir.create(path)
 }
-
-
 #Make pdf table of mapping statistics
 library(scales)
 library(flextable)
@@ -16,15 +17,16 @@ mapStats$Pecent.Uniquely.Mapped <- percent(
 #Get rid of period in the column names
 colnames(mapStats) <- gsub("\\."," ",colnames(mapStats))
 #Create table with flextable
-myft1 <- flextable(mapStats)
-myft1 <- autofit(myft1)
-myft1 <- align(myft1,align="center",part="all")
-myft1 <- add_header_lines(myft1,values=("Supplementary Table 1: Mapping Statistics"))
-myft1 <- bold(myft1,part="header")
-myft1 <- bold(myft1,j="Sample")
-myft1 <- font(myft1,fontname="Arial")
-myft1 <- fontsize(myft1,size=12,part="all")
-save_as_docx(myft1, path="paper/Supplementary_Table_1.docx")
+mapStatsFT <- flextable(mapStats)
+mapStatsFT <- autofit(mapStatsFT)
+mapStatsFT <- align(mapStatsFT,align="center",part="all")
+mapStatsFT <- add_header_lines(mapStatsFT,
+  values=("Supplementary Table 1: Mapping Statistics"))
+mapStatsFT <- bold(mapStatsFT,part="header")
+mapStatsFT <- bold(mapStatsFT,j="Sample")
+mapStatsFT <- font(mapStatsFT,fontname="Arial")
+mapStatsFT <- fontsize(mapStatsFT,size=12,part="all")
+save_as_docx(mapStatsFT,path=paste(path,"Supplementary_Table_1.docx",sep=""))
 
 
 #Run DESeq2 analysis
@@ -48,19 +50,30 @@ dds <- nbinomWaldTest(dds)
 
 
 #Make diagnostic figures of samples
+path <- "Diagnostics/"
+if(!dir.exists(path)){
+  dir.create(path)
+}
 #Make a heat map of samples
 rld <- rlog(dds, blind=TRUE)
-pdf("Sample_Comparison_Heat_Map.pdf",width=6,height=6,paper='special')
+cairo_pdf(paste(path,"Sample_Comparison_Heat_Map.pdf",sep=""),width=6,height=6,
+  family="Arial")
 	#sampleHeatMap is a user-defined function
 	sampleHeatMap(rld)
 dev.off()
 #Make a PCA plot of samples
-pdf("Sample_Comparison_PCA.pdf",width=6,height=6,paper='special')
+cairo_pdf(paste(path,"Sample_Comparison_PCA.pdf",sep=""),width=6,height=6,
+  family="Arial")
 	#pcaPlot is a user-defined function
-	pcaPlot(rld)
+	pcaPlot(rld) + guides(color=guide_legend(title="Genotype"))
 dev.off()
 
-
+#DEGs
+#Make directory for DEG analyses
+path <- "DEGs/"
+if(!dir.exists(path)){
+  dir.create(path)
+}
 #Make results tables for each pairwise comparison
 #makeResultsTable is a user-defined function
 resKvT <- makeResultsTable(dds,"Kale","TO1000",lfcThreshold=0,filter=F)
@@ -69,7 +82,8 @@ resCvT <- makeResultsTable(dds,"Cabbage","TO1000",lfcThreshold=0,filter=F)
 #Combine results tables
 resfull <- as.data.frame(rbind(resKvT,resKvC,resCvT))
 #Adjust p-values for all results
-#This is necessary because the adjusted p-value is only for the individual pairwise comparisons
+#This is necessary because the adjusted p-value is only for the 
+#individual pairwise comparisons
 resfull$padj <- p.adjust(resfull$pval,method="BH")
 
 
@@ -89,23 +103,40 @@ colnames(geneEx) <- c("Gene","Kale_1","Kale_2","Kale_3",
 	"Kale_Mean","Cabbage_Mean","TO1000_Mean","KvT_log2FC",
 	"KvT_padj","KvC_log2FC","KvC_padj","CvT_log2FC","CvT_padj")
 #Output the table
-write.table(geneEx,"Gene_Expression_Table.tsv",sep="\t",quote=FALSE,row.names=FALSE)
+write.table(geneEx,paste(path,"Gene_Expression_Table.csv",sep=""),sep=",",
+  quote=FALSE,row.names=FALSE)
 
 
 #Extract significant DEGs
 #Here we are using a adjusted p-value of <= 0.05 and a log2FC of >= 1 or <= -1
 #This log2FC is equivalent to a gene doubling or halving in expression
-sig <- na.omit(resfull[resfull$padj <= 0.05 & resfull$log2FC >= 1 | resfull$padj <= 0.05 & resfull$log2FC <= -1,])
+sig <- na.omit(resfull[resfull$padj <= 0.05 & resfull$log2FC >= 1 | 
+  resfull$padj <= 0.05 & resfull$log2FC <= -1,])
 #Count number of DEGs for each comparison
 table(sig$sampleA,sig$sampleB)
 #For each pairwise comparison, extract the DEGs
 CvTsig <- sig[sig$sampleA == "Cabbage" & sig$sampleB == "TO1000",]
 KvTsig <- sig[sig$sampleA == "Kale" & sig$sampleB == "TO1000",]
 KvCsig <- sig[sig$sampleA == "Kale" & sig$sampleB == "Cabbage",]
+#Output KvT DEGs
+write.table(
+  geneEx[geneEx$Gene %in% KvTsig$id,c(1,2,3,4,7,8,9,10,12,13,14)],
+  paste(path,"KvT_DEGs.csv",sep=""),sep=",",quote=FALSE,row.names=FALSE
+)
+#Output KvC DEGs
+write.table(
+  geneEx[geneEx$Gene %in% KvCsig$id,c(1,2,3,4,5,6,10,11,15,16)],
+  paste(path,"KvC_DEGs.csv",sep=""),sep=",",quote=FALSE,row.names=FALSE
+)
+#Output CvT DEGs
+write.table(
+  geneEx[geneEx$Gene %in% CvTsig$id,c(1,5,6,7,8,9,11,12,17,18)],
+  paste(path,"CvT_DEGs.csv",sep=""),sep=",",quote=FALSE,row.names=FALSE
+)
 
 
 #Create a table of DEG Numbers
-df3 <- data.frame(Comparison=c("Kale vs T01000","Kale vs Cabbage","Cabbage vs TO1000"),
+DEGs <- data.frame(Comparison=c("Kale vs T01000","Kale vs Cabbage","Cabbage vs TO1000"),
   "Higher Expressed DEGs"=c(nrow(KvTsig[KvTsig$log2FC >= 1,]),
     nrow(KvCsig[KvCsig$log2FC >= 1,]),
     nrow(CvTsig[CvTsig$log2FC >= 1,])),
@@ -114,17 +145,17 @@ df3 <- data.frame(Comparison=c("Kale vs T01000","Kale vs Cabbage","Cabbage vs TO
     nrow(CvTsig[CvTsig$log2FC <= -1,])),
   "Total DEGs"=c(nrow(KvTsig),nrow(KvCsig),nrow(CvTsig))
   )
-colnames(df3) <- gsub("\\."," ",colnames(df3))
+colnames(DEGs) <- gsub("\\."," ",colnames(DEGs))
 #Formatt and export the table with flextable
-myft2 <- flextable(df3)
-myft2 <- autofit(myft2)
-myft2 <- align(myft2,align="center",part="all")
-myft2 <- add_header_lines(myft2,values=("A: Differentially Expressed Genes"))
-myft2 <- bold(myft2,part="header")
-myft2 <- bold(myft2,j="Comparison")
-myft2 <- font(myft2,fontname="Arial")
-myft2 <- fontsize(myft2,size=12,part="all")
-save_as_docx(myft2, path="paper/Table_1.docx")
+DEGsFT <- flextable(DEGs)
+DEGsFT <- autofit(DEGsFT)
+DEGsFT <- align(DEGsFT,align="center",part="all")
+DEGsFT <- add_header_lines(DEGsFT,values=("Differentially Expressed Genes"))
+DEGsFT <- bold(DEGsFT,part="header")
+DEGsFT <- bold(DEGsFT,j="Comparison")
+DEGsFT <- font(DEGsFT,fontname="Arial")
+DEGsFT <- fontsize(DEGsFT,size=12,part="all")
+save_as_docx(DEGsFT, path=paste(path,"DEGs_numbers.docx",sep=""))
 
 
 #Make a venn diagram of DEGs
@@ -132,44 +163,196 @@ save_as_docx(myft2, path="paper/Table_1.docx")
 d2 <- data.frame(id=unique(sig$id))
 d2 <- data.frame(
 	id=d2$id,
-	KvT=ifelse(d2$id %in% sig[sig$sampleA == "Kale" & sig$sampleB == "TO1000",]$id, 1, 0),
-	KvC=ifelse(d2$id %in% sig[sig$sampleA == "Kale" & sig$sampleB == "Cabbage",]$id, 1, 0),
-	CvT=ifelse(d2$id %in% sig[sig$sampleA == "Cabbage" & sig$sampleB == "TO1000",]$id, 1, 0)
+	KvT=ifelse(d2$id %in% sig[sig$sampleA == "Kale" & sig$sampleB == "TO1000",]$id,1,0),
+	KvC=ifelse(d2$id %in% sig[sig$sampleA == "Kale" & sig$sampleB == "Cabbage",]$id,1,0),
+	CvT=ifelse(d2$id %in% sig[sig$sampleA == "Cabbage" & sig$sampleB == "TO1000",]$id,1,0)
 	)
 #Make the venn diagram using VennDiagram and save as a pdf
 library(VennDiagram)
-pdf("DEG_Overlap.pdf",width=6,height=6,paper='special')
+cairo_pdf(paste(path,"DEG_Overlap.pdf",sep=""),width=6,height=6,family="Arial")
 	draw.triple.venn(
-		area1=nrow(subset(d2,CvT==1)),
-		area2=nrow(subset(d2,KvT==1)),
-		area3=nrow(subset(d2,KvC==1)),
-		n12=nrow(subset(d2,CvT==1 & KvT==1)),
-		n23=nrow(subset(d2,KvT==1 & KvC==1)),
-		n13=nrow(subset(d2,CvT==1 & KvC==1)),
-		n123=nrow(subset(d2,CvT==1 & KvT==1 & KvC==1)),
-		category=c("Cabbage v TO1000","Kale v TO100","Kale v Cabbage"),
-			lty="blank",fill=c("skyblue","pink1","mediumorchid")
+		area1=nrow(subset(d2,KvT==1)),
+		area2=nrow(subset(d2,KvC==1)),
+		area3=nrow(subset(d2,CvT==1)),
+		n12=nrow(subset(d2,KvT==1 & KvC==1)),
+		n23=nrow(subset(d2,KvC==1 & CvT==1)),
+		n13=nrow(subset(d2,KvT==1 & CvT==1)),
+		n123=nrow(subset(d2,KvT==1 & KvC==1 & CvT==1)),
+		category=c("Kale vs TO1000","Kale vs Cabbage","Cabbage vs TO1000"),
+		lty="blank",fill=c("skyblue","pink1","mediumorchid"),
+    fontfamily=rep("Arial"),cat.fontfamily=rep("Arial"),
+    margin=0.08
 	)
 dev.off()
 
 
 #Identify DEGs in common in both Kale comparisons
 Kshared <- subset(d2,KvT==1 & KvC==1 & CvT==0)
-KsharedUp <- geneEx[geneEx$Gene %in% Kshared$id & geneEx$KvT_log2FC > 1 & geneEx$KvC_log2FC > 1,]
-KsharedDown <- geneEx[geneEx$Gene %in% Kshared$id & geneEx$KvT_log2FC < -1 & geneEx$KvC_log2FC < -1,]
+KsharedUp <- geneEx[geneEx$Gene %in% Kshared$id & 
+  geneEx$KvT_log2FC > 1 & geneEx$KvC_log2FC > 1,]
+KsharedDown <- geneEx[geneEx$Gene %in% Kshared$id & 
+  geneEx$KvT_log2FC < -1 & geneEx$KvC_log2FC < -1,]
 #Read in descriptive annotations
 BoAnnot <- read.csv("../misc/Bo_annotations.tsv",header=TRUE)
 #Identify shared genes with increased or decreased expression, map these to
 #the descriptive annotations, and output as csv files
 KsharedUpAnnot <- merge(KsharedUp,BoAnnot)
 write.csv(KsharedUpAnnot[c("Gene","Description","BLAST_hit")],
-  "Kale_shared_Up_Annotations.tsv",quote=FALSE,row.names=FALSE)
+  paste(path,"Kale_shared_Up_Annotations.tsv",sep=""),quote=FALSE,row.names=FALSE)
 KsharedDownAnnot <- merge(KsharedDown,BoAnnot)
 write.csv(KsharedDownAnnot[c("Gene","Description","BLAST_hit")],
-  "Kale_shared_Down_Annotations.tsv",quote=FALSE,row.names=FALSE)
+  paste(path,"Kale_shared_Down_Annotations.tsv",sep=""),quote=FALSE,row.names=FALSE)
+
+#Compare Syntenic vs Non-Syntenic Genes between B. oleracea and Arabidopsis for 
+#enrichment in DEGs
+#Read in data and format tables
+syn <- read.table("../misc/Bo-At-syntelogs.tsv",header=T,sep="\t")
+synRes <- merge(resfull,syn,by.x="id",by.y="Bo_gene")
+synSig <- merge(sig,syn,by.x="id",by.y="Bo_gene")
+
+pSyn=data.frame(
+  row.names=c("Syntenic: Genome","Syntenic: KvT DEGs","Syntenic: KvC DEGs",
+    "Syntenic: CvT DEGs","Non-Syntenic: Genome","Non-Syntenic: KvT DEGs",
+    "Non-Syntenic: KvC DEGs","Non-Syntenic: CvT DEGs"),
+  percent=c(length(syn$Bo_gene %in% geneEx$Gene)/59225,
+    nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="Kale" & sig$sampleB=="TO1000",])/
+      nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="TO1000",]),
+    nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="Kale" & sig$sampleB=="Cabbage",])/
+      nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="Cabbage",]),
+    nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",])/
+      nrow(sig[sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",]),
+    (59225-length(syn$Bo_gene %in% geneEx$Gene))/59225,
+    nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="Kale" & sig$sampleB=="TO1000",])/
+      nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="TO1000",]),
+    nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="Kale" & sig$sampleB=="Cabbage",])/
+      nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="Cabbage",]),
+    nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",])/
+      nrow(sig[sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",])),
+  order=c(1,2,3,4,5,6,7,8))
+#Make Plot
+ggsave(paste(path,"Syntenic_genes.pdf",sep=""),
+  ggplot(pSyn) + 
+    geom_bar(aes(x=reorder(row.names(pSyn),order),
+     y=percent,fill=reorder(row.names(pSyn),order)),stat="identity") + 
+    theme(panel.background=element_blank(),
+      axis.line=element_line(color="black"),
+      axis.text=element_text(size=12,color="black"),
+      axis.title=element_text(size=18,color="black",face="bold"),
+      axis.text.x=element_text(angle=270,hjust=0,vjust=0.5),
+      plot.title = element_text(size=18,hjust = 0.5,color="black",face="bold"),
+      legend.position="none") + 
+    scale_y_continuous(expand=c(0,0),limits=c(0,0.7),labels=percent) + 
+    scale_fill_manual(values=c("tomato2","dodgerblue3","palegreen4","khaki3",
+      "tomato2","dodgerblue3","palegreen4","khaki3")) +
+    ylab("Percentage of Genes") +
+    xlab("") + ggtitle("Genes Syntenic to Arabidopsis")
+)
+
+#KvT subgenome
+KvTsub=data.frame(
+  row.names=c("LF Genome","LF DEGs","MF1 Genome","MF1 DEGs","MF2 Genome","MF2 DEGs"),
+  percent=c(nrow(syn[syn$subgenome=="LF",])/59225,
+    nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="LF",])/
+      nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="TO1000",]),
+    nrow(syn[syn$subgenome=="MF1",])/59225,
+    nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF1",])/
+      nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="TO1000",]),
+    nrow(syn[syn$subgenome=="MF2",])/59225,
+    nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF2",])/
+      nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="TO1000",])),
+  order=c(1,2,3,4,5,6))
+#Make Plot
+ggsave(paste(path,"KvT_subgenome.pdf",sep=""),
+       ggplot(KvTsub) + 
+         geom_bar(aes(x=reorder(row.names(KvTsub),order),
+          y=percent,fill=reorder(row.names(KvTsub),order)),
+          stat="identity") + 
+         theme(panel.background=element_blank(),
+          axis.line=element_line(color="black"),
+          axis.text=element_text(size=12,color="black"),
+          axis.title=element_text(size=18,color="black",face="bold"),
+          axis.text.x=element_text(angle=270,hjust=0,vjust=0.5),
+          plot.title = element_text(size=18,hjust = 0.5,color="black",face="bold"),
+          legend.position="none") + 
+         scale_y_continuous(expand=c(0,0),limits=c(0,0.23),labels=percent) + 
+         scale_fill_manual(values=c("tomato2","tomato2","dodgerblue3",
+          "dodgerblue3","black","black")) +
+         ylab("Percentage of Genes") +
+         xlab("") + ggtitle("Kale vs T01000 Subgenomes")
+)
+#KvC subgenome
+KvCsub=data.frame(
+  row.names=c("LF Genome","LF DEGs","MF1 Genome","MF1 DEGs","MF2 Genome","MF2 DEGs"),
+  percent=c(nrow(syn[syn$subgenome=="LF",])/59225,
+    nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="Cabbage" & synSig$subgenome=="LF",])/
+      nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="Cabbage",]),
+    nrow(syn[syn$subgenome=="MF1",])/59225,
+    nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="Cabbage" & synSig$subgenome=="MF1",])/
+      nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="Cabbage",]),
+    nrow(syn[syn$subgenome=="MF2",])/59225,
+    nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="Cabbage" & synSig$subgenome=="MF2",])/
+      nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="Cabbage",])),
+  order=c(1,2,3,4,5,6))
+#Make Plot
+ggsave(paste(path,"KvC_subgenome.pdf",sep=""),
+       ggplot(KvCsub) + 
+         geom_bar(aes(x=reorder(row.names(KvCsub),order),
+          y=percent,fill=reorder(row.names(KvCsub),order)),
+          stat="identity") + 
+         theme(panel.background=element_blank(),
+          axis.line=element_line(color="black"),
+          axis.text=element_text(size=12,color="black"),
+          axis.title=element_text(size=18,color="black",face="bold"),
+          axis.text.x=element_text(angle=270,hjust=0,vjust=0.5),
+          plot.title = element_text(size=18,hjust = 0.5,color="black",face="bold"),
+          legend.position="none") + 
+         scale_y_continuous(expand=c(0,0),limits=c(0,0.23),labels=percent) + 
+         scale_fill_manual(values=c("tomato2","tomato2","dodgerblue3",
+          "dodgerblue3","black","black")) +
+         ylab("Percentage of Genes") +
+         xlab("") + ggtitle("Kale vs Cabbage Subgenomes")
+)
+#CvT subgenome
+CvTsub=data.frame(
+  row.names=c("LF Genome","LF DEGs","MF1 Genome","MF1 DEGs","MF2 Genome","MF2 DEGs"),
+  percent=c(nrow(syn[syn$subgenome=="LF",])/59225,
+    nrow(synSig[synSig$sampleA=="Cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="LF",])/
+      nrow(sig[sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",]),
+    nrow(syn[syn$subgenome=="MF1",])/59225,
+    nrow(synSig[synSig$sampleA=="Cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF1",])/
+      nrow(sig[sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",]),
+    nrow(syn[syn$subgenome=="MF2",])/59225,
+    nrow(synSig[synSig$sampleA=="Cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF2",])/
+      nrow(sig[sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",])),
+  order=c(1,2,3,4,5,6))
+#Make Plot
+ggsave(paste(path,"CvT_subgenome.pdf",sep=""),
+       ggplot(CvTsub) + 
+         geom_bar(aes(x=reorder(row.names(CvTsub),order),
+          y=percent,fill=reorder(row.names(CvTsub),order)),
+          stat="identity") + 
+         theme(panel.background=element_blank(),
+          axis.line=element_line(color="black"),
+          axis.text=element_text(size=12,color="black"),
+          axis.title=element_text(size=18,color="black",face="bold"),
+          axis.text.x=element_text(angle=270,hjust=0,vjust=0.5),
+          plot.title = element_text(size=18,hjust = 0.5,color="black",face="bold"),
+          legend.position="none") + 
+         scale_y_continuous(expand=c(0,0),limits=c(0,0.23),labels=percent) + 
+         scale_fill_manual(values=c("tomato2","tomato2","dodgerblue3",
+          "dodgerblue3","black","black")) +
+         ylab("Percentage of Genes") +
+         xlab("") + ggtitle("Cabbage vs T01000 Subgenomes")
+)
 
 
 ##GO term enrichment using topGO
+#Create output directory
+path <- "GO_terms/"
+if(!dir.exists(path)){
+  dir.create(path)
+}
+#Load libraries
 library(topGO)
 library(GO.db)
 #Read in gene to GO term mapping in topGO format
@@ -184,120 +367,49 @@ names(KvTgotermUP) <- resKvT$id
 #Here I am restricting analysis to only GO terms with ...
 #at least 5 genes mapping to that to that term in the entire gene list
 KvTgotermUP <- topGO(KvTgotermUP,goTerms,nodeSize=5,fdr=0.05,filename="KvT_up",
-  path="goTerms",writeData=TRUE)
+  path=path,writeData=TRUE)
 #Analyze GO term enrichment for decreased expression genes in Kale vs TO1000
 KvTgotermDOWN <- factor(as.integer(resKvT$id %in% KvTsig[KvTsig$log2FC < -1,]$id))
 names(KvTgotermDOWN) <- resKvT$id
 KvTgotermDOWN <- topGO(KvTgotermDOWN,goTerms,nodeSize=5,fdr=0.05,filename="KvT_down",
-  path="goTerms/",writeData=TRUE)
+  path=path,writeData=TRUE)
 #Analyze GO terms for increased expression genes in Kale vs Cabbage
 KvCgotermUP <- factor(as.integer(resKvC$id %in% KvCsig[KvCsig$log2FC > 1,]$id))
 names(KvCgotermUP) <- resKvC$id
 KvCgotermUP <- topGO(KvCgotermUP,goTerms,nodeSize=5,fdr=0.05,filename="KvC_up",
-  path="goTerms/",writeData=TRUE)
+  path=path,writeData=TRUE)
 #Analyze GO term enrichment for decreased expression genes in Kale vs Cabbage
 KvCgotermDOWN <- factor(as.integer(resKvC$id %in% KvCsig[KvCsig$log2FC < -1,]$id))
 names(KvCgotermDOWN) <- resKvC$id
 KvCgotermDOWN <- topGO(KvCgotermDOWN,goTerms,nodeSize=5,fdr=0.05,filename="KvC_down",
-  path="goTerms/",writeData=TRUE)
+  path=path,writeData=TRUE)
 #Analyze GO terms for increased expression genes in Cabbage vs TO1000 
 CvTgotermUP <- factor(as.integer(resCvT$id %in% CvTsig[CvTsig$log2FC > 1,]$id))
 names(CvTgotermUP) <- resCvT$id
 CvTgotermUP <- topGO(CvTgotermUP,goTerms,nodeSize=5,fdr=0.05,filename="CvT_up",
-  path="goTerms/",writeData=TRUE)
+  path=path,writeData=TRUE)
 #Analyze GO term enrichment for decreased expression genes in Cabbage vs TO1000
 CvTgotermDOWN <- factor(as.integer(resCvT$id %in% CvTsig[CvTsig$log2FC < -1,]$id))
 names(CvTgotermDOWN) <- resCvT$id
 CvTgotermDOWN <- topGO(CvTgotermDOWN,goTerms,nodeSize=5,fdr=0.05,filename="CvT_down",
-  path="goTerms/",writeData=TRUE)
+  path=path,writeData=TRUE)
 #Analyze GO terms for increased expression genes in Kale shared
 KsharedGOtermUP <- factor(as.integer(geneEx$Gene %in% KsharedUp$Gene))
 names(KsharedGOtermUP) <- geneEx$Gene
 KsharedGOtermUP <- topGO(KsharedGOtermUP,goTerms,nodeSize=5,fdr=0.05,
-  filename="Kale_shared_up",path="goTerms/",writeData=TRUE)
+  filename="Kale_shared_up",path=path,writeData=TRUE)
 #Analyze GO term enrichment for decreased expression genes in Kale shared
 KsharedGOtermDOWN <- factor(as.integer(geneEx$Gene %in% KsharedDown$Gene))
 names(KsharedGOtermDOWN) <- geneEx$Gene
 KsharedGOtermDOWN <- topGO(KsharedGOtermDOWN,goTerms,nodeSize=5,fdr=0.05,
-  filename="Kale_shared_down",path="goTerms/",writeData=TRUE)
-
-upGoterm <- merge(CvTgotermUP$BP,KvTgotermUP$BP,by.x="GO.ID",by.y="GO.ID")
-upGoterm <- merge(upGoterm,KvCgotermUP$BP,by.x="GO.ID",by.y="GO.ID")
-upSig <- upGoterm[upGoterm$fdr.x < 0.05 | upGoterm$fdr.y < 0.05 | upGoterm$fdr < 0.05, ]
-upSig <- data.frame(Term = upSig$Term, CvT_FDR = upSig$fdr.x, CvT_sig = upSig$Significant.x, KvT_FDR = upSig$fdr.y, KvT_sig = upSig$Significant.y, KvC_FDR = upSig$fdr, KvC_sig = upSig$Significant)
-upSig$CvT_FDR <- ifelse(upSig$CvT_FDR < 0.05, upSig$CvT_FDR, NA)
-upSig$CvT_sig <- ifelse(upSig$CvT_FDR < 0.05, upSig$CvT_sig, NA)
-upSig$KvT_FDR <- ifelse(upSig$KvT_FDR < 0.05, upSig$KvT_FDR, NA)
-upSig$KvT_sig <- ifelse(upSig$KvT_FDR < 0.05, upSig$KvT_sig, NA)
-upSig$KvC_FDR <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_FDR, NA)
-upSig$KvC_sig <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_sig, NA)
-ggsave("goTerms/Up_BP.pdf",plot=GOdotplot2(upSig))
-
-upGoterm <- merge(CvTgotermUP$MF,KvTgotermUP$MF,by.x="GO.ID",by.y="GO.ID")
-upGoterm <- merge(upGoterm,KvCgotermUP$MF,by.x="GO.ID",by.y="GO.ID")
-upSig <- upGoterm[upGoterm$fdr.x < 0.05 | upGoterm$fdr.y < 0.05 | upGoterm$fdr < 0.05, ]
-upSig <- data.frame(Term = upSig$Term, CvT_FDR = upSig$fdr.x, CvT_sig = upSig$Significant.x, KvT_FDR = upSig$fdr.y, KvT_sig = upSig$Significant.y, KvC_FDR = upSig$fdr, KvC_sig = upSig$Significant)
-upSig$CvT_FDR <- ifelse(upSig$CvT_FDR < 0.05, upSig$CvT_FDR, NA)
-upSig$CvT_sig <- ifelse(upSig$CvT_FDR < 0.05, upSig$CvT_sig, NA)
-upSig$KvT_FDR <- ifelse(upSig$KvT_FDR < 0.05, upSig$KvT_FDR, NA)
-upSig$KvT_sig <- ifelse(upSig$KvT_FDR < 0.05, upSig$KvT_sig, NA)
-upSig$KvC_FDR <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_FDR, NA)
-upSig$KvC_sig <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_sig, NA)
-ggsave("goTerms/Up_MF.pdf",plot=GOdotplot2(upSig))
-
-upGoterm <- merge(CvTgotermUP$CC,KvTgotermUP$CC,by.x="GO.ID",by.y="GO.ID")
-upGoterm <- merge(upGoterm,KvCgotermUP$CC,by.x="GO.ID",by.y="GO.ID")
-upSig <- upGoterm[upGoterm$fdr.x < 0.05 | upGoterm$fdr.y < 0.05 | upGoterm$fdr < 0.05, ]
-upSig <- data.frame(Term = upSig$Term, CvT_FDR = upSig$fdr.x, CvT_sig = upSig$Significant.x, KvT_FDR = upSig$fdr.y, KvT_sig = upSig$Significant.y, KvC_FDR = upSig$fdr, KvC_sig = upSig$Significant)
-upSig$CvT_FDR <- ifelse(upSig$CvT_FDR < 0.05, upSig$CvT_FDR, NA)
-upSig$CvT_sig <- ifelse(upSig$CvT_FDR < 0.05, upSig$CvT_sig, NA)
-upSig$KvT_FDR <- ifelse(upSig$KvT_FDR < 0.05, upSig$KvT_FDR, NA)
-upSig$KvT_sig <- ifelse(upSig$KvT_FDR < 0.05, upSig$KvT_sig, NA)
-upSig$KvC_FDR <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_FDR, NA)
-upSig$KvC_sig <- ifelse(upSig$KvC_FDR < 0.05, upSig$KvC_sig, NA)
-ggsave("goTerms/Up_CC.pdf",plot=GOdotplot2(upSig))
-
-downGoterm <- merge(CvTgotermDOWN$BP,KvTgotermDOWN$BP,by.x="GO.ID",by.y="GO.ID")
-downGoterm <- merge(downGoterm,KvCgotermDOWN$BP,by.x="GO.ID",by.y="GO.ID")
-downSig <- downGoterm[downGoterm$fdr.x < 0.05 | downGoterm$fdr.y < 0.05 | downGoterm$fdr < 0.05, ]
-downSig <- data.frame(Term = downSig$Term, CvT_FDR = downSig$fdr.x, CvT_sig = downSig$Significant.x, KvT_FDR = downSig$fdr.y, KvT_sig = downSig$Significant.y, KvC_FDR = downSig$fdr, KvC_sig = downSig$Significant)
-downSig$CvT_FDR <- ifelse(downSig$CvT_FDR < 0.05, downSig$CvT_FDR, NA)
-downSig$CvT_sig <- ifelse(downSig$CvT_FDR < 0.05, downSig$CvT_sig, NA)
-downSig$KvT_FDR <- ifelse(downSig$KvT_FDR < 0.05, downSig$KvT_FDR, NA)
-downSig$KvT_sig <- ifelse(downSig$KvT_FDR < 0.05, downSig$KvT_sig, NA)
-downSig$KvC_FDR <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_FDR, NA)
-downSig$KvC_sig <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_sig, NA)
-ggsave("goTerms/Down_BP.pdf",plot=GOdotplot2(downSig))
-
-downGoterm <- merge(CvTgotermDOWN$MF,KvTgotermDOWN$MF,by.x="GO.ID",by.y="GO.ID")
-downGoterm <- merge(downGoterm,KvCgotermDOWN$MF,by.x="GO.ID",by.y="GO.ID")
-downSig <- downGoterm[downGoterm$fdr.x < 0.05 | downGoterm$fdr.y < 0.05 | downGoterm$fdr < 0.05, ]
-downSig <- data.frame(Term = downSig$Term, CvT_FDR = downSig$fdr.x, CvT_sig = downSig$Significant.x, KvT_FDR = downSig$fdr.y, KvT_sig = downSig$Significant.y, KvC_FDR = downSig$fdr, KvC_sig = downSig$Significant)
-downSig$CvT_FDR <- ifelse(downSig$CvT_FDR < 0.05, downSig$CvT_FDR, NA)
-downSig$CvT_sig <- ifelse(downSig$CvT_FDR < 0.05, downSig$CvT_sig, NA)
-downSig$KvT_FDR <- ifelse(downSig$KvT_FDR < 0.05, downSig$KvT_FDR, NA)
-downSig$KvT_sig <- ifelse(downSig$KvT_FDR < 0.05, downSig$KvT_sig, NA)
-downSig$KvC_FDR <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_FDR, NA)
-downSig$KvC_sig <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_sig, NA)
-ggsave("goTerms/Down_MF.pdf",plot=GOdotplot2(downSig))
-
-downGoterm <- merge(CvTgotermDOWN$CC,KvTgotermDOWN$CC,by.x="GO.ID",by.y="GO.ID")
-downGoterm <- merge(downGoterm,KvCgotermDOWN$CC,by.x="GO.ID",by.y="GO.ID")
-downSig <- downGoterm[downGoterm$fdr.x < 0.05 | downGoterm$fdr.y < 0.05 | downGoterm$fdr < 0.05, ]
-downSig <- data.frame(Term = downSig$Term, CvT_FDR = downSig$fdr.x, CvT_sig = downSig$Significant.x, KvT_FDR = downSig$fdr.y, KvT_sig = downSig$Significant.y, KvC_FDR = downSig$fdr, KvC_sig = downSig$Significant)
-downSig$CvT_FDR <- ifelse(downSig$CvT_FDR < 0.05, downSig$CvT_FDR, NA)
-downSig$CvT_sig <- ifelse(downSig$CvT_FDR < 0.05, downSig$CvT_sig, NA)
-downSig$KvT_FDR <- ifelse(downSig$KvT_FDR < 0.05, downSig$KvT_FDR, NA)
-downSig$KvT_sig <- ifelse(downSig$KvT_FDR < 0.05, downSig$KvT_sig, NA)
-downSig$KvC_FDR <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_FDR, NA)
-downSig$KvC_sig <- ifelse(downSig$KvC_FDR < 0.05, downSig$KvC_sig, NA)
-ggsave("goTerms/Down_CC.pdf",plot=GOdotplot2(downSig))
+  filename="Kale_shared_down",path=path,writeData=TRUE)
 
 
 #KEGG analysis
 #Check if directory "kegg" exists and if not create it
-if(!dir.exists("kegg")){
-  dir.create("kegg")
+path <- "Kegg/"
+if(!dir.exists(path)){
+  dir.create(path)
 }
 #Read in mappings to Bo ncbi gene names
 #These are the ones supported by KEGG for B. oleracea
@@ -325,43 +437,70 @@ library(clusterProfiler)
 #Perform enrichment test for Kale vs TO1000 genes with increased expression
 #and export the results to table
 KvTupKEGG <- enrichKEGG(KvTncbiSigUp$NCBI_gene, organism="boe")@result
-write.table(KvTupKEGG[KvTupKEGG$p.adjust < 0.05,],"kegg/KvT_up.csv",sep=","
-  ,quote=FALSE,row.names=FALSE)
+write.table(KvTupKEGG[KvTupKEGG$p.adjust < 0.05,],
+  paste(path,"KvT_up.csv",sep=""),sep=",",quote=FALSE,row.names=FALSE)
 #Perform enrichment test for Kale vs TO1000 genes with decreased expression
 #and export the results to table
 KvTdownKEGG <- enrichKEGG(KvTncbiSigDown$NCBI_gene, organism="boe")@result
-write.table(KvTdownKEGG[KvTdownKEGG$p.adjust < 0.05,],"kegg/KvT_down.csv",sep=","
-  ,quote=FALSE,row.names=FALSE)
+write.table(KvTdownKEGG[KvTdownKEGG$p.adjust < 0.05,],
+  paste(path,"KvT_down.csv",sep=""),sep=",",quote=FALSE,row.names=FALSE)
 #Perform enrichment test for Kale vs Cabbage genes with increased expression
 #and export the results to table
 KvCupKEGG <- enrichKEGG(KvCncbiSigUp$NCBI_gene, organism="boe")@result
-write.table(KvCupKEGG[KvCupKEGG$p.adjust < 0.05,],"kegg/KvC_up.csv",sep=","
-  ,quote=FALSE,row.names=FALSE)
+write.table(KvCupKEGG[KvCupKEGG$p.adjust < 0.05,],
+  paste(path,"KvC_up.csv",sep=""),sep=",",quote=FALSE,row.names=FALSE)
 #Perform enrichment test for Kale vs Cabbage genes with decreased expression
 #and export the results to table
 KvCdownKEGG <- enrichKEGG(KvCncbiSigDown$NCBI_gene, organism="boe")@result
-write.table(KvCdownKEGG[KvCdownKEGG$p.adjust < 0.05,],"kegg/KvC_down.csv",sep=","
-  ,quote=FALSE,row.names=FALSE)
+write.table(KvCdownKEGG[KvCdownKEGG$p.adjust < 0.05,],
+  paste(path,"KvC_down.csv",sep=""),sep=",",quote=FALSE,row.names=FALSE)
 #Perform enrichment test for Cabbage vs TO1000 genes with increased expression
 #and export the results to table
 CvTupKEGG <- enrichKEGG(CvTncbiSigUp$NCBI_gene, organism="boe")@result
-write.table(CvTupKEGG[CvTupKEGG$p.adjust < 0.05,],"kegg/CvT_up.csv",sep=","
-  ,quote=FALSE,row.names=FALSE)
+write.table(CvTupKEGG[CvTupKEGG$p.adjust < 0.05,],
+  paste(path,"CvT_up.csv",sep=""),sep=",",quote=FALSE,row.names=FALSE)
 #Perform enrichment test for Cabbage vs TO1000 genes with decreased expression
 #and export the results to table
 CvTdownKEGG <- enrichKEGG(CvTncbiSigDown$NCBI_gene, organism="boe")@result
-write.table(CvTdownKEGG[CvTdownKEGG$p.adjust < 0.05,],"kegg/CvT_down.csv",sep=","
-  ,quote=FALSE,row.names=FALSE)
+write.table(CvTdownKEGG[CvTdownKEGG$p.adjust < 0.05,],
+  paste(path,"CvT_down.csv",sep=""),sep=",",quote=FALSE,row.names=FALSE)
 #Perform enrichment test for Kale shared genes with increased expression
 #and export the results to table
 KsharedUpKEGG <- enrichKEGG(KncbiSharedUp$NCBI_gene, organism="boe")@result
-write.table(KsharedUpKEGG[KsharedUpKEGG$p.adjust < 0.05,],"kegg/Kale_shared_up.csv",
-  sep=",",quote=FALSE,row.names=FALSE)
+write.table(KsharedUpKEGG[KsharedUpKEGG$p.adjust < 0.05,],
+  paste(path,"Kale_shared_up.csv",sep=""),sep=",",quote=FALSE,row.names=FALSE)
 #Perform enrichment test for Kale shared genes with decreased expression
 #and export the results to table
 KsharedDownKEGG <- enrichKEGG(KncbiSharedDown$NCBI_gene, organism="boe")@result
-write.table(KsharedDownKEGG[KsharedDownKEGG$p.adjust < 0.05,],"kegg/Kale_shared_down.csv",
-  sep=",",quote=FALSE,row.names=FALSE)
+write.table(KsharedDownKEGG[KsharedDownKEGG$p.adjust < 0.05,],
+  paste(path,"Kale_shared_down.csv",sep=""),sep=",",quote=FALSE,row.names=FALSE)
 
 
 #Plot out data for specific genes of interest
+#Create output directory
+path <- "Genes_of_interest/"
+if(!dir.exists(path)){
+  dir.create(path)
+}
+#Read in gene list
+goi <- read.csv("../misc/genes_of_interest.csv",header=TRUE)
+#Iterate over each gene in that list
+for(gene in goi$gene){
+    #Use "tryCatch" to handle errors
+    tryCatch({
+        #Make a table of that gene's data from deseq2 using the plotCounts function
+        x <- plotCounts(dds,gene,intgroup="condition",normalized=TRUE,transform=FALSE,
+          returnData=TRUE)
+        #Plot using ggplot2
+        p <- ggplot(x) +
+             geom_point(aes(x=condition,y= count,color=condition)) +
+             theme(panel.background=element_blank(),
+              axis.line=element_line(color="black"),
+              axis.text=element_text(color="black"),
+              axis.title=element_text(color="black",face="bold"),
+              legend.position="none") + xlab("Genotype")
+    #Save as a pdf
+    ggsave(paste(path,gene,"_counts.pdf",sep=""),p,width=5,height=4)
+    #How to handle potential errors
+    },error=function(e){})
+}

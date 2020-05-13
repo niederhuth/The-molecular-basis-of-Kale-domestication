@@ -75,18 +75,6 @@ GOdotplot <- function(x,fdr=0.05){
     labs(size="Gene Count",color="FDR") +
     ggtitle("Top 10 Enriched GO Terms")
 }
-#Function for making combined dotplots of GOterms
-GOdotplot2 <- function(x){
-  ggplot(x) + 
-    geom_point(aes(x=c("CvT"),y=Term,size=CvT_sig,color=CvT_FDR)) +
-    geom_point(aes(x=c("KvT"),y=Term,size=KvT_sig,color=KvT_FDR)) +
-    geom_point(aes(x=c("KvC"),y=Term,size=KvC_sig,color=KvC_FDR)) + 
-    scale_color_continuous(low="red",high="blue",na.value="grey50") +
-    theme_bw() +
-    ylab("") +
-    xlab("Sample Comparisons") +
-    labs(size="Gene Count",color="FDR")
-}
 
 
 #Function for running topGO on a list of genes
@@ -114,13 +102,13 @@ topGO <- function(genelist,goTerms,nodeSize,fdr=0.05,filename,path="",writeData=
     CCgenTable$fdr <- p.adjust(CCgenTable$Fisher,method="BH")
     write.csv(BPgenTable[BPgenTable$fdr <= fdr,],paste(path,filename,"_BP.csv",sep=""),
         row.names=FALSE,quote=FALSE)
-    ggsave(paste(path,filename,"_BP.pdf"),plot=GOdotplot(BPgenTable,fdr=fdr))
+    ggsave(paste(path,filename,"_BP.pdf",sep=""),plot=GOdotplot(BPgenTable,fdr=fdr))
     write.csv(MFgenTable[MFgenTable$fdr <= fdr,],paste(path,filename,"_MF.csv",sep=""),
         row.names=FALSE,quote=FALSE)
-    ggsave(paste(path,filename,"_MF.pdf"),plot=GOdotplot(MFgenTable,fdr=fdr))
+    ggsave(paste(path,filename,"_MF.pdf",sep=""),plot=GOdotplot(MFgenTable,fdr=fdr))
     write.csv(CCgenTable[CCgenTable$fdr <= fdr,],paste(path,filename,"_CC.csv",sep=""),
         row.names=FALSE,quote=FALSE)
-    ggsave(paste(path,filename,"_CC.pdf"),plot=GOdotplot(CCgenTable,fdr=fdr))
+    ggsave(paste(path,filename,"_CC.pdf",sep=""),plot=GOdotplot(CCgenTable,fdr=fdr))
     if(writeData){
       return(list(BP=BPgenTable,MF=MFgenTable,CC=CCgenTable))
     }
