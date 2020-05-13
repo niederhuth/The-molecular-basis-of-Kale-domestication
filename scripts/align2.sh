@@ -3,7 +3,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=20
-#SBATCH --mem=20GB
+#SBATCH --mem=60GB
 #SBATCH --job-name align2
 #SBATCH --output=job_reports/%x-%j.SLURMout
 
