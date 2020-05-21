@@ -1,54 +1,94 @@
-﻿gene,name,kale_expression,description
-Bo1g101380,IAA9 At5g65670 F6H11.210 MPA24.1,up,Auxin-responsive protein IAA9 (Indoleacetic acid-induced protein 9)
-Bo2g007350,TBR At5g06700 MPH15.5,up,Protein trichome birefringence
-Bo2g092580,IGMT1 At1g21100 T22I11.7,up,Indole glucosinolate O-methyltransferase 1 (EC 2.1.1.-)
-Bo2g092800,LAX3 At1g77690 T32E8.2,up,Auxin transporter-like protein 3 (AUX1-like protein 3)
-Bo2g127690,IAA9 At5g65670 F6H11.210 MPA24.1,up,Auxin-responsive protein IAA9 (Indoleacetic acid-induced protein 9)
-Bo2g155820,,up,Myrosinase (EC 3.2.1.147) (Sinigrinase) (Thioglucosidase)
-Bo2g155840,,up,Myrosinase (EC 3.2.1.147) (Sinigrinase) (Thioglucosidase)
-Bo2g155870,,up,Myrosinase (EC 3.2.1.147) (Sinigrinase) (Thioglucosidase)
-Bo3g029830,BLH1 EDA29 At2g35940 F11F19.15,up,BEL1-like homeodomain protein 1 (BEL1-like protein 1) (Protein EMBRYO SAC DEVELOPMENT ARREST 29)
-Bo3g071570,TCP18 BRC1 TBL1 At3g18550 K24M9.4,up,Transcription factor TCP18 (Protein BRANCHED 1) (Protein TEOSINTE BRANCHED 1-LIKE 1)
-Bo3g081600,IAA7 AXR2 At3g23050 MXC7.8,up,Auxin-responsive protein IAA7 (Auxin resistant 2) (Indoleacetic acid-induced protein 7)
-Bo3g100540,MAF5 AGL68 FCL1 At5g65080 F15O5.4,up,Protein MADS AFFECTING FLOWERING 5 (MADS box protein FCL1) (MADS-box protein AGAMOUS-LIKE 68)
-Bo3g100570,AGL27 FK1 FLM MAF1 At1g77080 F22K20.15,up,Agamous-like MADS-box protein AGL27 (MADS box FLC1-like nuclear protein) (Protein FLOWERING LOCUS M) (Protein MADS AFFECTING FLOWERING 1)
-Bo4g013080,BHLH100 EN7 At2g41240 F13H10.21,up,Transcription factor bHLH100 (Basic helix-loop-helix protein 100) (AtbHLH100) (bHLH 100) (Transcription factor EN 7) (bHLH transcription factor bHLH100)
-Bo4g142080,BEL1 BELL1 At5g41410 MYC6.12,up,Homeobox protein BEL1 homolog
-Bo4g159930,ELF3 PYK20 At2g25930 F17H15.25 T19L18.26,up,Protein EARLY FLOWERING 3 (Nematode-responsive protein)
-Bo5g004390,IAA3 SHY2 At1g04240 F19P19.32,up,Auxin-responsive protein IAA3 (Indoleacetic acid-induced protein 3) (Short hypocotyl) (Suppressor of HY2)
-Bo5g004400,IAA17 AXR3 At1g04250 F19P19.31,up,Auxin-responsive protein IAA17 (Auxin response 3) (Indoleacetic acid-induced protein 17)
-Bo5g021950,SAUR41 At1g16510 F3O9.31,up,Auxin-responsive protein SAUR41 (Protein SMALL AUXIN UP RNA 41)
-Bo5g065750,AGL63 GOA At1g31140 F28K20.7,up,Agamous-like MADS-box protein AGL63 (Protein GORDITA)
-Bo6g064770,GEBP STKR1 At4g00270 F5I10.11,up,GLABROUS1 enhancer-binding protein (Probable transcription factor At4g00270) (Protein GeBP) (Protein STOREKEEPER RELATED 1) (Storekeeper-like protein At4g00270)
-Bo6g079990,GL2 ATHB10 At1g79840 F19K16.20,up,Homeobox-leucine zipper protein GLABRA 2 (HD-ZIP protein ATHB-10) (Homeobox-leucine zipper protein ATHB-10)
-Bo6g081880,IAA9 At5g65670 F6H11.210 MPA24.1,up,Auxin-responsive protein IAA9 (Indoleacetic acid-induced protein 9)
-Bo6g082100,LAX3 At1g77690 T32E8.2,up,Auxin transporter-like protein 3 (AUX1-like protein 3)
-Bo6g099300,BAT1 DRL1 PIZ At4g31910 F10N7.280 F11C18.110,up,Brassinosteroid-related acyltransferase 1 (BR-related acyltransferase 1) (EC 2.3.1.-) (Protein DWARF AND ROUND LEAF 1) (Protein PIZZA)
-Bo6g119200,At1g75040 F9E10.11,up,Pathogenesis-related protein 5 (PR-5)
-Bo6g119210,At1g75040 F9E10.11,up,Pathogenesis-related protein 5 (PR-5)
-Bo6g119600,BLH3 At1g75410 F1B16.6,up,BEL1-like homeodomain protein 3 (BEL1-like protein 3)
-Bo6g124080,At1g79700 F19K16.32 F20B17.12,up,AP2-like ethylene-responsive transcription factor At1g79700
-Bo7g090950,GL1,up,Trichome differentiation protein GL1 (Protein GLABROUS 1)
-Bo7g109250,ARF9 At4g23980 T19F6.20 T32A16.150,up,Auxin response factor 9
-Bo8g070840,IAA9 At5g65670 F6H11.210 MPA24.1,up,Auxin-responsive protein IAA9 (Indoleacetic acid-induced protein 9)
-Bo8g099490,CCD1 NC1 NCED1 At3g63520 MAA21_150,up,Carotenoid 910(9'10')-cleavage dioxygenase 1 (EC 1.14.99.n4) (AtCCD1) (Neoxanthin cleavage enzyme NC1) (AtNCED1)
-Bo8g108270,RFL1 At1g12210 T28K15.6,up,Disease resistance protein RFL1 (RPS5-like protein 1) (pNd13/pNd14)
-Bo9g035190,D27 At1g03055 F10O3,up,Beta-carotene isomerase D27 chloroplastic (EC 5.2.1.14) (Protein DWARF-27 homolog) (AtD27)
-Bo9g054420,Os05g0567100 LOC_Os05g49200 OJ1781_H11.11,up,Aspartic proteinase oryzasin-1 (EC 3.4.23.-)
-Bo9g054420,Os05g0567100 LOC_Os05g49200 OJ1781_H11.11,up,Aspartic proteinase oryzasin-1 (EC 3.4.23.-)
-Bo9g072940,IAA9 At5g65670 F6H11.210 MPA24.1,up,Auxin-responsive protein IAA9 (Indoleacetic acid-induced protein 9)
-Bo9g173370,FLC FLF At5g10140 T31P16.130,up,MADS-box protein FLOWERING LOCUS C (MADS-box protein FLOWERING LOCUS F)
-Bo9g180110,BSMT1 At3g11480 F24K9.15,up,Salicylate/benzoate carboxyl methyltransferase (Benzoate O-methyltransferase) (EC 2.1.1.273) (S-adenosyl-L-methionine:benzoic acid carboxyl methyltransferase) (S-adenosyl-L-methionine:salicylate acid carboxyl methyltransferase) (SABATH methyltransferase) (Salicylate carboxymethyltransferase) (EC 2.1.1.274)
-Bo00722s140,GSTT2 GST10B At5g41240/At5g41230 K1O13.3/K1O13.2,down,Glutathione S-transferase T2 (AtGSTT2) (EC 2.5.1.18) (GST class-theta member 2) (Glutathione S-transferase 10B)
-Bo03856s010,AGL70 FCL3 MAF3 At5g65060 F15O5.2,down,Agamous-like MADS-box protein AGL70 (MADS box FLC1-like nuclear protein 3) (Protein AGAMOUS-like 70) (Protein MADS AFFECTING FLOWERING 3)
-Bo1g025880,Bp10,down,L-ascorbate oxidase homolog (EC 1.10.3.-)
-Bo1g118970,BGLU43 At3g18070 MRC8.6,down,Beta-glucosidase 43 (AtBGLU43) (EC 3.2.1.21)
-Bo2g041160,At5g56590 MIK19.3,down,Glucan endo-13-beta-glucosidase 13 (EC 3.2.1.39) ((1->3)-beta-glucan endohydrolase 13) ((1->3)-beta-glucanase 13) (Beta-13-endoglucanase 13) (Beta-13-glucanase 13)
-Bo3g165860,CSY4 At2g44350 F4I1.16,down,Citrate synthase 4 mitochondrial (EC 2.3.3.16)
-Bo4g016170,TBL39 At2g42570 F14N22.16,down,Protein trichome birefringence-like 39
-Bo4g022780,BGLU15 At2g44450 F4I1.26,down,Beta-glucosidase 15 (AtBGLU15) (EC 3.2.1.21)
-Bo5g035250,AGL104 At1g22130 F2E2.20,down,Agamous-like MADS-box protein AGL104
-Bo5g038690,AGL80 FEM111 At5g48670 K15N18.16,down,Agamous-like MADS-box protein AGL80
-Bo6g094120,AGL12 XAL1 At1g71692 F14O23.5 F26A9.6,down,Agamous-like MADS-box protein AGL12 (Protein XAANTAL 1)
-Bo7g057820,AGL80 FEM111 At5g48670 K15N18.16,down,Agamous-like MADS-box protein AGL80
-Bo7g098710,TPS25 At3g29410 MUO10.2,down,Terpenoid synthase 25 (AtTPS25) (EC 4.2.3.-)
+﻿Gene,Name,Function
+Bo5g156410,MYB106,Development
+Bo6g046840,GLABRA 2,Development
+Bo4g081080,SVB,Development
+Bo2g007350,TBR,Development
+Bo1g022290,BAM3,Development
+Bo1g086260,AXR4,Development
+Bo1g090350,ARF1,Development
+Bo1g103500,IAA2,Development
+Bo2g127690,IAA9,Development
+Bo2g161810,ARF2,Development
+Bo3g081600,IAA7,Development
+Bo3g082080,BLI,Development
+Bo5g004400,AXR3,Development
+Bo5g093110,IAA7,Development
+Bo6g014240,PIN3,Development
+Bo6g044730,LAX3,Development
+Bo6g044950,IAA9,Development
+Bo6g111180,ARF GH3,Development
+Bo6g111190,ARF GH3,Development
+Bo7g109250,ARF9,Development
+Bo7g116220,ARF GH3,Development
+Bo8g052710,AXR1,Development
+Bo8g070840,IAA9,Development
+Bo8g102450,AXR1,Development
+Bo9g072940,IAA9,Development
+Bo01250s010,ACAULIS 5,Development
+Bo4g039440,PID,Development
+Bo5g004680,IAA12,Development
+Bo7g062200,SAUR-LIKE ARF,Development
+Bo8g088360,ARF17,Development
+Bo5g086990,MYC2,Defense
+Bo5g043140,PFT1,Defense
+Bo4g009300,JAR1,Defense
+Bo1g050800,RCA,Defense
+Bo6g006920,PDF1.2,Defense
+Bo2g086460,PDF1.2,Defense
+Bo6g100350,MBP2,Defense
+Bo2g155820,TGG1,Defense
+Bo2g155840,TGG1,Defense
+Bo2g155810,TGG1,Defense
+Bo4g191120,CYP83A1,Defense
+Bo6g100310,MBP2,Defense
+Bo3g052110,AOP1,Defense
+Bo6g086780,MBP2,Defense
+Bo00751s090,MAM1,Defense
+Bo9g050970,SOT18,Defense
+Bo2g102190,AOP3,Defense
+Bo6g031030,TGG1,Defense
+Bo00751s100,MAM1,Defense
+Bo3g064960,HCHIB,Defense
+Bo7g058040,EP3,Defense
+Bo3g064970,HCHIB,Defense
+Bo1g021960,ChiC,Defense
+Bo3g036660,CHITINASE,Defense
+Bo3g024590,CHITINASE,Defense
+Bo3g019100,CER3,Defense
+Bo2g082410,TIFY10B,Defense
+Bo8g100360,ACL,Defense
+Bo3g028490,ACX,Defense
+Bo7g118280,MES9,Defense
+Bo6g115830,ACX5,Defense
+Bo6g080030,JR1,Defense
+Bo5g131580,COI1,Defense
+Bo9g037180,FMO GS-OX2,Defense
+Bo6g008450,SOT16,Defense
+Bo4g120620,SOT18,Defense
+Bo01342s020,IGMT4,Defense
+Bo4g188590,CYT1,Nutrition
+Bo2g041230,VTC5,Nutrition
+Bo8g002920,CRY2,Flowering
+Bo7g109690,PGI1,Flowering
+Bo9g067070,CCT,Flowering
+Bo9g012630,PRR5,Flowering
+Bo2g062650,AP1,Flowering
+Bo3g018870,MSI1,Flowering
+Bo5g038860,GI,Flowering
+Bo8g076450,CUL3,Flowering
+Bo1g157390,COL2,Flowering
+Bo5g043140,PFT1,Flowering
+Bo6g046240,SAR3,Flowering
+Bo3g100540,MAF4,Flowering
+Bo3g100570,AGL31,Flowering
+Bo4g159930,ELF3,Flowering
+Bo3g058530,CLPS3,Flowering
+Bo8g095790,MYB17,Flowering
+Bo4g042390,SPL3,Flowering
+Bo9g163720,COL1,Flowering
+Bo9g022460,ABH1,Flowering
+Bo4g040030,MED8,Flowering
+Bo4g024850,AGL20,Flowering
+Bo4g032400,ELF9,Flowering
+Bo7g078170,RPI2,Flowering
+Bo6g015990,RPI2,Flowering

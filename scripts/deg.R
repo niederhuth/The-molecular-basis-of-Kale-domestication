@@ -485,7 +485,7 @@ if(!dir.exists(path)){
 #Read in gene list
 goi <- read.csv("../misc/genes_of_interest.csv",header=TRUE)
 #Iterate over each gene in that list
-for(gene in goi$gene){
+for(gene in goi$Gene){
     #Use "tryCatch" to handle errors
     tryCatch({
         #Make a table of that gene's data from deseq2 using the plotCounts function
@@ -504,3 +504,28 @@ for(gene in goi$gene){
     #How to handle potential errors
     },error=function(e){})
 }
+#Plots for GOI of different functions
+for(i in c('Development','Defense','Nutrition','Flowering')){
+  #Subset expression data
+  x <- geneEx[geneEx$Gene %in% goi2[goi2$Function==i,]$Gene,]
+  #Merge expression data with goi info
+  x <- merge(x,goi2[goi2$Class==i,],by.x='Gene',by.y='Gene')
+  #Set rownames to combination of B. oleracea gene ID & At homolog name
+  row.names(x) <- paste(x$Gene,': ',x$Name,sep="")
+  #Reorder the data frame based on log2 fold change from increasing to decreasing
+  x <- x[order(x$KvT_log2FC,decreasing=TRUE),]
+  #Lets make a heatmap
+  #Save as pdf
+  pdf(paste(path,i,'_heatmap.pdf',sep=''))
+    #Use pheatmap on log2 transformed data
+    #We add 0.01 to all the data to handle 0 values that otherwise get set to -Inf
+    pheatmap(log2(x[2:9]+0.01),
+      #Turn off clustering
+      cluster_rows=FALSE,cluster_cols=FALSE,
+      #Modify the sample labels
+      labels_col =gsub('_',' ',colnames(x2[2:9])),)
+  dev.off()
+}
+
+
+
