@@ -1,6 +1,9 @@
 GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
-GO:0044435,plastid part,2027,122,71.74,3.5e-09,2.842e-06
-GO:0009536,plastid,3612,183,127.84,1.7e-08,6.902e-06
-GO:0005576,extracellular region,1759,97,62.26,8.5e-06,0.00230066666666667
-GO:0009579,thylakoid,747,46,26.44,0.00014,0.02842
-GO:0005853,eukaryotic translation elongation factor...,9,4,0.32,0.00018,0.029232
+GO:0044435,plastid part,2027,146,84.63,4.5e-11,3.654e-08
+GO:0009536,plastid,3612,219,150.8,1.2e-10,4.872e-08
+GO:0005576,extracellular region,1759,120,73.44,5.8e-08,1.56986666666667e-05
+GO:0009579,thylakoid,747,61,31.19,2.0e-07,4.06e-05
+GO:0034357,photosynthetic membrane,559,43,23.34,6.7e-05,0.0100146666666667
+GO:0044444,cytoplasmic part,12336,554,515.02,7.4e-05,0.0100146666666667
+GO:0044436,thylakoid part,586,43,24.47,0.00015,0.0174
+GO:0005853,eukaryotic translation elongation factor...,9,4,0.38,0.00035,0.035525

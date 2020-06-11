@@ -1,3 +1,9 @@
 GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
-GO:0010181,FMN binding,64,11,2.36,9.7e-06,0.0172563
-GO:0016829,lyase activity,528,42,19.51,2.0e-05,0.01779
+GO:0019137,thioglucosidase activity,18,11,0.78,1.7e-08,3.0243e-05
+GO:0102799,glucosinolate glucohydrolase activity,17,10,0.74,1.4e-07,0.00012453
+GO:0016829,lyase activity,528,48,22.94,1.0e-05,0.00578175
+GO:0048037,cofactor binding,1466,95,63.69,1.3e-05,0.00578175
+GO:0047958,glycine:2-oxoglutarate aminotransferase ...,7,4,0.3,3.2e-05,0.010081
+GO:0010181,FMN binding,64,11,2.78,3.4e-05,0.010081
+GO:0016491,oxidoreductase activity,2141,138,93.02,4.9e-05,0.012453
+GO:0016838,carbon-oxygen lyase activity, acting on ...,36,11,1.56,0.00017,0.03780375

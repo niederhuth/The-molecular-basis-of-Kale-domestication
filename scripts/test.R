@@ -1,4 +1,3 @@
-goi <- read.csv("../misc/goi.csv")
 
 tmp <- synRes[synRes$sampleA=="Kale" & synRes$sampleB=="TO1000",]
 tmp$direction <- ifelse(tmp$log2FC > 0 & tmp$padj < 0.05,1,ifelse(tmp$log2FC < 0 & tmp$padj < 0.05,-1,0))
@@ -10,10 +9,11 @@ tmp4 <- tmp[,c(10,9,11)]
 tmp5 <- as.data.frame.matrix(table(tmp4$At_gene,tmp4$subgenome))
 tmp5$sum <- rowSums(tmp5)
 tmp6 <- as.vector(row.names(tmp5[tmp5$sum != tmp5$LF & tmp5$sum != tmp5$MF1 & tmp5$sum != tmp5$MF2,]))
-tmp5 <- as.data.frame.matrix(table(tmp4$At_gene,tmp4$direction))
-tmp5 <- tmp5[row.names(tmp5) %in% as.vector(unique(tmp$At_gene)),]
+tmp7 <- as.data.frame.matrix(table(tmp4$At_gene,tmp4$direction))
+tmp7 <- tmp7[row.names(tmp5) %in% as.vector(unique(tmp$At_gene)),]
 #tmp5 <- tmp5[row.names(tmp5) %in% tmp2,]
-tmp5$sum <- rowSums(tmp5)
+tmp7$sum <- rowSums(tmp7)
+
 tmp7 <- tmp5[tmp5$sum > 1 & row.names(tmp5) %in% tmp6,]
 tmp6 <- row.names(tmp5[tmp5$`1` > 0 & tmp5$`-1` > 0,])
 Bidirectional <- tmp[tmp$At_gene %in% tmp6,]
@@ -90,61 +90,7 @@ for(i in "Bo8g002920"){
 
 
 
-pSyn$number=c(length(syn$Bo_gene %in% geneEx$Gene),
-          nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="Kale" & sig$sampleB=="TO1000",]),
-          nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="Kale" & sig$sampleB=="Cabbage",]),
-          nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",]),
-          (nrow(geneEx)-length(syn$Bo_gene %in% geneEx$Gene)),
-          nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="Kale" & sig$sampleB=="TO1000",]),
-          nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="Kale" & sig$sampleB=="Cabbage",]),
-          nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",]))
-
-test <- data.frame(row.names=c("Genome","KvT DEG","KvT Non-DEG","KvC DEG","KvC Non-DEG","CvT DEG","CvT Non-DEG"),
-                   syntenic=c(24521,3519,21002,3469,21052,3514,21007),nonsyntenic=c(34704,4596,30108,3875,30829,3915,30789))
 
 
-fisher.test(as.matrix(test[c(2:3),]))
-fisher.test(as.matrix(test[c(4:5),]))
-fisher.test(as.matrix(test[c(6:7),]))
 
-fisher.test(as.matrix(test[c(2:3),c(2,1)]))
-fisher.test(as.matrix(test[c(4:5),c(2,1)]))
-fisher.test(as.matrix(test[c(6:7),c(2,1)]))
-
-test2 <- data.frame(
-  row.names=c("Genome","KvT DEG","KvT Non-DEG","KvC DEG","KvC Non-DEG","CvT DEG","CvT Non-DEG"),
-  LF=c(10763,1463,9300,1472,9291,1502,9261),
-  nonLF=c(48462,6652,41810,5872,42590,5526,42936),
-  MF1=c(7420,1120,6300,1121,6299,1099,6321),
-  nonMF1=c(51805,6995,44810,6223,45582,5929,45876),
-  MF2=c(6338,936,5402,876,5462,913,5425),
-  nonMF2=c(52887,7179,45708,6468,46419,6115,46772))
-
-test3 <- data.frame(
-  row.names=c("KvT","KvC","CvT"), 
-  LF_pvalue=c(
-    fisher.test(as.matrix(test2[c(2:3),c(1,2)]))$p.value,
-    fisher.test(as.matrix(test2[c(4:5),c(1,2)]))$p.value,
-    fisher.test(as.matrix(test2[c(6:7),c(1,2)]))$p.value), 
-  LF_OR=c(
-    fisher.test(as.matrix(test2[c(2:3),c(1,2)]))$estimate,
-    fisher.test(as.matrix(test2[c(4:5),c(1,2)]))$estimate,
-    fisher.test(as.matrix(test2[c(6:7),c(1,2)]))$estimate),
-  MF1_pvalue=c(
-    fisher.test(as.matrix(test2[c(2:3),c(3,4)]))$p.value,
-    fisher.test(as.matrix(test2[c(4:5),c(3,4)]))$p.value,
-    fisher.test(as.matrix(test2[c(6:7),c(3,4)]))$p.value), 
-  MF1_OR=c(
-    fisher.test(as.matrix(test2[c(2:3),c(3,4)]))$estimate,
-    fisher.test(as.matrix(test2[c(4:5),c(3,4)]))$estimate,
-    fisher.test(as.matrix(test2[c(6:7),c(3,4)]))$estimate),
-  MF2_pvalue=c(
-    fisher.test(as.matrix(test2[c(2:3),c(5,6)]))$p.value,
-    fisher.test(as.matrix(test2[c(4:5),c(5,6)]))$p.value,
-    fisher.test(as.matrix(test2[c(6:7),c(5,6)]))$p.value), 
-  MF2_OR=c(
-    fisher.test(as.matrix(test2[c(2:3),c(5,6)]))$estimate,
-    fisher.test(as.matrix(test2[c(4:5),c(5,6)]))$estimate,
-    fisher.test(as.matrix(test2[c(6:7),c(5,6)]))$estimate)
-)
 

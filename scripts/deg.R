@@ -187,13 +187,54 @@ dev.off()
 
 
 #Identify DEGs in common in both Kale comparisons
-Kshared <- subset(d2,KvT==1 & KvC==1 & CvT==0)
+Kshared <- subset(d2,KvT==1 & KvC==1)
+#All genes higher in Kale
 KsharedUp <- geneEx[geneEx$Gene %in% Kshared$id & 
   geneEx$KvT_log2FC > 1 & geneEx$KvC_log2FC > 1,]
+#All genes lower in Kale
 KsharedDown <- geneEx[geneEx$Gene %in% Kshared$id & 
   geneEx$KvT_log2FC < -1 & geneEx$KvC_log2FC < -1,]
+#Genes higher in Cabbage, lower in TO1000
+KsharedC_higher <- geneEx[geneEx$Gene %in% Kshared$id & 
+  geneEx$KvT_log2FC < -1 & geneEx$KvC_log2FC > 1,]
+#Genes lower in Cabbage, higher in TO1000
+KsharedT_higher <- geneEx[geneEx$Gene %in% Kshared$id & 
+  geneEx$KvT_log2FC > 1 & geneEx$KvC_log2FC < -1,]
+#Create a table of these numbers
+KsharedNumbers <- data.frame(Comparison=c("Kale higher, both comparisons",
+	"Kale lower, both comparisons","Cabbage higher, TO1000 lower",
+	"Cabbage lower, TO1000 higher"),
+	Number=c(nrow(KsharedUp),nrow(KsharedDown),nrow(KsharedC_higher),
+		nrow(KsharedT_higher)),order=c(1,2,3,4))
+#Plot numbers
+ggsave(paste(path,"Kale_Shared_Expression.pdf",sep=""),
+	ggplot(KsharedNumbers) + 
+		geom_bar(aes(x=reorder(Comparison,order),
+			y=Number,fill=Comparison),stat="identity") +
+		theme_bw() +
+		theme(axis.line=element_line(color="black"),
+		axis.text=element_text(size=12,color="black"),
+		axis.title=element_text(size=18,color="black",face="bold"),
+		axis.text.x=element_text(angle=270,hjust=0,vjust=0.5),
+		plot.title = element_text(size=18,hjust = 0.5,color="black",face="bold"),
+		legend.position="none") + 
+	scale_y_continuous(expand=c(0,0)) +
+	scale_fill_discrete() +
+	ylab("Number of Genes") +
+	xlab("")
+)
 #Read in descriptive annotations
 BoAnnot <- read.csv("../misc/Bo_annotations.tsv",header=TRUE)
+#Map genes to descriptive annotations and output as csv files
+KsharedAnnot <- merge(geneEx[geneEx$Gene %in% Kshared$id,],BoAnnot)
+write.csv(KsharedAnnot[c("Gene","Description","BLAST_hit")],
+  paste(path,"Kale_shared_Annotations.csv",sep=""),quote=FALSE,row.names=FALSE)
+KsharedAnnot_kale_only <- KsharedAnnot[KsharedAnnot$Gene %in% Kshared[Kshared$CvT == 0,]$id,]
+write.csv(KsharedAnnot_kale_only[c("Gene","Description","BLAST_hit")],
+  paste(path,"Kale_shared_kale_only_Annotations.csv",sep=""),quote=FALSE,row.names=FALSE)
+KsharedAnnot_CvT <- KsharedAnnot[KsharedAnnot$Gene %in% Kshared[Kshared$CvT == 1,]$id,]
+write.csv(KsharedAnnot_CvT[c("Gene","Description","BLAST_hit")],
+  paste(path,"Kale_shared_and_CvT_DEG_Annotations.csv",sep=""),quote=FALSE,row.names=FALSE)
 #Identify shared genes with increased or decreased expression, map these to
 #the descriptive annotations, and output as csv files
 KsharedUpAnnot <- merge(KsharedUp,BoAnnot)
@@ -201,7 +242,8 @@ write.csv(KsharedUpAnnot[c("Gene","Description","BLAST_hit")],
   paste(path,"Kale_shared_Up_Annotations.tsv",sep=""),quote=FALSE,row.names=FALSE)
 KsharedDownAnnot <- merge(KsharedDown,BoAnnot)
 write.csv(KsharedDownAnnot[c("Gene","Description","BLAST_hit")],
-  paste(path,"Kale_shared_Down_Annotations.tsv",sep=""),quote=FALSE,row.names=FALSE)
+  paste(path,"Kale_shared_Down_Annotations.csv",sep=""),quote=FALSE,row.names=FALSE)
+
 
 #Compare Syntenic vs Non-Syntenic Genes between B. oleracea and Arabidopsis for 
 #enrichment in DEGs
@@ -209,7 +251,7 @@ write.csv(KsharedDownAnnot[c("Gene","Description","BLAST_hit")],
 syn <- read.table("../misc/Bo-At-syntelogs.tsv",header=T,sep="\t")
 synRes <- merge(resfull,syn,by.x="id",by.y="Bo_gene")
 synSig <- merge(sig,syn,by.x="id",by.y="Bo_gene")
-
+#Create a table of percentage of DEG & Non-DEG Syntenic & Non-Syntenic Genes
 pSyn=data.frame(
   row.names=c("Syntenic: Genome","Syntenic: KvT DEGs","Syntenic: KvC DEGs",
     "Syntenic: CvT DEGs","Non-Syntenic: Genome","Non-Syntenic: KvT DEGs",
@@ -229,6 +271,32 @@ pSyn=data.frame(
     nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",])/
       nrow(sig[sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",])),
   order=c(1,2,3,4,5,6,7,8))
+#Create contingency table of DEG & Non-DEG numbers
+synDEG <- data.frame(
+  row.names=c("Genome","KvT DEG","KvT Non-DEG",
+    "KvC DEG","KvC Non-DEG","CvT DEG","CvT Non-DEG"),
+  syntenic=c(nrow(syn),
+    nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="Kale" & sig$sampleB=="TO1000",]),
+    nrow(syn)-nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="Kale" & sig$sampleB=="TO1000",]),
+    nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="Kale" & sig$sampleB=="Cabbage",]),
+    nrow(syn)-nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="Kale" & sig$sampleB=="Cabbage",]),
+    nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",]),
+    nrow(syn)-nrow(sig[sig$id %in% syn$Bo_gene & sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",])),
+  nonsyntenic=c(59225-nrow(syn),
+    nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="Kale" & sig$sampleB=="TO1000",]),
+    (59225-nrow(syn))-nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="Kale" & sig$sampleB=="TO1000",]),
+    nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="Kale" & sig$sampleB=="Cabbage",]),
+    (59225-nrow(syn))-nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="Kale" & sig$sampleB=="Cabbage",]),
+    nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",]),
+    (59225-nrow(syn))-nrow(sig[!(sig$id %in% syn$Bo_gene) & sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",]))            
+)
+#Use Fisher's Exact Test to test for differences between syntenic & non-syntenic genes
+fisher.test(as.matrix(synDEG[c(2:3),]),alternative="two.sided")
+fisher.test(as.matrix(synDEG[c(4:5),]),alternative="two.sided")
+fisher.test(as.matrix(synDEG[c(6:7),]),alternative="two.sided")
+fisher.test(as.matrix(synDEG[c(2:3),c(2,1)]),alternative="two.sided")
+fisher.test(as.matrix(synDEG[c(4:5),c(2,1)]),alternative="two.sided")
+fisher.test(as.matrix(synDEG[c(6:7),c(2,1)]),alternative="two.sided")
 #Make Plot
 ggsave(paste(path,"Syntenic_genes.pdf",sep=""),
   ggplot(pSyn) + 
@@ -247,6 +315,90 @@ ggsave(paste(path,"Syntenic_genes.pdf",sep=""),
     ylab("Percentage of Genes") +
     xlab("") + ggtitle("Genes Syntenic to Arabidopsis")
 )
+#Create a contingency table for DEGs for each subgenome
+subDEG <- data.frame(row.names=c("Genome","KvT DEG","KvT Non-DEG","KvC DEG",
+    "KvC Non-DEG","CvT DEG","CvT Non-DEG"),
+  LF=c(nrow(syn[syn$subgenome=="LF",]),
+    nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="LF",]),
+    nrow(syn[syn$subgenome=="LF",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="LF",]),
+    nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="Cabbage" & synSig$subgenome=="LF",]),
+    nrow(syn[syn$subgenome=="LF",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="Cabbage" & synSig$subgenome=="LF",]),
+    nrow(synSig[synSig$sampleA=="Cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="LF",]),
+    nrow(syn[syn$subgenome=="LF",])-nrow(synSig[synSig$sampleA=="Cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="LF",])),
+  nonLF=c(59225-nrow(syn[syn$subgenome=="LF",]),
+   nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="TO1000",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="LF",]),
+   (59225-nrow(syn[syn$subgenome=="LF",]))-(nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="TO1000",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="LF",])),
+    nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="Cabbage",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="Cabbage" & synSig$subgenome=="LF",]),
+   (59225-nrow(syn[syn$subgenome=="LF",]))-(nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="Cabbage",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="Cabbage" & synSig$subgenome=="LF",])),
+   nrow(sig[sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",])-nrow(synSig[synSig$sampleA=="Cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="LF",]),
+   (59225-nrow(syn[syn$subgenome=="LF",]))-(nrow(sig[sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",])-nrow(synSig[synSig$sampleA=="Cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="LF",]))),
+  MF1=c(nrow(syn[syn$subgenome=="MF1",]),
+    nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF1",]),
+    nrow(syn[syn$subgenome=="MF1",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF1",]),
+    nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="Cabbage" & synSig$subgenome=="MF1",]),
+    nrow(syn[syn$subgenome=="MF1",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="Cabbage" & synSig$subgenome=="MF1",]),
+    nrow(synSig[synSig$sampleA=="Cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF1",]),
+    nrow(syn[syn$subgenome=="MF1",])-nrow(synSig[synSig$sampleA=="Cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF1",])),
+  nonMF1=c(59225-nrow(syn[syn$subgenome=="MF1",]),
+   nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="TO1000",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF1",]),
+   (59225-nrow(syn[syn$subgenome=="MF1",]))-(nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="TO1000",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF1",])),
+    nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="Cabbage",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="Cabbage" & synSig$subgenome=="MF1",]),
+   (59225-nrow(syn[syn$subgenome=="MF1",]))-(nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="Cabbage",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="Cabbage" & synSig$subgenome=="MF1",])),
+   nrow(sig[sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",])-nrow(synSig[synSig$sampleA=="Cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF1",]),
+   (59225-nrow(syn[syn$subgenome=="MF1",]))-(nrow(sig[sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",])-nrow(synSig[synSig$sampleA=="Cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF1",]))),
+  MF2=c(nrow(syn[syn$subgenome=="MF2",]),
+    nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF2",]),
+    nrow(syn[syn$subgenome=="MF2",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF2",]),
+    nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="Cabbage" & synSig$subgenome=="MF2",]),
+    nrow(syn[syn$subgenome=="MF2",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="Cabbage" & synSig$subgenome=="MF2",]),
+    nrow(synSig[synSig$sampleA=="Cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF2",]),
+    nrow(syn[syn$subgenome=="MF2",])-nrow(synSig[synSig$sampleA=="Cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF2",])),
+  nonMF2=c(59225-nrow(syn[syn$subgenome=="MF2",]),
+   nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="TO1000",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF2",]),
+   (59225-nrow(syn[syn$subgenome=="MF2",]))-(nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="TO1000",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF2",])),
+    nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="Cabbage",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="Cabbage" & synSig$subgenome=="MF2",]),
+   (59225-nrow(syn[syn$subgenome=="MF2",]))-(nrow(sig[sig$sampleA=="Kale" & sig$sampleB=="Cabbage",])-nrow(synSig[synSig$sampleA=="Kale" & synSig$sampleB=="Cabbage" & synSig$subgenome=="MF2",])),
+   nrow(sig[sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",])-nrow(synSig[synSig$sampleA=="Cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF2",]),
+   (59225-nrow(syn[syn$subgenome=="MF2",]))-(nrow(sig[sig$sampleA=="Cabbage" & sig$sampleB=="TO1000",])-nrow(synSig[synSig$sampleA=="Cabbage" & synSig$sampleB=="TO1000" & synSig$subgenome=="MF2",])))
+)
+#Perform Fisher's Exact Test on subgenomes
+FEsubDEG <- data.frame(
+  row.names=c("Kale vs TO1000 LF","Kale vs TO1000 MF1","Kale vs TO1000 MF2",
+  	"Kale vs Cabbage LF","Kale vs Cabbage MF1","Kale vs Cabbage MF2",
+  	"Cabbage vs TO1000 LF","Cabbage vs TO1000 MF1","Cabbage vs TO1000 MF2"),
+  OR=c(fisher.test(as.matrix(subDEG[c(2:3),c(1,2)]),alternative="two.sided")$estimate,
+    fisher.test(as.matrix(subDEG[c(4:5),c(1,2)]),alternative="two.sided")$estimate,
+    fisher.test(as.matrix(subDEG[c(6:7),c(1,2)]),alternative="two.sided")$estimate,
+    fisher.test(as.matrix(subDEG[c(2:3),c(3,4)]),alternative="two.sided")$estimate,
+    fisher.test(as.matrix(subDEG[c(4:5),c(3,4)]),alternative="two.sided")$estimate,
+    fisher.test(as.matrix(subDEG[c(6:7),c(3,4)]),alternative="two.sided")$estimate,
+    fisher.test(as.matrix(subDEG[c(2:3),c(5,6)]),alternative="two.sided")$estimate,
+    fisher.test(as.matrix(subDEG[c(4:5),c(5,6)]),alternative="two.sided")$estimate,
+    fisher.test(as.matrix(subDEG[c(6:7),c(5,6)]),alternative="two.sided")$estimate),
+  pvalue=c(fisher.test(as.matrix(subDEG[c(2:3),c(1,2)]),alternative="two.sided")$p.value,
+    fisher.test(as.matrix(subDEG[c(4:5),c(1,2)]),alternative="two.sided")$p.value,
+    fisher.test(as.matrix(subDEG[c(6:7),c(1,2)]),alternative="two.sided")$p.value,
+    fisher.test(as.matrix(subDEG[c(2:3),c(3,4)]),alternative="two.sided")$p.value,
+    fisher.test(as.matrix(subDEG[c(4:5),c(3,4)]),alternative="two.sided")$p.value,
+    fisher.test(as.matrix(subDEG[c(6:7),c(3,4)]),alternative="two.sided")$p.value,
+    fisher.test(as.matrix(subDEG[c(2:3),c(5,6)]),alternative="two.sided")$p.value,
+    fisher.test(as.matrix(subDEG[c(4:5),c(5,6)]),alternative="two.sided")$p.value,
+    fisher.test(as.matrix(subDEG[c(6:7),c(5,6)]),alternative="two.sided")$p.value)
+)
+FEsubDEG$p.adjust <- p.adjust(FEsubDEG$pvalue,method="BH")
+
+#FEsubDEGFT <- flextable(FEsubDEG)
+#FEsubDEGFT <- autofit(FEsubDEG)
+#FEsubDEGFT <- align(FEsubDEG,align="center",part="all")
+#FEsubDEGFT <- add_header_lines(mapStatsFT,
+#  values=("Supplementary Table 1: Mapping Statistics"))
+#FEsubDEGFT <- bold(mapStatsFT,part="header")
+#FEsubDEGFT <- bold(mapStatsFT,j="Sample")
+#FEsubDEGFT <- font(mapStatsFT,fontname="Arial")
+#FEsubDEGFT <- fontsize(mapStatsFT,size=12,part="all")
+#save_as_docx(mapStatsFT,path=paste(path,"Supplementary_Table_1.docx",sep=""))
+
+
 
 #KvT subgenome
 KvTsub=data.frame(
@@ -507,9 +659,9 @@ for(gene in goi$Gene){
 #Plots for GOI of different functions
 for(i in c('Development','Defense','Nutrition','Flowering')){
   #Subset expression data
-  x <- geneEx[geneEx$Gene %in% goi2[goi2$Function==i,]$Gene,]
+  x <- geneEx[geneEx$Gene %in% goi[goi$Function==i,]$Gene,]
   #Merge expression data with goi info
-  x <- merge(x,goi2[goi2$Class==i,],by.x='Gene',by.y='Gene')
+  x <- merge(x,goi[goi$Function==i,],by.x='Gene',by.y='Gene')
   #Set rownames to combination of B. oleracea gene ID & At homolog name
   row.names(x) <- paste(x$Gene,': ',x$Name,sep="")
   #Reorder the data frame based on log2 fold change from increasing to decreasing
@@ -523,7 +675,7 @@ for(i in c('Development','Defense','Nutrition','Flowering')){
       #Turn off clustering
       cluster_rows=FALSE,cluster_cols=FALSE,
       #Modify the sample labels
-      labels_col =gsub('_',' ',colnames(x2[2:9])),)
+      labels_col =gsub('_',' ',colnames(x[2:9])),)
   dev.off()
 }
 
