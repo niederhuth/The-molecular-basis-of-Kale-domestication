@@ -1,3 +1,17 @@
+TFs <- read.csv("../misc/Bo_TFs.csv",header=TRUE)
+
+for(i in unique(TFs$TF.Family)){
+
+}
+
+
+
+
+
+
+
+
+
 
 tmp <- synRes[synRes$sampleA=="Kale" & synRes$sampleB=="TO1000",]
 tmp$direction <- ifelse(tmp$log2FC > 0 & tmp$padj < 0.05,1,ifelse(tmp$log2FC < 0 & tmp$padj < 0.05,-1,0))

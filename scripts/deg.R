@@ -224,7 +224,7 @@ ggsave(paste(path,"Kale_Shared_Expression.pdf",sep=""),
 	xlab("")
 )
 #Read in descriptive annotations
-BoAnnot <- read.csv("../misc/Bo_annotations.tsv",header=TRUE)
+BoAnnot <- read.csv("../misc/Bo_annotations.csv",header=TRUE)
 #Map genes to descriptive annotations and output as csv files
 KsharedAnnot <- merge(geneEx[geneEx$Gene %in% Kshared$id,],BoAnnot)
 write.csv(KsharedAnnot[c("Gene","Description","BLAST_hit")],
@@ -248,7 +248,7 @@ write.csv(KsharedDownAnnot[c("Gene","Description","BLAST_hit")],
 #Compare Syntenic vs Non-Syntenic Genes between B. oleracea and Arabidopsis for 
 #enrichment in DEGs
 #Read in data and format tables
-syn <- read.table("../misc/Bo-At-syntelogs.tsv",header=T,sep="\t")
+syn <- read.table("../misc/Bo_At_syntelogs.csv",header=T,sep="\t")
 synRes <- merge(resfull,syn,by.x="id",by.y="Bo_gene")
 synSig <- merge(sig,syn,by.x="id",by.y="Bo_gene")
 #Create a table of percentage of DEG & Non-DEG Syntenic & Non-Syntenic Genes
@@ -659,9 +659,9 @@ for(gene in goi$Gene){
 #Plots for GOI of different functions
 for(i in c('Development','Defense','Nutrition','Flowering')){
   #Subset expression data
-  x <- geneEx[geneEx$Gene %in% goi[goi$Function==i,]$Gene,]
+  x <- geneEx[geneEx$Gene %in% goi[goi$Function==i & goi$Heatmap=='',]$Gene,]
   #Merge expression data with goi info
-  x <- merge(x,goi[goi$Function==i,],by.x='Gene',by.y='Gene')
+  x <- merge(x,goi[goi$Function==i & goi$Heatmap=='',],by.x='Gene',by.y='Gene')
   #Set rownames to combination of B. oleracea gene ID & At homolog name
   row.names(x) <- paste(x$Gene,': ',x$Name,sep="")
   #Reorder the data frame based on log2 fold change from increasing to decreasing
@@ -678,6 +678,26 @@ for(i in c('Development','Defense','Nutrition','Flowering')){
       labels_col =gsub('_',' ',colnames(x[2:9])),)
   dev.off()
 }
-
-
+#New Heatmaps
+for(i in c('HM1','HM2')){
+  #Subset expression data
+  x <- geneEx[geneEx$Gene %in% goi[goi$Heatmap==i,]$Gene,]
+  #Merge expression data with goi info
+  x <- merge(x,goi[goi$Heatmap==i,],by.x='Gene',by.y='Gene')
+  #Set rownames to combination of B. oleracea gene ID & At homolog name
+  row.names(x) <- paste(x$Gene,': ',x$Name,sep="")
+  #Reorder the data frame based on log2 fold change from increasing to decreasing
+  x <- x[order(x$KvT_log2FC,decreasing=TRUE),]
+  #Lets make a heatmap
+  #Save as pdf
+  pdf(paste(path,i,'_heatmap.pdf',sep=''))
+    #Use pheatmap on log2 transformed data
+    #We add 0.01 to all the data to handle 0 values that otherwise get set to -Inf
+    pheatmap(log2(x[2:9]+0.01),
+      #Turn off clustering
+      cluster_rows=FALSE,cluster_cols=FALSE,
+      #Modify the sample labels
+      labels_col=gsub('_',' ',colnames(x[2:9])),)
+  dev.off()
+}
 
