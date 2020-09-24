@@ -1,0 +1,153 @@
+﻿Gene,Name,Function,Heatmap
+Bo5g156410,MYB106,Development
+Bo6g046840,GLABRA 2,Development
+Bo4g081080,SVB,Development
+Bo2g007350,TBR,Development
+Bo1g022290,BAM3,Development
+Bo1g086260,AXR4,Development
+Bo1g090350,ARF1,Development
+Bo1g103500,IAA2,Development
+Bo2g127690,IAA9,Development
+Bo2g161810,ARF2,Development
+Bo3g081600,IAA7,Development
+Bo3g082080,BLI,Development
+Bo5g004400,AXR3,Development
+Bo5g093110,IAA7,Development
+Bo6g014240,PIN3,Development
+Bo6g044730,LAX3,Development
+Bo6g044950,IAA9,Development
+Bo6g111180,ARF GH3,Development
+Bo6g111190,ARF GH3,Development
+Bo7g109250,ARF9,Development
+Bo7g116220,ARF GH3,Development
+Bo8g052710,AXR1,Development
+Bo8g070840,IAA9,Development
+Bo8g102450,AXR1,Development
+Bo9g072940,IAA9,Development
+Bo01250s010,ACAULIS 5,Development
+Bo4g039440,PID,Development
+Bo5g004680,IAA12,Development
+Bo7g062200,SAUR-LIKE ARF,Development
+Bo8g088360,ARF17,Development
+Bo5g086990,MYC2,Defense
+Bo5g043140,PFT1,Defense
+Bo4g009300,JAR1,Defense
+Bo1g050800,RCA,Defense
+Bo6g006920,PDF1.2,Defense
+Bo2g086460,PDF1.2,Defense
+Bo6g100350,MBP2,Defense
+Bo2g155820,TGG1,Defense
+Bo2g155840,TGG1,Defense
+Bo2g155810,TGG1,Defense
+Bo4g191120,CYP83A1,Defense
+Bo6g100310,MBP2,Defense
+Bo3g052110,AOP1,Defense
+Bo6g086780,MBP2,Defense
+Bo00751s090,MAM1,Defense
+Bo9g050970,SOT18,Defense
+Bo2g102190,AOP3,Defense
+Bo6g031030,TGG1,Defense
+Bo00751s100,MAM1,Defense
+Bo3g064960,HCHIB,Defense
+Bo7g058040,EP3,Defense
+Bo3g064970,HCHIB,Defense
+Bo1g021960,ChiC,Defense
+Bo3g036660,CHITINASE,Defense
+Bo3g024590,CHITINASE,Defense
+Bo3g019100,CER3,Defense
+Bo2g082410,TIFY10B,Defense
+Bo8g100360,ACL,Defense
+Bo3g028490,ACX,Defense
+Bo7g118280,MES9,Defense
+Bo6g115830,ACX5,Defense
+Bo6g080030,JR1,Defense
+Bo5g131580,COI1,Defense
+Bo9g037180,FMO GS-OX2,Defense
+Bo6g008450,SOT16,Defense
+Bo4g120620,SOT18,Defense
+Bo01342s020,IGMT4,Defense
+Bo4g188590,CYT1,Nutrition
+Bo2g041230,VTC5,Nutrition
+Bo8g002920,CRY2,Flowering
+Bo7g109690,PGI1,Flowering
+Bo9g067070,CCT,Flowering
+Bo9g012630,PRR5,Flowering
+Bo2g062650,AP1,Flowering
+Bo3g018870,MSI1,Flowering
+Bo5g038860,GI,Flowering
+Bo8g076450,CUL3,Flowering
+Bo1g157390,COL2,Flowering
+Bo5g043140,PFT1,Flowering
+Bo6g046240,SAR3,Flowering
+Bo3g100540,MAF4,Flowering
+Bo3g100570,AGL31,Flowering
+Bo4g159930,ELF3,Flowering
+Bo3g058530,CLPS3,Flowering
+Bo8g095790,MYB17,Flowering
+Bo4g042390,SPL3,Flowering
+Bo9g163720,COL1,Flowering
+Bo9g022460,ABH1,Flowering
+Bo4g040030,MED8,Flowering
+Bo4g024850,AGL20,Flowering
+Bo4g032400,ELF9,Flowering
+Bo7g078170,RPI2,Flowering
+Bo6g015990,RPI2,Flowering
+#New List
+Bo3g071570,TCP18,Plant Architecture,HM1
+Bo8g052710,AXR1,Plant Architecture,HM1
+Bo8g102450,AXR1,Plant Architecture,HM1
+Bo4g195410,YAB1,Leaf Morphogenesis,HM1
+Bo7g041000,ASL6,Leaf Morphogenesis,HM1
+Bo3g153310,ANT,Leaf Morphogenesis,HM1
+Bo6g124080,AP2,Leaf Morphogenesis,HM1
+Bo9g006170,ABP1,Leaf Morphogenesis,HM1
+Bo3g029830,BLH1,Leaf Morphogenesis,HM1
+Bo6g119600,BLH3,Leaf Morphogenesis,HM1
+Bo9g028790,KNAT7,Leaf Morphogenesis,HM1
+Bo4g142080,BEL1,Leaf Morphogenesis,HM1
+Bo5g156410,MYB106,Trichome Development,HM1
+Bo8g104210,MYB106,Trichome Development,HM1
+Bo8g091080,MYB80,Trichome Development,HM1
+Bo9g035460,EGL1,Trichome Development,HM1
+Bo7g090950,GL1,Trichome Development,HM1
+Bo6g079990,GL2,Trichome Development,HM1
+Bo3g031650,WRKY44,Trichome Development,HM1
+Bo4g030720,WRKY44,Trichome Development,HM1
+Bo1g051040,TRY,Trichome Development,HM1
+Bo03856s010,AGL70,Flowering,HM1
+Bo3g100570,AGL27,Flowering,HM1
+Bo6g094120,AGL12,Flowering,HM1
+Bo4g024850,SOC1,Flowering,HM1
+Bo9g173370,FLC,Flowering,HM1
+Bo00579s080,BBX13,Flowering,HM1
+Bo4g159930,ELF3,Flowering,HM1
+Bo2g062650,AP1,Flowering,HM1
+Bo5g097000,FRIGIDA-Like,Flowering,HM1
+Bo3g100540,AGL69,Flowering,HM1
+Bo3g042090,CYP711A1/MAX1,Strigalactones,HM2
+Bo7g118840,CYP79B2,Glucosinolates,HM2
+Bo4g191120,REF2,Glucosinolates,HM2
+Bo3g052110,AOP3,Glucosinolates,HM2
+Bo9g175680,MYB29,Glucosinolates,HM2
+Bo2g092580,IGMT1,Glucosinolates,HM2
+Bo2g092680,IGMT1,Glucosinolates,HM2
+Bo00934s010,TGG1,Glucosinolates,HM2
+Bo2g155820,TGG1,Glucosinolates,HM2
+Bo2g155840,TGG1,Glucosinolates,HM2
+Bo2g155870,TGG1,Glucosinolates,HM2
+Bo8g039420,TGG1,Glucosinolates,HM2
+Bo6g040050,MBP2,Glucosinolates,HM2
+Bo2g082270,MYB96,Abiotic Stress,HM2
+Bo6g118860,MYB96,Abiotic Stress,HM2
+Bo2g041230,VTC5,Vitamin C,HM2
+Bo2g165650,ASO,Vitamin C,HM2
+Bo9g150050,ASO,Vitamin C,HM2
+Bo7g118970,ASO,Vitamin C,HM2
+Bo4g061330,PY,Vitamin B1,HM2
+Bo8g059760,FD1,Iron,HM2
+Bo04491s010,CPN60A,Chloroplast,HM2
+Bo6g034560,CPN60A,Chloroplast,HM2
+
+
+
+

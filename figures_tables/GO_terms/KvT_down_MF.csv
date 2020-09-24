@@ -1,5 +1,5 @@
 GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
-GO:0046983,protein dimerization activity,968,111,78.94,7.7e-07,0.00136983
-GO:0031491,nucleosome binding,51,16,4.16,3.0e-06,0.0026685
-GO:0003676,nucleic acid binding,5544,530,452.1,1.7e-05,0.010081
-GO:0045431,flavonol synthase activity,5,5,0.41,3.9e-05,0.01734525
+GO:0046983,protein dimerization activity,968,111,78.85,9.1e-07,0.0016016
+GO:0031491,nucleosome binding,51,16,4.15,3.0e-06,0.00264
+GO:0003676,nucleic acid binding,5452,524,444.1,1.2e-05,0.00704
+GO:0045431,flavonol synthase activity,5,5,0.41,3.9e-05,0.01716

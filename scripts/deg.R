@@ -248,7 +248,7 @@ write.csv(KsharedDownAnnot[c("Gene","Description","BLAST_hit")],
 #Compare Syntenic vs Non-Syntenic Genes between B. oleracea and Arabidopsis for 
 #enrichment in DEGs
 #Read in data and format tables
-syn <- read.table("../misc/Bo_At_syntelogs.csv",header=T,sep="\t")
+syn <- read.csv("../misc/Bo_At_syntelogs.csv",header=T)
 synRes <- merge(resfull,syn,by.x="id",by.y="Bo_gene")
 synSig <- merge(sig,syn,by.x="id",by.y="Bo_gene")
 #Create a table of percentage of DEG & Non-DEG Syntenic & Non-Syntenic Genes
@@ -666,6 +666,8 @@ for(i in c('Development','Defense','Nutrition','Flowering')){
   row.names(x) <- paste(x$Gene,': ',x$Name,sep="")
   #Reorder the data frame based on log2 fold change from increasing to decreasing
   x <- x[order(x$KvT_log2FC,decreasing=TRUE),]
+  #Get number of rows Kale is higher expressed, use this to set gap in heatmap
+  gap <- nrow(x[x$KvT_log2FC > 0,])
   #Lets make a heatmap
   #Save as pdf
   pdf(paste(path,i,'_heatmap.pdf',sep=''))
@@ -675,7 +677,8 @@ for(i in c('Development','Defense','Nutrition','Flowering')){
       #Turn off clustering
       cluster_rows=FALSE,cluster_cols=FALSE,
       #Modify the sample labels
-      labels_col =gsub('_',' ',colnames(x[2:9])),)
+      labels_col =gsub('_',' ',colnames(x[2:9])),
+      gaps_row=c(gap),)
   dev.off()
 }
 #New Heatmaps
@@ -688,6 +691,8 @@ for(i in c('HM1','HM2')){
   row.names(x) <- paste(x$Gene,': ',x$Name,sep="")
   #Reorder the data frame based on log2 fold change from increasing to decreasing
   x <- x[order(x$KvT_log2FC,decreasing=TRUE),]
+  #Get number of rows Kale is higher expressed, use this to set gap in heatmap
+  gap <- nrow(x[x$KvT_log2FC > 0,])
   #Lets make a heatmap
   #Save as pdf
   pdf(paste(path,i,'_heatmap.pdf',sep=''))
@@ -697,7 +702,8 @@ for(i in c('HM1','HM2')){
       #Turn off clustering
       cluster_rows=FALSE,cluster_cols=FALSE,
       #Modify the sample labels
-      labels_col=gsub('_',' ',colnames(x[2:9])),)
+      labels_col=gsub('_',' ',colnames(x[2:9])),
+      gaps_row=c(gap),)
   dev.off()
 }
 

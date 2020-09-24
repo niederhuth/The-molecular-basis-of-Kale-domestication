@@ -1,5 +1,5 @@
 GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
-GO:0006790,sulfur compound metabolic process,659,76,44.3,1.1e-06,0.0049775
-GO:0019757,glycosinolate metabolic process,232,34,15.6,6.3e-06,0.0102566666666667
-GO:0010438,cellular response to sulfur starvation,16,8,1.08,6.8e-06,0.0102566666666667
-GO:1901135,carbohydrate derivative metabolic proces...,1295,124,87.06,1.1e-05,0.01244375
+GO:0006790,sulfur compound metabolic process,659,76,44.21,1.1e-06,0.0049423
+GO:0019757,glycosinolate metabolic process,232,34,15.56,4.7e-06,0.0101841333333333
+GO:0010438,cellular response to sulfur starvation,16,8,1.07,6.8e-06,0.0101841333333333
+GO:1901135,carbohydrate derivative metabolic proces...,1216,117,81.57,1.3e-05,0.01460225

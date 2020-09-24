@@ -1,31 +1,30 @@
 GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
-GO:0080028,nitrile biosynthetic process,20,10,0.87,9.5e-10,4.29875e-06
-GO:0050898,nitrile metabolic process,20,10,0.87,2.2e-09,4.9775e-06
-GO:1901568,fatty acid derivative metabolic process,140,22,6.07,1.7e-07,0.000256416666666667
-GO:0080027,response to herbivore,56,16,2.43,2.3e-07,0.0002601875
-GO:0019759,glycosinolate catabolic process,47,13,2.04,1.5e-06,0.0013575
-GO:1901136,carbohydrate derivative catabolic proces...,121,20,5.25,2.8e-06,0.00211166666666667
-GO:0051707,response to other organism,1965,130,85.23,5.3e-06,0.00342607142857143
-GO:1901570,fatty acid derivative biosynthetic proce...,96,16,4.16,7.4e-06,0.00357475
-GO:0008299,isoprenoid biosynthetic process,275,29,11.93,7.8e-06,0.00357475
-GO:0019757,glycosinolate metabolic process,232,27,10.06,7.9e-06,0.00357475
-GO:0044273,sulfur compound catabolic process,72,14,3.12,9.4e-06,0.00386681818181818
-GO:0010106,cellular response to iron ion starvation,22,8,0.95,1.3e-05,0.00490208333333333
-GO:0019748,secondary metabolic process,766,59,33.23,2.3e-05,0.00800576923076923
-GO:0015979,photosynthesis,379,34,16.44,3.0e-05,0.00969642857142857
-GO:0006082,organic acid metabolic process,2051,125,88.96,5.0e-05,0.0150833333333333
-GO:1903792,negative regulation of anion transport,7,4,0.3,6.3e-05,0.0170352941176471
-GO:0044281,small molecule metabolic process,3038,175,131.77,6.4e-05,0.0170352941176471
-GO:0009657,plastid organization,404,26,17.52,6.8e-05,0.0170944444444444
-GO:0050896,response to stimulus,9629,475,417.66,8.8e-05,0.0205681818181818
-GO:0009607,response to biotic stimulus,1993,132,86.45,9.5e-05,0.0205681818181818
-GO:0006629,lipid metabolic process,1593,100,69.1,0.00010,0.0205681818181818
-GO:0006950,response to stress,5784,324,250.88,0.00010,0.0205681818181818
-GO:0000272,polysaccharide catabolic process,273,25,11.84,0.00011,0.0216413043478261
-GO:0016143,S-glycoside metabolic process,232,27,10.06,0.00012,0.022625
-GO:0043271,negative regulation of ion transport,13,5,0.56,0.00013,0.02353
-GO:0008610,lipid biosynthetic process,923,66,40.04,0.00014,0.0243653846153846
-GO:1901658,glycosyl compound catabolic process,75,16,3.25,0.00017,0.0284907407407407
-GO:0080184,response to phenylpropanoid,13,5,0.56,0.00018,0.0290892857142857
-GO:0015977,carbon fixation,71,11,3.08,0.00024,0.037448275862069
-GO:0001906,cell killing,31,7,1.34,0.00030,0.04525
+GO:0080028,nitrile biosynthetic process,20,10,0.87,1.1e-09,4.493e-06
+GO:0050898,nitrile metabolic process,20,10,0.87,2.0e-09,4.493e-06
+GO:0080027,response to herbivore,56,16,2.43,1.5e-07,0.000202185
+GO:1901568,fatty acid derivative metabolic process,140,22,6.07,1.8e-07,0.000202185
+GO:0019759,glycosinolate catabolic process,47,13,2.04,1.5e-06,0.00112325
+GO:0044419,interspecies interaction between organis...,2247,143,97.37,1.5e-06,0.00112325
+GO:1901136,carbohydrate derivative catabolic proces...,121,20,5.24,3.6e-06,0.00231068571428571
+GO:0019757,glycosinolate metabolic process,232,27,10.05,7.6e-06,0.00386398
+GO:1901570,fatty acid derivative biosynthetic proce...,96,16,4.16,7.9e-06,0.00386398
+GO:0008299,isoprenoid biosynthetic process,275,29,11.92,8.6e-06,0.00386398
+GO:0010106,cellular response to iron ion starvation,22,8,0.95,1.3e-05,0.00524183333333333
+GO:0044273,sulfur compound catabolic process,72,14,3.12,1.4e-05,0.00524183333333333
+GO:0019748,secondary metabolic process,766,59,33.19,2.3e-05,0.00794915384615385
+GO:0015979,photosynthesis,379,34,16.42,2.9e-05,0.00930692857142857
+GO:0006082,organic acid metabolic process,1994,122,86.41,5.0e-05,0.0149766666666667
+GO:1903792,negative regulation of anion transport,7,4,0.3,6.3e-05,0.0174727777777778
+GO:0009657,plastid organization,404,26,17.51,7.0e-05,0.0174727777777778
+GO:0050896,response to stimulus,9620,475,416.88,7.0e-05,0.0174727777777778
+GO:0044281,small molecule metabolic process,2883,167,124.93,7.4e-05,0.0174990526315789
+GO:0006950,response to stress,5778,324,250.39,0.00010,0.0214882608695652
+GO:0006629,lipid metabolic process,1593,100,69.03,0.00011,0.0214882608695652
+GO:0043271,negative regulation of ion transport,13,5,0.56,0.00011,0.0214882608695652
+GO:0000272,polysaccharide catabolic process,274,25,11.87,0.00011,0.0214882608695652
+GO:0008610,lipid biosynthetic process,923,66,40,0.00017,0.0318254166666667
+GO:0080184,response to phenylpropanoid,13,5,0.56,0.00018,0.0323496
+GO:0034763,negative regulation of transmembrane tra...,9,4,0.39,0.00020,0.0345615384615385
+GO:0016143,S-glycoside metabolic process,232,27,10.05,0.00021,0.0349455555555556
+GO:0015977,carbon fixation,71,11,3.08,0.00024,0.0385114285714286
+GO:0009607,response to biotic stimulus,2153,138,93.3,0.00030,0.0464793103448276

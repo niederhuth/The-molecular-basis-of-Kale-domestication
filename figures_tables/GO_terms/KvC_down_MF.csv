@@ -1,4 +1,4 @@
 GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
-GO:0043169,cation binding,5529,395,371.79,4.7e-07,0.00083613
-GO:0016491,oxidoreductase activity,2141,180,143.97,1.2e-05,0.010674
-GO:0016782,transferase activity, transferring sulfu...,72,14,4.84,4.4e-05,0.026092
+GO:0043169,cation binding,5529,395,371.99,4.7e-07,0.0008272
+GO:0016491,oxidoreductase activity,2141,180,144.04,2.5e-05,0.022
+GO:0016782,transferase activity, transferring sulfu...,72,14,4.84,4.8e-05,0.02816

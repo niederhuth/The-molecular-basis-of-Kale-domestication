@@ -1,9 +1,9 @@
 GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
-GO:0019137,thioglucosidase activity,18,15,1.92,7.5e-10,1.33425e-06
-GO:0102799,glucosinolate glucohydrolase activity,17,14,1.81,4.2e-09,3.7359e-06
-GO:0003824,catalytic activity,12746,1449,1356.33,2.7e-05,0.016011
-GO:0016984,ribulose-bisphosphate carboxylase activi...,13,9,1.38,4.0e-05,0.01779
-GO:0016838,carbon-oxygen lyase activity, acting on ...,36,16,3.83,0.00010,0.02965
-GO:0004133,glycogen debranching enzyme activity,6,5,0.64,0.00010,0.02965
-GO:0016829,lyase activity,528,88,56.19,0.00013,0.0311325
-GO:0000287,magnesium ion binding,245,46,26.07,0.00014,0.0311325
+GO:0019137,thioglucosidase activity,18,15,1.92,7.5e-10,1.32e-06
+GO:0102799,glucosinolate glucohydrolase activity,17,14,1.81,4.2e-09,3.696e-06
+GO:0016984,ribulose-bisphosphate carboxylase activi...,13,9,1.38,4.0e-05,0.0234666666666667
+GO:0004133,glycogen debranching enzyme activity,6,5,0.64,0.00010,0.0308
+GO:0016838,carbon-oxygen lyase activity, acting on ...,36,16,3.83,0.00010,0.0308
+GO:0016829,lyase activity,528,88,56.19,0.00011,0.0308
+GO:0003824,catalytic activity,12378,1401,1317.33,0.00014,0.0308
+GO:0000287,magnesium ion binding,245,46,26.07,0.00014,0.0308
