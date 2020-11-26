@@ -74,7 +74,7 @@ do
 		--outFilterMismatchNmax 10 \
 		--outFilterMismatchNoverReadLmax 0.1 \
 		--quantMode GeneCounts
-	cut -f1,4 ReadsPerGene.out.tab | sed '1,4d' > counts.tsv 
+	cut -f1,2 ReadsPerGene.out.tab | sed '1,4d' > counts.tsv 
 	cp counts.tsv ../../../figures_tables/raw_counts/"$i"_counts.tsv
 	cd ../../
 done
