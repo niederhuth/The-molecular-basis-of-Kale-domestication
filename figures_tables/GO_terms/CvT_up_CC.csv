@@ -1,6 +1,0 @@
-GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
-GO:0009536,plastid,3612,344,258.42,1.4e-08,1.0836e-05
-GO:0009532,plastid stroma,1126,119,80.56,1.0e-05,0.00387
-GO:0005737,cytoplasm,14292,1100,1022.51,2.8e-05,0.0063855
-GO:0034357,photosynthetic membrane,559,65,39.99,3.3e-05,0.0063855
-GO:0009579,thylakoid,747,82,53.44,6.8e-05,0.0105264

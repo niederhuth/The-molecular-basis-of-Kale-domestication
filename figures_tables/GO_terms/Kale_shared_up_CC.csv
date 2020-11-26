@@ -1,7 +1,0 @@
-GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
-GO:0009536,plastid,3612,219,150.82,8.2e-11,6.3468e-08
-GO:0009532,plastid stroma,1126,91,47.02,8.1e-10,3.1347e-07
-GO:0005576,extracellular region,1759,120,73.45,3.9e-08,1.0062e-05
-GO:0009579,thylakoid,747,61,31.19,4.0e-07,7.74e-05
-GO:0034357,photosynthetic membrane,559,43,23.34,8.8e-05,0.0136224
-GO:0005853,eukaryotic translation elongation factor...,9,4,0.38,0.00033,0.04257
