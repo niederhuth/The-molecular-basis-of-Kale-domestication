@@ -1,0 +1,6 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0043169,cation binding,6021,478,447.53,1.8e-08,3.2274e-05
+GO:0003676,nucleic acid binding,5953,478,442.48,4.3e-06,0.00385495
+GO:0016491,oxidoreductase activity,2371,212,176.23,9.9e-06,0.0059169
+GO:0016782,transferase activity, transferring sulfu...,78,16,5.8,1.6e-05,0.007172
+GO:0098772,molecular function regulator,3511,316,260.97,0.00011,0.039446

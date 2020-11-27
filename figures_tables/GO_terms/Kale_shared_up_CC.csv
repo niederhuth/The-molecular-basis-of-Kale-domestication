@@ -1,0 +1,6 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0009536,plastid,3789,261,192.54,1.9e-09,1.4972e-06
+GO:0009532,plastid stroma,1177,100,59.81,2.5e-07,9.85e-05
+GO:0005576,extracellular region,2024,151,102.85,7.4e-07,0.000194373333333333
+GO:0005773,vacuole,1879,130,95.48,4.0e-05,0.00788
+GO:0009579,thylakoid,778,62,39.53,0.00028,0.044128

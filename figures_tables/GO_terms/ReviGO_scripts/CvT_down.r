@@ -21,10 +21,15 @@ library(treemap) 								# treemap package by Martijn Tennekes
 # Here is your data from REVIGO. Scroll down for plot configuration options.
 
 revigo.names <- c("term_ID","description","freqInDbPercent","abslog10pvalue","uniqueness","dispensability","representative");
-revigo.data <- rbind(c("GO:0006139","nucleobase-containing compound metabolic process",26.547,2.4811,0.192,0.000,"nucleobase-containing compound metabolism"),
-c("GO:0034641","cellular nitrogen compound metabolic process",34.137,2.0434,0.199,0.484,"nucleobase-containing compound metabolism"),
-c("GO:0046483","heterocycle metabolic process",29.664,2.1313,0.270,0.234,"nucleobase-containing compound metabolism"),
-c("GO:0006725","cellular aromatic compound metabolic process",29.628,2.1313,0.270,0.245,"nucleobase-containing compound metabolism"));
+revigo.data <- rbind(c("GO:0017038","protein import",0.257,1.5752,0.766,0.000,"protein import"),
+c("GO:0051276","chromosome organization",1.477,3.1462,0.593,0.000,"chromosome organization"),
+c("GO:0032543","mitochondrial translation",0.068,1.5100,0.523,0.557,"chromosome organization"),
+c("GO:0006139","nucleobase-containing compound metabolic process",26.547,3.1462,0.441,0.059,"nucleobase-containing compound metabolism"),
+c("GO:0034641","cellular nitrogen compound metabolic process",34.137,2.5216,0.496,0.484,"nucleobase-containing compound metabolism"),
+c("GO:0046483","heterocycle metabolic process",29.664,3.1462,0.592,0.234,"nucleobase-containing compound metabolism"),
+c("GO:0006725","cellular aromatic compound metabolic process",29.628,2.9432,0.592,0.245,"nucleobase-containing compound metabolism"),
+c("GO:0090304","nucleic acid metabolic process",21.449,1.5100,0.449,0.597,"nucleobase-containing compound metabolism"),
+c("GO:1901360","organic cyclic compound metabolic process",30.324,1.5100,0.708,0.178,"nucleobase-containing compound metabolism"));
 
 stuff <- data.frame(revigo.data);
 names(stuff) <- revigo.names;

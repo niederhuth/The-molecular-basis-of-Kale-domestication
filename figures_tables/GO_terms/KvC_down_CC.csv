@@ -1,0 +1,11 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0000786,nucleosome,95,23,7.07,3.8e-07,0.00029944
+GO:0044815,DNA packaging complex,104,23,7.74,5.6e-06,0.00207506666666667
+GO:0032993,protein-DNA complex,152,29,11.32,7.9e-06,0.00207506666666667
+GO:0005622,intracellular,20976,1633,1561.7,1.1e-05,0.002167
+GO:0110165,cellular anatomical entity,26156,1956,1947.36,0.00012,0.018912
+GO:0098798,mitochondrial protein complex,268,38,19.95,0.00017,0.0223266666666667
+GO:0010369,chromocenter,32,10,2.38,0.00026,0.026595
+GO:1990204,oxidoreductase complex,194,28,14.44,0.00027,0.026595
+GO:0098796,membrane protein complex,920,89,68.5,0.00057,0.044916
+GO:0070469,respirasome,165,25,12.28,0.00057,0.044916

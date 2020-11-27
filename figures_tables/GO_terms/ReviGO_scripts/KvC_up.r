@@ -21,26 +21,20 @@ library(treemap) 								# treemap package by Martijn Tennekes
 # Here is your data from REVIGO. Scroll down for plot configuration options.
 
 revigo.names <- c("term_ID","description","freqInDbPercent","abslog10pvalue","uniqueness","dispensability","representative");
-revigo.data <- rbind(c("GO:0050898","nitrile metabolic process",0.000,2.7076,0.875,0.000,"nitrile metabolism"),
-c("GO:0080028","nitrile biosynthetic process",0.000,2.7704,0.863,0.103,"nitrile metabolism"),
-c("GO:0080027","response to herbivore",0.000,2.7704,0.819,0.000,"response to herbivore"),
-c("GO:0006950","response to stress",4.575,2.4693,0.818,0.238,"response to herbivore"),
-c("GO:0051707","response to other organism",0.299,1.3724,0.793,0.634,"response to herbivore"),
-c("GO:0009605","response to external stimulus",1.370,2.2652,0.820,0.501,"response to herbivore"),
-c("GO:0015979","photosynthesis",0.183,2.4636,0.889,0.007,"photosynthesis"),
-c("GO:0015977","carbon fixation",0.036,2.4413,0.866,0.021,"carbon fixation"),
-c("GO:0008299","isoprenoid biosynthetic process",0.442,1.4113,0.839,0.118,"carbon fixation"),
-c("GO:0007033","vacuole organization",0.102,1.3444,0.902,0.025,"vacuole organization"),
-c("GO:0010629","negative regulation of gene expression",0.784,2.0434,0.623,0.035,"negative regulation of gene expression"),
-c("GO:0032879","regulation of localization",0.726,1.5723,0.787,0.271,"negative regulation of gene expression"),
-c("GO:0043271","negative regulation of ion transport",0.022,1.3444,0.625,0.579,"negative regulation of gene expression"),
-c("GO:0010361","regulation of anion channel activity by blue light",0.000,1.3444,0.697,0.399,"negative regulation of gene expression"),
-c("GO:0071902","positive regulation of protein serine/threonine kinase activity",0.075,1.5796,0.734,0.314,"negative regulation of gene expression"),
-c("GO:0005975","carbohydrate metabolic process",5.260,1.6040,0.874,0.058,"carbohydrate metabolism"),
-c("GO:0010021","amylopectin biosynthetic process",0.001,1.3724,0.835,0.068,"amylopectin biosynthesis"),
-c("GO:0019759","glycosinolate catabolic process",0.001,1.3444,0.819,0.219,"amylopectin biosynthesis"),
-c("GO:2000896","amylopectin metabolic process",0.001,1.3444,0.845,0.221,"amylopectin biosynthesis"),
-c("GO:1901568","fatty acid derivative metabolic process",0.017,1.4113,0.867,0.095,"fatty acid derivative metabolism"));
+revigo.data <- rbind(c("GO:0018874","benzoate metabolic process",0.004,2.2055,0.804,0.000,"benzoate metabolism"),
+c("GO:0043271","negative regulation of ion transport",0.022,1.4758,0.829,0.000,"negative regulation of ion transport"),
+c("GO:0080027","response to herbivore",0.000,2.9987,0.671,0.000,"response to herbivore"),
+c("GO:0006950","response to stress",4.575,1.4873,0.660,0.501,"response to herbivore"),
+c("GO:0034052","positive regulation of plant-type hypersensitive response",0.000,2.2055,0.608,0.141,"response to herbivore"),
+c("GO:0009605","response to external stimulus",1.370,1.6879,0.666,0.220,"response to herbivore"),
+c("GO:0016046","detection of fungus",0.000,2.2055,0.685,0.422,"response to herbivore"),
+c("GO:0010106","cellular response to iron ion starvation",0.002,1.6665,0.636,0.362,"response to herbivore"),
+c("GO:0007032","endosome organization",0.020,1.5815,0.849,0.017,"endosome organization"),
+c("GO:0050898","nitrile metabolic process",0.000,2.1650,0.840,0.019,"nitrile metabolism"),
+c("GO:0080028","nitrile biosynthetic process",0.000,2.2055,0.830,0.103,"nitrile metabolism"),
+c("GO:0015979","photosynthesis",0.183,2.2055,0.841,0.036,"photosynthesis"),
+c("GO:1901568","fatty acid derivative metabolic process",0.017,2.1650,0.822,0.083,"fatty acid derivative metabolism"),
+c("GO:0015977","carbon fixation",0.036,1.4873,0.821,0.095,"carbon fixation"));
 
 stuff <- data.frame(revigo.data);
 names(stuff) <- revigo.names;

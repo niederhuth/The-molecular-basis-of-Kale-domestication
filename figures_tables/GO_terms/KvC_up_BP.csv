@@ -1,0 +1,16 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0080027,response to herbivore,57,24,6.88,2.2e-07,0.00100298
+GO:0018874,benzoate metabolic process,31,15,3.74,3.0e-06,0.00623063333333333
+GO:0015979,photosynthesis,394,78,47.53,6.0e-06,0.00623063333333333
+GO:0080028,nitrile biosynthetic process,22,11,2.65,6.9e-06,0.00623063333333333
+GO:0034052,positive regulation of plant-type hypers...,32,14,3.86,7.4e-06,0.00623063333333333
+GO:0016046,detection of fungus,26,13,3.14,8.2e-06,0.00623063333333333
+GO:1901568,fatty acid derivative metabolic process,152,38,18.34,1.2e-05,0.0068385
+GO:0050898,nitrile metabolic process,22,11,2.65,1.2e-05,0.0068385
+GO:0009605,response to external stimulus,3152,450,380.25,4.4e-05,0.0205155
+GO:0010363,regulation of plant-type hypersensitive ...,42,15,5.07,4.5e-05,0.0205155
+GO:0010106,cellular response to iron ion starvation,26,12,3.14,5.2e-05,0.0215516363636364
+GO:0007032,endosome organization,33,12,3.98,6.9e-05,0.02621425
+GO:0006950,response to stress,6366,846,767.97,9.5e-05,0.0325642857142857
+GO:0015977,carbon fixation,77,22,9.29,0.00010,0.0325642857142857
+GO:0043271,negative regulation of ion transport,14,8,1.69,0.00011,0.0334326666666667

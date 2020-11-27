@@ -1,0 +1,5 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0005739,mitochondrion,2137,290,226.54,5.8e-06,0.0045704
+GO:0010369,chromocenter,32,12,3.39,5.0e-05,0.0197
+GO:0000943,retrotransposon nucleocapsid,40,13,4.24,0.00016,0.03349
+GO:0005720,nuclear heterochromatin,23,9,2.44,0.00017,0.03349

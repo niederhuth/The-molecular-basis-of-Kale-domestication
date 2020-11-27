@@ -1,0 +1,12 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0016491,oxidoreductase activity,2371,408,277.52,1.1e-13,1.9723e-10
+GO:0046906,tetrapyrrole binding,566,117,66.25,1.5e-12,1.34475e-09
+GO:0005506,iron ion binding,503,104,58.87,2.0e-08,1.19533333333333e-05
+GO:0019904,protein domain specific binding,183,42,21.42,4.1e-07,0.0001837825
+GO:0102799,glucosinolate glucohydrolase activity,18,12,2.11,1.2e-06,0.00043032
+GO:0019137,thioglucosidase activity,21,13,2.46,1.5e-06,0.00044825
+GO:0016209,antioxidant activity,222,50,25.98,3.6e-06,0.000922114285714286
+GO:0003824,catalytic activity,13599,1699,1591.71,9.7e-06,0.0021740125
+GO:0016168,chlorophyll binding,52,18,6.09,1.3e-05,0.00258988888888889
+GO:0051139,metal ion:proton antiporter activity,30,10,3.51,1.6e-05,0.0028688
+GO:0019842,vitamin binding,260,48,30.43,0.00021,0.03423

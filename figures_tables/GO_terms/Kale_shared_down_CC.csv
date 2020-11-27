@@ -1,0 +1,5 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0032993,protein-DNA complex,152,18,4.78,3e-05,0.02364
+GO:0032991,protein-containing complex,4546,183,143.1,0.00018,0.04531
+GO:0010369,chromocenter,32,7,1.01,0.00019,0.04531
+GO:0044815,DNA packaging complex,104,13,3.27,0.00023,0.04531

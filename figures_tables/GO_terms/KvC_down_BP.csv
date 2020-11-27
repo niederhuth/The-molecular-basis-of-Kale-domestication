@@ -1,0 +1,12 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0010200,response to chitin,251,54,19.02,2.2e-09,1.00298e-05
+GO:0010438,cellular response to sulfur starvation,17,10,1.29,3.5e-07,0.000797825
+GO:0019757,glycosinolate metabolic process,267,42,20.24,7.1e-07,0.00107896333333333
+GO:0080167,response to karrikin,193,38,14.63,2.1e-06,0.002393475
+GO:0010467,gene expression,5411,441,410.08,4.9e-06,0.00446782
+GO:0006790,sulfur compound metabolic process,721,87,54.64,7.2e-06,0.0054708
+GO:0045839,negative regulation of mitotic nuclear d...,51,10,3.87,2.0e-05,0.0130257142857143
+GO:0060255,regulation of macromolecule metabolic pr...,3930,335,297.84,3.6e-05,0.0187425555555556
+GO:0019758,glycosinolate biosynthetic process,97,21,7.35,3.7e-05,0.0187425555555556
+GO:0010117,photoprotection,14,7,1.06,8.2e-05,0.036472
+GO:0001932,regulation of protein phosphorylation,259,27,19.63,8.8e-05,0.036472

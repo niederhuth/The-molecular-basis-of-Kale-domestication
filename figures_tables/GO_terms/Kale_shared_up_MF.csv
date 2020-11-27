@@ -1,0 +1,6 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0019137,thioglucosidase activity,21,12,1.1,5.1e-08,6.90305e-05
+GO:0102799,glucosinolate glucohydrolase activity,18,11,0.95,7.7e-08,6.90305e-05
+GO:0003824,catalytic activity,13599,787,714.81,1.7e-05,0.0101603333333333
+GO:0016491,oxidoreductase activity,2371,181,124.63,2.5e-05,0.01120625
+GO:0016798,hydrolase activity, acting on glycosyl b...,599,55,31.49,0.00013,0.046618
