@@ -21,13 +21,7 @@ library(treemap) 								# treemap package by Martijn Tennekes
 # Here is your data from REVIGO. Scroll down for plot configuration options.
 
 revigo.names <- c("term_ID","description","freqInDbPercent","abslog10pvalue","uniqueness","dispensability","representative");
-revigo.data <- rbind(c("GO:0009116","nucleoside metabolic process",2.917,2.3901,0.357,0.000,"nucleoside metabolism"),
-c("GO:0034641","cellular nitrogen compound metabolic process",34.137,2.8972,0.578,0.252,"nucleoside metabolism"),
-c("GO:0006139","nucleobase-containing compound metabolic process",26.547,1.8673,0.503,0.484,"nucleoside metabolism"),
-c("GO:0050684","regulation of mRNA processing",0.035,1.4993,0.540,0.169,"nucleoside metabolism"),
-c("GO:1903311","regulation of mRNA metabolic process",0.044,1.3667,0.537,0.611,"nucleoside metabolism"),
-c("GO:0022613","ribonucleoprotein complex biogenesis",1.614,1.3667,0.657,0.000,"ribonucleoprotein complex biogenesis"),
-c("GO:1901135","carbohydrate derivative metabolic process",6.319,1.3822,0.716,0.071,"carbohydrate derivative metabolism"));
+revigo.data <- rbind(c("GO:0034641","cellular nitrogen compound metabolic process",34.137,1.4326,1.000,0.000,"cellular nitrogen compound metabolism"));
 
 stuff <- data.frame(revigo.data);
 names(stuff) <- revigo.names;

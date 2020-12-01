@@ -1,0 +1,10 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0051276,chromosome organization,995,154,105.09,4.3e-07,0.000714243333333333
+GO:0046483,heterocycle metabolic process,6219,764,656.84,4.4e-07,0.000714243333333333
+GO:0006139,nucleobase-containing compound metabolic...,5683,714,600.23,4.7e-07,0.000714243333333333
+GO:0006725,cellular aromatic compound metabolic pro...,6504,792,686.94,1.0e-06,0.00113975
+GO:0034641,cellular nitrogen compound metabolic pro...,7200,865,760.45,3.3e-06,0.00300894
+GO:0017038,protein import,209,38,22.07,3.5e-05,0.0265941666666667
+GO:1901360,organic cyclic compound metabolic proces...,6707,804,708.38,5.3e-05,0.0308998888888889
+GO:0032543,mitochondrial translation,43,14,4.54,5.9e-05,0.0308998888888889
+GO:0090304,nucleic acid metabolic process,5057,638,534.11,6.1e-05,0.0308998888888889

@@ -1,0 +1,23 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0080028,nitrile biosynthetic process,22,9,1.15,2.2e-07,0.000615465
+GO:0044419,interspecies interaction between organis...,2506,187,130.96,2.7e-07,0.000615465
+GO:0044281,small molecule metabolic process,3049,216,159.33,4.4e-07,0.000661055
+GO:0050898,nitrile metabolic process,22,9,1.15,5.8e-07,0.000661055
+GO:0006082,organic acid metabolic process,2137,158,111.67,1.1e-06,0.00100298
+GO:0080027,response to herbivore,57,16,2.98,1.9e-06,0.00144368333333333
+GO:1901568,fatty acid derivative metabolic process,152,23,7.94,3.5e-06,0.0022795
+GO:0015979,photosynthesis,394,41,20.59,6.0e-06,0.00341925
+GO:0008610,lipid biosynthetic process,999,84,52.2,1.5e-05,0.00759833333333333
+GO:0018874,benzoate metabolic process,31,10,1.62,2.2e-05,0.0100298
+GO:0006629,lipid metabolic process,1737,127,90.77,2.9e-05,0.0120191818181818
+GO:0050896,response to stimulus,10587,621,553.24,5.0e-05,0.0189958333333333
+GO:1901570,fatty acid derivative biosynthetic proce...,107,17,5.59,5.5e-05,0.0192880769230769
+GO:0034052,positive regulation of plant-type hypers...,32,8,1.67,6.6e-05,0.0214924285714286
+GO:0006468,protein phosphorylation,1237,72,64.64,9.9e-05,0.0300894
+GO:0008299,isoprenoid biosynthetic process,308,32,16.1,0.00011,0.0303933333333333
+GO:0009607,response to biotic stimulus,2408,180,125.83,0.00012,0.0303933333333333
+GO:1901136,carbohydrate derivative catabolic proces...,139,20,7.26,0.00012,0.0303933333333333
+GO:0010106,cellular response to iron ion starvation,26,8,1.36,0.00013,0.0311931578947368
+GO:0010363,regulation of plant-type hypersensitive ...,42,8,2.19,0.00014,0.031913
+GO:0016046,detection of fungus,26,8,1.36,0.00016,0.0347352380952381
+GO:0010119,regulation of stomatal movement,210,22,10.97,0.00024,0.0497345454545455

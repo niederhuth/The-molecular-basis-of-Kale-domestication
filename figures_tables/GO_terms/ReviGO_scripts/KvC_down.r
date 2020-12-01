@@ -21,11 +21,18 @@ library(treemap) 								# treemap package by Martijn Tennekes
 # Here is your data from REVIGO. Scroll down for plot configuration options.
 
 revigo.names <- c("term_ID","description","freqInDbPercent","abslog10pvalue","uniqueness","dispensability","representative");
-revigo.data <- rbind(c("GO:0006790","sulfur compound metabolic process",1.822,2.3030,0.417,0.000,"sulfur compound metabolism"),
-c("GO:0010438","cellular response to sulfur starvation",0.000,1.9890,0.430,0.019,"cellular response to sulfur starvation"),
-c("GO:1901135","carbohydrate derivative metabolic process",6.319,1.9050,0.448,0.021,"carbohydrate derivative metabolism"),
-c("GO:0019757","glycosinolate metabolic process",0.003,1.9890,0.406,0.042,"glycosinolate metabolism"));
+revigo.data <- rbind(c("GO:0010200","response to chitin",0.004,5.0000,0.721,0.000,"response to chitin"),
+c("GO:0080167","response to karrikin",0.006,2.6210,0.671,0.187,"response to chitin"),
+c("GO:0010117","photoprotection",0.000,1.4380,0.678,0.461,"response to chitin"),
+c("GO:0010438","cellular response to sulfur starvation",0.000,3.0981,0.716,0.158,"response to chitin"),
+c("GO:0019757","glycosinolate metabolic process",0.003,2.9670,0.606,0.000,"glycosinolate metabolism"),
+c("GO:0045839","negative regulation of mitotic nuclear division",0.051,1.8852,0.685,0.104,"glycosinolate metabolism"),
+c("GO:0060255","regulation of macromolecule metabolic process",11.716,1.7272,0.634,0.493,"glycosinolate metabolism"),
+c("GO:0001932","regulation of protein phosphorylation",0.430,1.4380,0.639,0.208,"glycosinolate metabolism"),
+c("GO:0010467","gene expression",19.671,2.3499,0.747,0.038,"gene expression"),
+c("GO:0006790","sulfur compound metabolic process",1.822,2.2619,0.771,0.042,"sulfur compound metabolism"));
 
+stuff <- data.frame(revigo.data);
 stuff <- data.frame(revigo.data);
 names(stuff) <- revigo.names;
 

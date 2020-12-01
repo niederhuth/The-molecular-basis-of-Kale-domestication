@@ -12,7 +12,7 @@ library(scales)
 library(flextable)
 mapStats <- read.csv("Mapping_Stats.csv",header=TRUE)
 #Add a percentage mapped column
-mapStats$Pecent.Uniquely.Mapped <- percent(
+mapStats$Percent.Uniquely.Mapped <- percent(
   mapStats$Uniquely.Mapped/mapStats$Trimmed.Reads,accuracy=0.1)
 #Get rid of period in the column names
 colnames(mapStats) <- gsub("\\."," ",colnames(mapStats))
@@ -367,22 +367,22 @@ FEsubDEG <- data.frame(
   	"Kale vs Cabbage LF","Kale vs Cabbage MF1","Kale vs Cabbage MF2",
   	"Cabbage vs TO1000 LF","Cabbage vs TO1000 MF1","Cabbage vs TO1000 MF2"),
   OR=c(fisher.test(as.matrix(subDEG[c(2:3),c(1,2)]),alternative="two.sided")$estimate,
-    fisher.test(as.matrix(subDEG[c(4:5),c(1,2)]),alternative="two.sided")$estimate,
-    fisher.test(as.matrix(subDEG[c(6:7),c(1,2)]),alternative="two.sided")$estimate,
     fisher.test(as.matrix(subDEG[c(2:3),c(3,4)]),alternative="two.sided")$estimate,
-    fisher.test(as.matrix(subDEG[c(4:5),c(3,4)]),alternative="two.sided")$estimate,
-    fisher.test(as.matrix(subDEG[c(6:7),c(3,4)]),alternative="two.sided")$estimate,
     fisher.test(as.matrix(subDEG[c(2:3),c(5,6)]),alternative="two.sided")$estimate,
+    fisher.test(as.matrix(subDEG[c(4:5),c(1,2)]),alternative="two.sided")$estimate,
+    fisher.test(as.matrix(subDEG[c(4:5),c(3,4)]),alternative="two.sided")$estimate,
     fisher.test(as.matrix(subDEG[c(4:5),c(5,6)]),alternative="two.sided")$estimate,
+    fisher.test(as.matrix(subDEG[c(6:7),c(1,2)]),alternative="two.sided")$estimate,
+    fisher.test(as.matrix(subDEG[c(6:7),c(3,4)]),alternative="two.sided")$estimate,
     fisher.test(as.matrix(subDEG[c(6:7),c(5,6)]),alternative="two.sided")$estimate),
   pvalue=c(fisher.test(as.matrix(subDEG[c(2:3),c(1,2)]),alternative="two.sided")$p.value,
-    fisher.test(as.matrix(subDEG[c(4:5),c(1,2)]),alternative="two.sided")$p.value,
-    fisher.test(as.matrix(subDEG[c(6:7),c(1,2)]),alternative="two.sided")$p.value,
     fisher.test(as.matrix(subDEG[c(2:3),c(3,4)]),alternative="two.sided")$p.value,
-    fisher.test(as.matrix(subDEG[c(4:5),c(3,4)]),alternative="two.sided")$p.value,
-    fisher.test(as.matrix(subDEG[c(6:7),c(3,4)]),alternative="two.sided")$p.value,
     fisher.test(as.matrix(subDEG[c(2:3),c(5,6)]),alternative="two.sided")$p.value,
+    fisher.test(as.matrix(subDEG[c(4:5),c(1,2)]),alternative="two.sided")$p.value,
+    fisher.test(as.matrix(subDEG[c(4:5),c(3,4)]),alternative="two.sided")$p.value,
     fisher.test(as.matrix(subDEG[c(4:5),c(5,6)]),alternative="two.sided")$p.value,
+    fisher.test(as.matrix(subDEG[c(6:7),c(1,2)]),alternative="two.sided")$p.value,
+    fisher.test(as.matrix(subDEG[c(6:7),c(3,4)]),alternative="two.sided")$p.value,
     fisher.test(as.matrix(subDEG[c(6:7),c(5,6)]),alternative="two.sided")$p.value)
 )
 FEsubDEG$p.adjust <- p.adjust(FEsubDEG$pvalue,method="BH")

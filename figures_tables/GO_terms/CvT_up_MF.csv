@@ -1,0 +1,24 @@
+GO.ID,Term,Annotated,Significant,Expected,Fisher,fdr
+GO:0016491,oxidoreductase activity,2371,283,195.04,3.1e-12,5.5583e-09
+GO:0046906,tetrapyrrole binding,566,82,46.56,5.5e-10,4.93075e-07
+GO:0047631,ADP-ribose diphosphatase activity,14,9,1.15,6.5e-08,3.88483333333333e-05
+GO:0016209,antioxidant activity,222,43,18.26,1.1e-07,4.93075e-05
+GO:0019842,vitamin binding,260,38,21.39,3.1e-06,0.00104591666666667
+GO:0043565,sequence-specific DNA binding,1521,147,125.12,3.5e-06,0.00104591666666667
+GO:0005506,iron ion binding,503,74,41.38,5.6e-06,0.0014344
+GO:0043169,cation binding,6021,536,495.3,7.8e-06,0.001748175
+GO:0004551,nucleotide diphosphatase activity,33,11,2.71,9.6e-06,0.00191253333333333
+GO:0004020,adenylylsulfate kinase activity,14,6,1.15,2.9e-05,0.0051997
+GO:0050661,NADP binding,123,20,10.12,8.7e-05,0.014181
+GO:0016790,thiolester hydrolase activity,66,16,5.43,0.00012,0.0165507692307692
+GO:0019900,kinase binding,334,42,27.48,0.00012,0.0165507692307692
+GO:0016758,transferase activity, transferring hexos...,625,71,51.41,0.00020,0.0256142857142857
+GO:0016782,transferase activity, transferring sulfu...,78,15,6.42,0.00022,0.0262973333333333
+GO:0008171,O-methyltransferase activity,96,18,7.9,0.00027,0.030256875
+GO:0070401,NADP+ binding,6,4,0.49,0.00030,0.0316411764705882
+GO:0052855,ADP-dependent NAD(P)H-hydrate dehydratas...,6,5,0.49,0.00036,0.0339726315789474
+GO:0047453,ATP-dependent NAD(P)H-hydrate dehydratas...,6,5,0.49,0.00036,0.0339726315789474
+GO:0031543,peptidyl-proline dioxygenase activity,25,7,2.06,0.00040,0.03586
+GO:0015157,oligosaccharide transmembrane transporte...,28,10,2.3,0.00046,0.0392752380952381
+GO:0003906,DNA-(apurinic or apyrimidinic site) endo...,25,5,2.06,0.00051,0.0413169565217391
+GO:0016229,steroid dehydrogenase activity,22,9,1.81,0.00053,0.0413169565217391
