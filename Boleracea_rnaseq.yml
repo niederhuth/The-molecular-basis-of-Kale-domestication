@@ -1,4 +1,4 @@
-name: Boleracea_rnaseq
+name: Boleracea-rnaseq
 channels:
   - defaults
   - conda-forge
@@ -57,5 +57,5 @@ dependencies:
   - xopen=0.8.1=py37_0
   - xz=5.2.4=h14c3975_4
   - zlib=1.2.11=h7b6447c_3
-prefix: /mnt/home/niederhu/miniconda3/envs/Boleracea_rnaseq
+prefix: /mnt/home/niederhu/miniconda3/envs/Boleracea-rnaseq
 

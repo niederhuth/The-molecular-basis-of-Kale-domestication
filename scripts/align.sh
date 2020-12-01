@@ -8,7 +8,7 @@
 #SBATCH --output=job_reports/%x-%j.SLURMout
 
 cd $PBS_O_WORKDIR
-export PATH="$HOME/miniconda3/envs/Boleracea_rnaseq/bin:$PATH"
+export PATH="$HOME/miniconda3/envs/Boleracea-rnaseq/bin:$PATH"
 
 #Define variables
 samples=$(awk -v FS="," '$3=="this_study"' ../misc/samples.csv | cut -d ',' -f 1 | tr '\n' ' ')
