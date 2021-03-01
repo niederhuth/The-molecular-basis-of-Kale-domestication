@@ -8,7 +8,7 @@
 #SBATCH --output=job_reports/%x-%j.SLURMout
 
 cd $PBS_O_WORKDIR
-export PATH="$HOME/miniconda3/envs/Boleracea_rnaseq/bin:$PATH"
+export PATH="$HOME/miniconda3/envs/Boleracea-rnaseq/bin:$PATH"
 
 #Define variables
 sample=$(pwd | sed s/.*\\///)

@@ -1,9 +1,9 @@
 Sample,SRA_Data,Data_source
-Cabbage_1,,this_study
-Cabbage_2,,this_study
-Kale_1,,this_study
-Kale_2,,this_study
-Kale_3,,this_study
-TO1000_1,,this_study
-TO1000_2,,this_study
-TO1000_3,,this_study
+Cabbage_1,SRR11624301,this_study
+Cabbage_2,SRR11624302,this_study
+Kale_1,SRR11624303,this_study
+Kale_2,SRR11624304,this_study
+Kale_3,SRR11624305,this_study
+TO1000_1,SRR11624306,this_study
+TO1000_2,SRR11624307,this_study
+TO1000_3,SRR11624308,this_study

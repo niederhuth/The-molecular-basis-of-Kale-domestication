@@ -1,7 +1,18 @@
+#!/bin/bash --login
+#SBATCH --time=3:59:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=20
+#SBATCH --mem=60GB
+#SBATCH --job-name annotate2
+#SBATCH --output=%x-%j.SLURMout
+
+cd $PBS_O_WORKDIR
+export PATH="$HOME/miniconda3/envs/Boleracea-rnaseq/bin:$PATH"
+
 evalue=0.00001
 max_target=1
 identity=70
-
 
 wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/695/525/GCF_000695525.1_BOL/GCF_000695525.1_BOL_translated_cds.faa.gz
 

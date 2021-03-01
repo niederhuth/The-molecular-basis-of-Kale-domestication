@@ -8,7 +8,7 @@
 #SBATCH --output=job_reports/%x-%j.SLURMout
 
 cd $PBS_O_WORKDIR
-export PATH="$HOME/miniconda3/envs/Boleracea_rnaseq/bin:$PATH"
+export PATH="$HOME/miniconda3/envs/Boleracea-rnaseq/bin:$PATH"
 
 #Set Variables
 genome='ftp://ftp.ensemblgenomes.org/pub/plants/release-44/fasta/brassica_oleracea/dna/Brassica_oleracea.BOL.dna.toplevel.fa.gz'
