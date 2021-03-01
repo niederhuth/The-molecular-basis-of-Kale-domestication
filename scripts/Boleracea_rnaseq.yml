@@ -1,19 +1,19 @@
 name: Boleracea-rnaseq
 channels:
-  - defaults
-  - conda-forge
   - bioconda
+  - conda-forge
+  - defaults
 dependencies:
   - _libgcc_mutex=0.1=main
   - blas=1.0=mkl
   - boost=1.70.0=py37h9de70de_1
   - boost-cpp=1.70.0=ha2d47e9_1
   - bzip2=1.0.8=h7b6447c_0
-  - ca-certificates=2019.5.15=1
-  - certifi=2019.6.16=py37_1
+  - ca-certificates=2020.12.5=ha878542_0
+  - certifi=2020.12.5=py37h89c1867_1
   - curl=7.65.2=hbc83047_0
   - cutadapt=2.4=py37h14c3975_0
-  - diamond=0.9.25=hfb76ee0_0
+  - diamond=2.0.7=h56fc30b_0
   - dnaio=0.3=py37h14c3975_1
   - fastqc=0.11.8=1
   - font-ttf-dejavu-sans-mono=2.37=h6964260_0
@@ -41,11 +41,12 @@ dependencies:
   - numpy=1.16.4=py37h7e9f1db_0
   - numpy-base=1.16.4=py37hde5b4d6_0
   - openjdk=8.0.152=h46b5887_1
-  - openssl=1.1.1c=h7b6447c_1
+  - openssl=1.1.1j=h27cfd23_0
   - perl=5.26.2=h14c3975_0
   - pigz=2.4=h84994c4_0
   - pip=19.1.1=py37_0
   - python=3.7.4=h265db76_1
+  - python_abi=3.7=1_cp37m
   - readline=7.0=h7b6447c_5
   - samtools=1.9=h8571acd_11
   - setuptools=41.0.1=py37_0
@@ -58,4 +59,3 @@ dependencies:
   - xz=5.2.4=h14c3975_4
   - zlib=1.2.11=h7b6447c_3
 prefix: /mnt/home/niederhu/miniconda3/envs/Boleracea-rnaseq
-
