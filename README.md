@@ -3,7 +3,7 @@ Title: "The molecular basis of Kale domestication: Transcription profiling of de
 Authors: "Tatiana Arias, Chad E Niederhuth, Chris Pires, Paula McSteen"
 Raw data: "GSE149483"
 ---
-This repository is for scripts and processed data for the paper: 
+This repository is for scripts and processed data for the paper: https://www.frontiersin.org/articles/10.3389/fpls.2021.637115/abstract
 
 Please cite this paper if you use any of the resources here.  
 
